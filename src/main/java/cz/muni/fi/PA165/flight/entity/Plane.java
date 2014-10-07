@@ -1,8 +1,6 @@
 package cz.muni.fi.PA165.flight.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Michal Galan
@@ -32,9 +30,46 @@ public class Plane {
      */
     private int fuelLeft;
 
-    private Date lastRevision;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastRevisionTime;
 
-    private long flightTime;
+    private long totalFlightTime;
 
-    private long flightDistance;
+    private long totalFlightDistance;
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setPassangerSeatsCount(int passangerSeatsCount) {
+        this.passangerSeatsCount = passangerSeatsCount;
+    }
+
+    public void setStaffSeatsCount(int staffSeatsCount) {
+        this.staffSeatsCount = staffSeatsCount;
+    }
+
+    public void setTankCapacity(int tankCapacity) {
+        this.tankCapacity = tankCapacity;
+    }
+
+    public void setFuelLeft(int fuelLeft) {
+        this.fuelLeft = fuelLeft;
+    }
+
+    public void setLastRevisionTime(Date lastRevisionTime) {
+        this.lastRevisionTime = lastRevisionTime;
+    }
+
+    public void increaseTotalFlightTime(long inc) {
+        this.totalFlightTime += inc;
+    }
+
+    public void increaseTotalFlightDistance(long inc) {
+        this.totalFlightDistance += inc;
+    }
 }
