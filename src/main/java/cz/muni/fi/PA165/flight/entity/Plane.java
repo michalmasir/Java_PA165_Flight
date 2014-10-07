@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author Michal Galan
@@ -37,6 +38,8 @@ public class Plane {
 
     private long totalFlightDistance;
 
+    /* METHODS */
+
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
@@ -57,8 +60,18 @@ public class Plane {
         this.tankCapacity = tankCapacity;
     }
 
-    public void setFuelLeft(int fuelLeft) {
+    public void setFuelLeft(int fuelLeft) throws Exception {
+        if (fuelLeft > getTankCapacity()){
+            throw new Exception("Can not tank more than capacity");
+        }
         this.fuelLeft = fuelLeft;
+    }
+
+    public void tankFuel(int fuel) throws Exception {
+        if (fuelLeft+fuel > getTankCapacity()){
+            throw new Exception("Total fuel can not be more than tank capacity");
+        }
+        this.fuelLeft += fuel;
     }
 
     public void setLastRevisionTime(Date lastRevisionTime) {
@@ -71,5 +84,33 @@ public class Plane {
 
     public void increaseTotalFlightDistance(long inc) {
         this.totalFlightDistance += inc;
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getPassangerSeatsCount() {
+        return passangerSeatsCount;
+    }
+
+    public int getStaffSeatsCount() {
+        return staffSeatsCount;
+    }
+
+    public int getTankCapacity() {
+        return tankCapacity;
+    }
+
+    public int getFuelLeft() {
+        return fuelLeft;
     }
 }
