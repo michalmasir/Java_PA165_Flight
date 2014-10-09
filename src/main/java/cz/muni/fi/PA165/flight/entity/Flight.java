@@ -8,7 +8,6 @@ import java.util.Set;
 /**
  * @author Vladimir Jurenka
  */
-
 @Entity
 public class Flight {
 
@@ -33,9 +32,9 @@ public class Flight {
 
     @ManyToMany
     @JoinTable(
-          name="flight_stewards",
-          joinColumns={@JoinColumn(name="flight_id", referencedColumnName="id")},
-          inverseJoinColumns={@JoinColumn(name="steward_id", referencedColumnName="id")})
+            name = "flight_stewards",
+            joinColumns = {@JoinColumn(name = "flight_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "steward_id", referencedColumnName = "id")})
     private Set<Steward> stewards = new HashSet<Steward>();
 
 

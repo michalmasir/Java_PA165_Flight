@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-
+/**
+ * @author Vladimir Jurenka
+ */
 public class FlightDAOImpl implements FlightDAO {
 
     @PersistenceContext(unitName = "myUnit")
