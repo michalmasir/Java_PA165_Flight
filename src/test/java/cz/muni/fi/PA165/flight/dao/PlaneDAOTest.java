@@ -3,13 +3,12 @@ package cz.muni.fi.PA165.flight.dao;
 import cz.muni.fi.PA165.flight.DaoContext;
 import cz.muni.fi.PA165.flight.dao.impl.PlaneDAOImpl;
 import cz.muni.fi.PA165.flight.entity.Plane;
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
-import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class PlaneDAOTest extends TestCase {
+public class PlaneDAOTest extends AbstractTestNGSpringContextTests {
 
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -58,7 +57,7 @@ public class PlaneDAOTest extends TestCase {
 
         List<Plane> planes = planeDAO.getAllPlanes();
 
-        Assert.assertEquals(planes.size(),2);
+        Assert.assertEquals(planes.size(), 2);
     }
 
     @Test
@@ -88,6 +87,7 @@ public class PlaneDAOTest extends TestCase {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         planeDAO = new PlaneDAOImpl(em);
+        testedPlane = planeDAO.getPlaneById(testedPlane.getId());
         planeDAO.deletePlane(testedPlane);
         em.getTransaction().commit();
         em.close();
