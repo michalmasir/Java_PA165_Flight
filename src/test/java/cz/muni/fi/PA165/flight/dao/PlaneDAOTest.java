@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.entity.Plane;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
+import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeMethod;
@@ -35,6 +36,7 @@ public class PlaneDAOTest extends TestCase {
         em.close();
     }
 
+    @Test
     public void testGetAllPlanes() throws Exception {
         EntityManager em = emf.createEntityManager();
         PlaneDAO planeDAO;
@@ -59,11 +61,13 @@ public class PlaneDAOTest extends TestCase {
         Assert.assertEquals(planes.size(),2);
     }
 
+    @Test
     public void testDeletePlane() throws Exception {
         long planeID = -1;
         Plane plane = new Plane();
         plane.setManufacturer("Airbus");
         plane.setType("A320");
+        plane.setTankCapacity(500000);
         plane.setFuelLeft(10000);
         plane.setLastRevisionTime(new Date(5484855));
         EntityManager em = emf.createEntityManager();
@@ -95,11 +99,13 @@ public class PlaneDAOTest extends TestCase {
         Assert.assertNull(deletedPlane);
     }
 
+    @Test
     public void testAddPlane() throws Exception {
         long planeID = -1;
         Plane plane = new Plane();
         plane.setManufacturer("Airbus");
         plane.setType("A320");
+        plane.setTankCapacity(500000);
         plane.setFuelLeft(10000);
         plane.setLastRevisionTime(new Date(5484855));
         EntityManager em = emf.createEntityManager();
