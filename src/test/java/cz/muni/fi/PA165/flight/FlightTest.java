@@ -21,6 +21,9 @@ import javax.persistence.PersistenceUnit;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * @author Michal Masir
+ */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class FlightTest extends AbstractTestNGSpringContextTests {

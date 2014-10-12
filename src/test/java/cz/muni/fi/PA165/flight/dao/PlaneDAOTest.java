@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Michal Galan
+ * @author  Michal Hruby
  */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

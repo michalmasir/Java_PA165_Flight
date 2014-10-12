@@ -17,6 +17,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import java.util.List;
 
+/**
+ * @author Vladimir Jurenka
+ */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AirportTest extends AbstractTestNGSpringContextTests {

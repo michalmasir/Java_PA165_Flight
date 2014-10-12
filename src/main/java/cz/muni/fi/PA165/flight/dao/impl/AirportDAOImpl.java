@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by Michal Mašír on 9. 10. 2014.
+ * @author Michal Masir
  */
 public class AirportDAOImpl implements AirportDAO{
     public EntityManager em;

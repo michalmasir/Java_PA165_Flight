@@ -15,7 +15,7 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 /**
- * @author  Michal Hruby
+ *  @author Michal Galan
  */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
