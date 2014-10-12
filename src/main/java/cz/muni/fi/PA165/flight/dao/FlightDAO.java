@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.flight.dao;
 
 
 import cz.muni.fi.PA165.flight.entity.Flight;
+import cz.muni.fi.PA165.flight.entity.Steward;
 
 import java.util.List;
 
@@ -41,4 +42,13 @@ public interface FlightDAO {
      * @param flight Flight to save
      */
     public void addFlight(Flight flight);
+
+
+    /**
+     * Tries to assign steward for a particular flight
+     * @param flight Flight to assign steward to
+     * @param steward Steward to assign to flight
+     * @return true if the steward was assigned to this flight, false otherwise
+     */
+    public boolean safeAddSteward(Flight flight, Steward steward);
 }

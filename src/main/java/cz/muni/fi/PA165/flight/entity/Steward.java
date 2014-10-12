@@ -1,8 +1,9 @@
 package cz.muni.fi.PA165.flight.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author  Michal Hruby
@@ -19,6 +20,8 @@ public class Steward {
 
     private String last_name;
 
+    @ManyToMany(mappedBy = "stewards")
+    private Set<Flight> flights = new HashSet<Flight>();
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
@@ -48,6 +51,14 @@ public class Steward {
         this.id = id;
     }
 
+    public Set<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Set<Flight> flights) {
+        this.flights = flights;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,7 +66,7 @@ public class Steward {
 
         Steward steward = (Steward) o;
 
-        if (id != steward.id) return false;
+        if (id != steward.id || id != 0) return false;
 
         return true;
     }
@@ -64,4 +75,6 @@ public class Steward {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+
 }

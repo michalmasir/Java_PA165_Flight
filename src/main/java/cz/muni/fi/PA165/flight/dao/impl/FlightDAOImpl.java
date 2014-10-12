@@ -3,6 +3,8 @@ package cz.muni.fi.PA165.flight.dao.impl;
 
 import cz.muni.fi.PA165.flight.dao.FlightDAO;
 import cz.muni.fi.PA165.flight.entity.Flight;
+import cz.muni.fi.PA165.flight.entity.Plane;
+import cz.muni.fi.PA165.flight.entity.Steward;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,6 +42,79 @@ public class FlightDAOImpl implements FlightDAO {
 
     @Override
     public void addFlight(Flight flight) {
+        validateFlight(flight);
         em.persist(flight);
+    }
+
+    private void validateFlight(Flight flight) {
+        validateTime(flight);
+        validatePlane(flight);
+        validateStewards(flight);
+    }
+
+    private void validateTime(Flight flight) {
+        if ((flight.getArrivalTime().compareTo(flight.getDepartureTime()) < 0)) {
+            throw new IllegalArgumentException("Flight has arrival date before departure date!");
+        }
+    }
+
+    private void validateStewards(Flight flight) {
+        for (Steward steward : flight.getStewards()) {
+            for (Flight f : steward.getFlights()) {
+                if (f.equals(flight)) {
+                    continue;
+                }
+                if (flightsInterfere(f, flight)) {
+                    throw new IllegalArgumentException("Steward is scheduled for another flight at this time");
+                }
+            }
+        }
+    }
+
+    public boolean canAddSteward(Flight flight, Steward steward) {
+        for (Flight f : steward.getFlights()) {
+            if (f.equals(flight)) {
+                continue;
+            }
+            if (flightsInterfere(f, flight)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean safeAddSteward(Flight flight, Steward steward) {
+        if (canAddSteward(flight, steward)) {
+            flight.getStewards().add(steward);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean flightsInterfere(Flight flight1, Flight flight2) {
+        if (flight2.getDepartureTime().compareTo(flight1.getDepartureTime()) <= 0 && flight2.getArrivalTime().compareTo(flight1.getDepartureTime()) <= 0) {
+            return true;
+        }
+        if (flight1.getDepartureTime().compareTo(flight2.getDepartureTime()) <= 0 && flight1.getArrivalTime().compareTo(flight2.getDepartureTime()) <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private void validatePlane(Flight flight) {
+        Plane plane = flight.getPlane();
+        if (plane == null) {
+            throw new IllegalArgumentException("Flight has empty plane");
+        }
+        for (Flight f : plane.getFlights()) {
+            if (f.equals(flight)) {
+                continue;
+            }
+            if (flightsInterfere(f, flight)) {
+                throw new IllegalArgumentException("Plane is scheduled for another flight at this time");
+            }
+
+        }
     }
 }

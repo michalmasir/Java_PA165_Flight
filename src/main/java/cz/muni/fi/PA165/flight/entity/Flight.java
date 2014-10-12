@@ -37,7 +37,6 @@ public class Flight {
             inverseJoinColumns = {@JoinColumn(name = "steward_id", referencedColumnName = "id")})
     private Set<Steward> stewards = new HashSet<Steward>();
 
-
     public long getId() {
         return id;
     }
@@ -101,7 +100,7 @@ public class Flight {
 
         Flight flight = (Flight) o;
 
-        if (id != flight.id) return false;
+        if (id != flight.id || id == 0) return false;
 
         return true;
     }

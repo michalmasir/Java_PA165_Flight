@@ -2,6 +2,8 @@ package cz.muni.fi.PA165.flight.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents plane in the system.
@@ -39,6 +41,17 @@ public class Plane {
     private long totalFlightTime;
 
     private long totalFlightDistance;
+
+    public Set<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Set<Flight> flights) {
+        this.flights = flights;
+    }
+
+    @OneToMany(mappedBy = "plane")
+    private Set<Flight> flights = new HashSet<>();
 
     /* METHODS */
 

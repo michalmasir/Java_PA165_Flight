@@ -14,9 +14,7 @@ public class StewardDAOImpl implements StewardDAO {
     public EntityManager em;
 
     public StewardDAOImpl(EntityManager em) {
-
         this.em = em;
-
     }
 
     @Override
