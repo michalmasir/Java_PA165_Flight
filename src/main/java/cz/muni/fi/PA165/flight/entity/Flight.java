@@ -93,4 +93,21 @@ public class Flight {
     public void setStewards(Set<Steward> stewards) {
         this.stewards = stewards;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Flight flight = (Flight) o;
+
+        if (id != flight.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }

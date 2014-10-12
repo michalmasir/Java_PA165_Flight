@@ -185,4 +185,21 @@ public class Plane {
     public int getFuelLeft() {
         return fuelLeft;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Plane plane = (Plane) o;
+
+        if (id != plane.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }
