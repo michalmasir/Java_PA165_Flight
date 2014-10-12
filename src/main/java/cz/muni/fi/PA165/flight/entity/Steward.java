@@ -66,7 +66,7 @@ public class Steward {
 
         Steward steward = (Steward) o;
 
-        if (id != steward.id || id != 0) return false;
+        if (id != steward.id || id == 0) return false;
 
         return true;
     }

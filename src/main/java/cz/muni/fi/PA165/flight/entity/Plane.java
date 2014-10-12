@@ -206,7 +206,7 @@ public class Plane {
 
         Plane plane = (Plane) o;
 
-        if (id != plane.id) return false;
+        if (id != plane.id || id == 0) return false;
 
         return true;
     }
