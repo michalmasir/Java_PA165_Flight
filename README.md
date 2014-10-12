@@ -14,3 +14,11 @@ When recording a flight, it is necessary to set the departure and arrival times,
 The system should also check that the plane does not have another flight scheduled during the time of the this flight. 
 It should also be possible to assign (remove) stewards to (from) a flight while checking for the steward's availability. 
 The ultimate goal is to have a system capable of listing flights ordered by date and displaying the flight details (origin, destination, departure time, arrival time, plane, list of stewards).
+
+Usecase
+-
+![alt tag](https://raw.github.com/michalmasir/Java_PA165_Flight/master/images/usecase.png)
+
+Class diagram
+-
+![alt tag](https://raw.github.com/michalmasir/Java_PA165_Flight/master/images/diag.png)
