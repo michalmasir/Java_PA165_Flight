@@ -19,26 +19,17 @@ public class Steward {
 
     private String last_name;
 
-    /**
-     *
-     * @param first_name
-     */
+
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getFirst_name() {
         return first_name;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getLast_name() {
         return last_name;
     }
@@ -47,18 +38,12 @@ public class Steward {
         this.last_name = last_name;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
+   
     public void setId(long id) {
         this.id = id;
     }
