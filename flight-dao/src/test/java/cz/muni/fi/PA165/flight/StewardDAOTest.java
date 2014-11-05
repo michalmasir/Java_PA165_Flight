@@ -93,11 +93,11 @@ public class StewardDAOTest extends AbstractTestNGSpringContextTests {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Steward s1 = new Steward();
-        s1.setFirst_name("Philip");
-        s1.setLast_name("Fry");
+        s1.setFirstName("Philip");
+        s1.setLastName("Fry");
         Steward s2 = new Steward();
-        s2.setFirst_name("Turanga");
-        s2.setLast_name("Leela");
+        s2.setFirstName("Turanga");
+        s2.setLastName("Leela");
 
         new StewardDAOImpl(em).addSteward(s1);
         new StewardDAOImpl(em).addSteward(s2);

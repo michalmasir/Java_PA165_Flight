@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class FlightDAOImpl implements FlightDAO {
 
-    @PersistenceContext(unitName = "myUnit")
+    @PersistenceContext
     public EntityManager em;
 
     public FlightDAOImpl() {
@@ -55,6 +55,13 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     private void validateTime(Flight flight) {
+        if(flight.getDepartureTime() == null){
+            throw new DataIntegrityViolationException("Flight has null departure time!");
+        }
+        if(flight.getArrivalTime() == null){
+            throw new DataIntegrityViolationException("Flight has null arrival time!");
+        }
+
         if ((flight.getArrivalTime().compareTo(flight.getDepartureTime()) < 0)) {
             throw new DataIntegrityViolationException("Flight has arrival date before departure date!");
         }

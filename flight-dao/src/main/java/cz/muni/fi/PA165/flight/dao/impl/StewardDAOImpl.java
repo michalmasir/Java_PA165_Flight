@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.flight.dao.impl;
 import cz.muni.fi.PA165.flight.dao.StewardDAO;
 import cz.muni.fi.PA165.flight.entity.Steward;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -11,7 +12,11 @@ import java.util.List;
 
 public class StewardDAOImpl implements StewardDAO {
 
+    @PersistenceContext
     public EntityManager em;
+
+    public StewardDAOImpl() {
+    }
 
     public StewardDAOImpl(EntityManager em) {
         this.em = em;

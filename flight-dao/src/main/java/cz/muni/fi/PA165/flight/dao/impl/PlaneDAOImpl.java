@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.flight.dao.PlaneDAO;
 import cz.muni.fi.PA165.flight.entity.Plane;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -11,7 +12,11 @@ import java.util.List;
  */
 public class PlaneDAOImpl implements PlaneDAO {
 
+    @PersistenceContext
     public EntityManager em;
+
+    public PlaneDAOImpl() {
+    }
 
     public PlaneDAOImpl(EntityManager em){
 

@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.flight.dao.AirportDAO;
 import cz.muni.fi.PA165.flight.entity.Airport;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -11,7 +12,13 @@ import java.util.List;
  * @author Michal Masir
  */
 public class AirportDAOImpl implements AirportDAO{
+
+    @PersistenceContext
     public EntityManager em;
+
+
+    public AirportDAOImpl() {
+    }
 
     public AirportDAOImpl(EntityManager em){
         this.em = em;
