@@ -4,10 +4,10 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>flight-persistence</artifactId>
+    <artifactId>flight-dao</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>PA165 Project Flight Persistence</name>
+    <name>PA165 Project Flight DAO</name>
 
     <parent>
        <groupId>cz.muni.fi.PA165</groupId>

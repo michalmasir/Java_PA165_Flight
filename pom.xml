@@ -10,6 +10,6 @@
     <version>1.0-SNAPSHOT</version>
 
   <modules>
-    <module>flight-persistence</module>
+    <module>flight-dao</module>
   </modules>
 </project>
