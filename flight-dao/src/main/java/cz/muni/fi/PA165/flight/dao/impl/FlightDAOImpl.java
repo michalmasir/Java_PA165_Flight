@@ -5,6 +5,8 @@ import cz.muni.fi.PA165.flight.dao.FlightDAO;
 import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.entity.Steward;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,7 +56,7 @@ public class FlightDAOImpl implements FlightDAO {
 
     private void validateTime(Flight flight) {
         if ((flight.getArrivalTime().compareTo(flight.getDepartureTime()) < 0)) {
-            throw new IllegalArgumentException("Flight has arrival date before departure date!");
+            throw new DataIntegrityViolationException("Flight has arrival date before departure date!");
         }
     }
 
@@ -65,7 +67,7 @@ public class FlightDAOImpl implements FlightDAO {
                     continue;
                 }
                 if (flightsInterfere(f, flight)) {
-                    throw new IllegalArgumentException("Steward is scheduled for another flight at this time");
+                    throw new InvalidDataAccessApiUsageException("Steward is scheduled for another flight at this time");
                 }
             }
         }
@@ -105,14 +107,14 @@ public class FlightDAOImpl implements FlightDAO {
     private void validatePlane(Flight flight) {
         Plane plane = flight.getPlane();
         if (plane == null) {
-            throw new IllegalArgumentException("Flight has empty plane");
+            throw new DataIntegrityViolationException("Flight has empty plane");
         }
         for (Flight f : plane.getFlights()) {
             if (f.equals(flight)) {
                 continue;
             }
             if (flightsInterfere(f, flight)) {
-                throw new IllegalArgumentException("Plane is scheduled for another flight at this time");
+                throw new InvalidDataAccessApiUsageException("Plane is scheduled for another flight at this time");
             }
 
         }

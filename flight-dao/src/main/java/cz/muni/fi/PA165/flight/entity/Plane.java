@@ -1,5 +1,8 @@
 package cz.muni.fi.PA165.flight.entity;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -102,7 +105,7 @@ public class Plane {
      */
     public void setFuelLeft(int fuelLeft) throws Exception {
         if (fuelLeft > getTankCapacity()){
-            throw new Exception("Can not tank more than capacity");
+            throw new InvalidDataAccessApiUsageException("Can not tank more than capacity");
         }
         this.fuelLeft = fuelLeft;
     }
@@ -114,7 +117,7 @@ public class Plane {
      */
     public void tankFuel(int fuel) throws Exception {
         if (fuelLeft+fuel > getTankCapacity()){
-            throw new Exception("Total fuel can not be more than tank capacity");
+            throw new InvalidDataAccessApiUsageException("Total fuel can not be more than tank capacity");
         }
         this.fuelLeft += fuel;
     }
