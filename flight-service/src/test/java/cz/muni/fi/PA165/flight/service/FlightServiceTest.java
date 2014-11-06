@@ -1,15 +1,26 @@
 package cz.muni.fi.PA165.flight.service;
 
+import cz.muni.fi.PA165.flight.dao.FlightDAO;
+import cz.muni.fi.PA165.flight.dao.PlaneDAO;
+import cz.muni.fi.PA165.flight.entity.Flight;
+import cz.muni.fi.PA165.flight.entity.Plane;
+import cz.muni.fi.PA165.flight.service.impl.FlightServiceImpl;
+import cz.muni.fi.PA165.flight.service.impl.PlaneServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.dozer.DozerBeanMapper;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
-import javax.inject.Inject;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.mockito.Mockito.*;
 import java.util.Calendar;
 
 /**
@@ -18,40 +29,53 @@ import java.util.Calendar;
  * Time: 19:59
  */
 
-//((PlaneServiceImpl) planeService).planeDAO.getAllPlanes()
-@ContextConfiguration({"/application-context.xml",})
-@TransactionConfiguration(defaultRollback=false)
-public class FlightServiceTest extends AbstractTestNGSpringContextTests {
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
+public class FlightServiceTest {
 
-    @Inject
-    private FlightService flightService;
+    @Spy
+    DozerBeanMapper dozerBeanMapper;
 
-    @Inject
-    private PlaneService planeService;
+    @Mock
+    FlightDAO flightDAO;
 
-    @BeforeMethod
+    @Mock
+    PlaneDAO planeDAO;
+
+    @InjectMocks
+    FlightServiceImpl flightService;
+
+    @InjectMocks
+    PlaneServiceImpl planeService;
+
+    @Before
     public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testFlightAdd() {
-        PlaneTO plane = new PlaneTO();
-        FlightTO flight = new FlightTO();
+        PlaneTO planeTO = new PlaneTO();
+
+        FlightTO flightTO = new FlightTO();
 
         Calendar departure = Calendar.getInstance();
         departure.set(2000, Calendar.JANUARY, 1);
-
-        flight.setDepartureTime(departure.getTime());
-
         Calendar arrival = Calendar.getInstance();
         arrival.set(2000, Calendar.FEBRUARY, 1);
 
+        flightTO.setDepartureTime(departure.getTime());
+        flightTO.setArrivalTime(arrival.getTime());
+
+        flightTO.setPlane(planeTO);
+
+        flightService.addFlight(flightTO);
+
+        Flight flight = new Flight();
         flight.setArrivalTime(arrival.getTime());
+        flight.setDepartureTime(departure.getTime());
+        flight.setPlane(new Plane());
 
-        flight.setPlane(plane);
-        planeService.addPlane(plane);
-        flightService.addFlight(flight);
-
-        Assert.assertEquals(flightService.getFlightsList().size(), 1);
+        verify(flightDAO).addFlight(flight);
     }
 }

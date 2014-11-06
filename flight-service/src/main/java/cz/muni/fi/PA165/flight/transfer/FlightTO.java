@@ -84,11 +84,19 @@ public class FlightTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof FlightTO)) return false;
 
-        FlightTO flight = (FlightTO) o;
+        FlightTO flightTO = (FlightTO) o;
 
-        if (id != flight.id || id == 0) return false;
+        if (id != flightTO.id) return false;
+        if (arrivalTime != null ? !arrivalTime.equals(flightTO.arrivalTime) : flightTO.arrivalTime != null)
+            return false;
+        if (departureTime != null ? !departureTime.equals(flightTO.departureTime) : flightTO.departureTime != null)
+            return false;
+        if (from != null ? !from.equals(flightTO.from) : flightTO.from != null) return false;
+        if (plane != null ? !plane.equals(flightTO.plane) : flightTO.plane != null) return false;
+        if (stewards != null ? !stewards.equals(flightTO.stewards) : flightTO.stewards != null) return false;
+        if (to != null ? !to.equals(flightTO.to) : flightTO.to != null) return false;
 
         return true;
     }

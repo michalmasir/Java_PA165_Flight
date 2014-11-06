@@ -8,4 +8,5 @@ import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 public interface PlaneService {
 
     public void addPlane(PlaneTO planeTO);
+
 }

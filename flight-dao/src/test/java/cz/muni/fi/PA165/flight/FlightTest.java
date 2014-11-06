@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.flight.dao.impl.StewardDAOImpl;
 import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.entity.Steward;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -151,7 +152,7 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
     }
 
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
     public void testPlaneCollision() {
 
         EntityManager em = emf.createEntityManager();
@@ -182,7 +183,7 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
         em.close();
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
     public void testStewardCollision() {
 
         EntityManager em = emf.createEntityManager();

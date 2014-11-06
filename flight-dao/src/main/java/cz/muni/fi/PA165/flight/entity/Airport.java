@@ -148,7 +148,7 @@ public class Airport {
 
         Airport airport = (Airport) o;
 
-        if (id != airport.id || id == 0) return false;
+        if (id != airport.id) return false;
 
         return true;
     }
