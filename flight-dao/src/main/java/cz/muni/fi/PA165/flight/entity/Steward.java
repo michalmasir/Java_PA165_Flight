@@ -61,11 +61,14 @@ public class Steward {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Steward)) return false;
 
         Steward steward = (Steward) o;
 
-        if (id != steward.id ) return false;
+        if (id != steward.id) return false;
+        if (firstName != null ? !firstName.equals(steward.firstName) : steward.firstName != null) return false;
+        if (flights != null ? !flights.equals(steward.flights) : steward.flights != null) return false;
+        if (lastName != null ? !lastName.equals(steward.lastName) : steward.lastName != null) return false;
 
         return true;
     }
