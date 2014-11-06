@@ -4,6 +4,7 @@ package cz.muni.fi.PA165.flight.dao;
 import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Steward;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,4 +52,28 @@ public interface FlightDAO {
      * @return true if the steward was assigned to this flight, false otherwise
      */
     public boolean safeAddSteward(Flight flight, Steward steward);
+
+    /**
+     * Updates a Flight object.
+     * @param flight Flight to update
+     */
+    public void updateFlight(Flight flight);
+
+    /**
+     * Returns the list of all flights in the application with departure time in the specified interval
+     *
+     * @param from Departure date is grater or equal to "from"
+     * @param to Departure date is lower or equal to "to"
+     * @return list of all flights
+     */
+    public List<Flight> getFlightsByDepartureDate(Date from, Date to);
+
+    /**
+     * Returns the list of all flights in the application with arrival time in the specified interval
+     *
+     * @param from Arrival date is grater or equal to "from"
+     * @param to Arrival date is lower or equal to "to"
+     * @return list of all flights
+     */
+    public List<Flight> getFlightsByArrivalDate(Date from, Date to);
 }

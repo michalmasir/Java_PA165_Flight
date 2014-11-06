@@ -10,6 +10,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -99,6 +100,27 @@ public class FlightDAOImpl implements FlightDAO {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void updateFlight(Flight flight) {
+        em.merge(flight);
+    }
+
+    @Override
+    public List<Flight> getFlightsByDepartureDate(Date from, Date to) {
+        return  em.createQuery("SELECT f FROM Flight f WHERE departureTime >= :from AND departureTime <= :to", Flight.class)
+                .setParameter("from", from )
+                .setParameter("to", to)
+                .getResultList();
+    }
+
+    @Override
+    public List<Flight> getFlightsByArrivalDate(Date from, Date to) {
+        return  em.createQuery("SELECT f FROM Flight f WHERE arrivalTime >= :from AND arrivalTime <= :to", Flight.class)
+                .setParameter("from", from )
+                .setParameter("to", to)
+                .getResultList();
     }
 
     public boolean flightsInterfere(Flight flight1, Flight flight2) {

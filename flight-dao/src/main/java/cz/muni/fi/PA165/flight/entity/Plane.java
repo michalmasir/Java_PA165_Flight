@@ -229,4 +229,8 @@ public class Plane {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

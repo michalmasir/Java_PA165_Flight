@@ -6,4 +6,14 @@ package cz.muni.fi.PA165.flight.transfer;
  * Time: 20:37
  */
 public class PlaneTO {
+
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

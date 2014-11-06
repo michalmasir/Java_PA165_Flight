@@ -151,6 +151,48 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(flights.size(), 3);
     }
 
+    @Test
+    public void testGetFlightsByDate(){
+
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Flight flight1 = dummyFlight();
+        PlaneDAOImpl planeDAO = new PlaneDAOImpl(em);
+        planeDAO.addPlane(flight1.getPlane());
+
+        FlightDAOImpl flightDao = new FlightDAOImpl(em);
+        flightDao.addFlight(flight1);
+        em.getTransaction().commit();
+        em.close();
+
+
+        Calendar departure1 = Calendar.getInstance();
+        departure1.set(1999, 1, 1);
+
+        Calendar departure2 = Calendar.getInstance();
+        departure2.set(2001, 1, 1);
+
+
+        Calendar arrival1 = Calendar.getInstance();
+        arrival1.set(1999, 1, 1);
+
+        Calendar arrival2 = Calendar.getInstance();
+        arrival2.set(2001, 1, 1);
+
+        em = emf.createEntityManager();
+        List<Flight> flights = new FlightDAOImpl(em).getFlightsByDepartureDate(departure1.getTime(), departure2.getTime());
+        em.close();
+
+        Assert.assertEquals(flights.size(), 1);
+
+        em = emf.createEntityManager();
+        flights = new FlightDAOImpl(em).getFlightsByArrivalDate(arrival1.getTime(), arrival2.getTime());
+        em.close();
+
+        Assert.assertEquals(flights.size(), 1);
+    }
+
 
     @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
     public void testPlaneCollision() {
