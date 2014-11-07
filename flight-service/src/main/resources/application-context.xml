@@ -67,5 +67,15 @@
     </bean>
     <!-- end of Plane service -->
 
+    <!-- Steward Service-->
+
+    <bean id="stewardDao" class="cz.muni.fi.PA165.flight.dao.impl.StewardDAOImpl">
+    </bean>
+
+    <bean id="stewardService" class="cz.muni.fi.PA165.flight.service.impl.StewardServiceImpl">
+    </bean>
+    <!-- end of Steward service -->
+
+
 
 </beans>

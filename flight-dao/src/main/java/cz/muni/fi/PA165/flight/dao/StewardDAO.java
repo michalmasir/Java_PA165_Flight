@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.flight.dao;
 
+import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Steward;
 import java.util.List;
 
@@ -43,6 +44,8 @@ import java.util.List;
          */
 
         public void addSteward(Steward steward);
-    }
+
+
+          }
 
 

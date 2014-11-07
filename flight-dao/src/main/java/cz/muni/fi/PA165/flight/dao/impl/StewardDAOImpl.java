@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.dao.impl;
 
 import cz.muni.fi.PA165.flight.dao.StewardDAO;
+import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Steward;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -44,5 +45,9 @@ public class StewardDAOImpl implements StewardDAO {
     public void deleteSteward(Steward steward) {
 
         em.remove(steward);
+
     }
+
+
+
 }
