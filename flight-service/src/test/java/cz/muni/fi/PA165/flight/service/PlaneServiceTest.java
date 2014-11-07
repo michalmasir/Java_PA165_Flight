@@ -3,22 +3,17 @@ package cz.muni.fi.PA165.flight.service;
 import cz.muni.fi.PA165.flight.dao.PlaneDAO;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.service.impl.PlaneServiceImpl;
-import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import java.util.Calendar;
 import java.util.Date;
-import static org.junit.Assert.assertEquals;
 
 import static org.mockito.Mockito.verify;
 
@@ -29,7 +24,6 @@ import static org.mockito.Mockito.verify;
  */
 
 @ContextConfiguration(locations = {"classpath:/application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
 public class PlaneServiceTest {
 
     @Spy
@@ -45,7 +39,7 @@ public class PlaneServiceTest {
     Plane plane1;
 
 
-    @Before
+    @BeforeMethod
     public void setup() {
         planeTO1 = new PlaneTO();
 //        planeTO1.setId(1);

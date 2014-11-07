@@ -11,15 +11,14 @@ import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +26,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 /**
@@ -37,8 +35,7 @@ import static org.mockito.Mockito.when;
  */
 
 @ContextConfiguration(locations = {"classpath:/application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class FlightServiceTest {
+public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
     @Spy
     DozerBeanMapper dozerBeanMapper;
@@ -49,11 +46,13 @@ public class FlightServiceTest {
     @Mock
     PlaneDAO planeDAO;
 
+    @Mock
+    PlaneServiceImpl planeService;
+
     @InjectMocks
     FlightServiceImpl flightService;
 
-    @InjectMocks
-    PlaneServiceImpl planeService;
+
 
     private Flight flight1;
     private Flight flight2;
@@ -71,7 +70,7 @@ public class FlightServiceTest {
     private Steward steward;
     private StewardTO stewardTO;
 
-    @Before
+    @BeforeMethod
     public void setup() {
         planeTO1 = new PlaneTO();
         planeTO1.setId(1);
@@ -234,7 +233,7 @@ public class FlightServiceTest {
     @Test
     public void testLandingDone() {
         flightService.landingDone(flightTO1);
-        verify(planeDAO).updatePlane(flightTO1.getPlane());
+        verify(planeService).updatePlane(flightTO1.getPlane());
     }
 
 }

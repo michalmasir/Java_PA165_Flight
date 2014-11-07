@@ -9,23 +9,21 @@ import cz.muni.fi.PA165.flight.service.impl.FlightServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Calendar;
 
 import static org.mockito.Mockito.verify;
 
-@ContextConfiguration({"/application-context.xml",})
-@TransactionConfiguration(defaultRollback=false)
-
+@ContextConfiguration(locations = {"classpath:/application-context.xml"})
 public class AirportServiceTest extends AbstractTestNGSpringContextTests {
 
     @Spy
@@ -34,6 +32,7 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
     FlightDAO flightDAO;
     @Mock
     AirportDAO airportDAO;
+
     @InjectMocks
     FlightServiceImpl flightService;
     @InjectMocks
@@ -45,6 +44,7 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
 
     private AirportTO airportTO1;
     private AirportTO airportTO2;
+    private AirportTO airportTO3;
 
     private Flight flight1;
     private Flight flight2;
@@ -52,22 +52,22 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
     private FlightTO flightTO1;
     private FlightTO flightTO2;
 
-    @Before
+    @BeforeMethod
     public void setup() {
         //Airports
-        AirportTO airportTO1 = new AirportTO();
+        airportTO1 = new AirportTO();
         airportTO1.setId(0);
         airportTO1.setName("Masarykovo letisko");
         airportTO1.setCity("Brno");
         airportTO1.setState("CZ");
 
-        AirportTO airportTO2 = new AirportTO();
+        airportTO2 = new AirportTO();
         airportTO2.setId(1);
         airportTO2.setName("LAX");
         airportTO2.setState("US");
         airportTO2.setCity("Los Angeles");
 
-        AirportTO airportTO3 = new AirportTO();
+        airportTO3 = new AirportTO();
         airportTO3.setId(2);
         airportTO3.setName("Letisko Bratislava");
         airportTO3.setState("SK");
@@ -100,19 +100,19 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
         flightTO2.setTo(airportTO3);
 
 
-        Airport airport1 = new Airport();
+        airport1 = new Airport();
         airport1.setId(0);
         airport1.setName("Masarykovo letisko");
         airport1.setCity("Brno");
         airport1.setState("CZ");
 
-        Airport airport2 = new Airport();
+        airport2 = new Airport();
         airport2.setId(1);
         airport2.setName("LAX");
         airport2.setState("US");
         airport2.setCity("Los Angeles");
 
-        Airport airport3 = new Airport();
+        airport3 = new Airport();
         airport3.setId(2);
         airport3.setName("Letisko Bratislava");
         airport3.setState("SK");
