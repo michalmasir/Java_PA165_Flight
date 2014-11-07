@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.dao;
 
 import cz.muni.fi.PA165.flight.entity.Airport;
+import cz.muni.fi.PA165.flight.entity.Flight;
 
 import java.util.List;
 
@@ -32,4 +33,11 @@ public interface AirportDAO {
      * @param airport instance of the airport, we want to add
      */
     public void addAirport(Airport airport);
+
+    /**
+     * Ads a new flight
+     * @param airport
+     */
+    public Airport updateAirport(Airport airport);
+
 }
