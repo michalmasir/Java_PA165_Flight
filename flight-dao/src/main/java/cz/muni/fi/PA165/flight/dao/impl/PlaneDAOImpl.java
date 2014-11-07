@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.entity.Plane;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  * @author Michal Galan
@@ -37,19 +38,25 @@ public class PlaneDAOImpl implements PlaneDAO {
     }
 
     public void deletePlane(Plane plane){
-
+        if (plane == null){
+            throw new DataIntegrityViolationException("Plane can not be null");
+        }
         em.remove(plane);
 
     }
 
     public void addPlane(Plane plane){
-
+        if (plane == null){
+            throw new DataIntegrityViolationException("Plane can not be null");
+        }
         em.persist(plane);
 
     }
     
     public Plane updatePlane(Plane plane){
-        
+        if (plane == null){
+            throw new DataIntegrityViolationException("Plane can not be null");
+        }
         return em.merge(plane);
         
     }
