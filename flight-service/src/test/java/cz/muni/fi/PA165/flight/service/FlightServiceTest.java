@@ -230,5 +230,11 @@ public class FlightServiceTest {
         flightService.removeFlight(flightTO1);
         verify(flightDAO).deleteFlight(flight1);
     }
+    
+    @Test
+    public void testLandingDone() {
+        flightService.landingDone(flightTO1);
+        verify(planeDAO).updatePlane(flightTO1.getPlane());
+    }
 
 }
