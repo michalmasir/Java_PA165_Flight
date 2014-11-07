@@ -55,6 +55,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    @Transactional
     public void removeFlight(FlightTO flightTO) {
         Flight flight = dozerBeanMapper.map(flightTO, Flight.class);
         flightDAO.deleteFlight(flight);
