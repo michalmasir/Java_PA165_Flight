@@ -34,6 +34,10 @@ public class PlaneTO {
 
     private long totalFlightDistance;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public Set<FlightTO> getFlights() {
         return flights;
     }
