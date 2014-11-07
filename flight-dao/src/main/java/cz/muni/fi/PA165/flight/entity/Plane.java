@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.flight.entity;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import javax.persistence.*;
@@ -101,9 +100,9 @@ public class Plane {
     /**
      * Sets fuel present in a plane.
      * @param fuelLeft fuel amount present in the plane
-     * @throws Exception if fuelLeft is more than getTankCapacity().
+     * @throws InvalidDataAccessApiUsageException if fuelLeft is more than getTankCapacity().
      */
-    public void setFuelLeft(int fuelLeft) throws Exception {
+    public void setFuelLeft(int fuelLeft) throws InvalidDataAccessApiUsageException {
         if (fuelLeft > getTankCapacity()){
             throw new InvalidDataAccessApiUsageException("Can not tank more than capacity");
         }
@@ -115,7 +114,7 @@ public class Plane {
      * @param fuel fuel amount to tank to the plane
      * @throws Exception if total fuel would be more than getTankCapacity().
      */
-    public void tankFuel(int fuel) throws Exception {
+    public void tankFuel(int fuel) throws InvalidDataAccessApiUsageException {
         if (fuelLeft+fuel > getTankCapacity()){
             throw new InvalidDataAccessApiUsageException("Total fuel can not be more than tank capacity");
         }

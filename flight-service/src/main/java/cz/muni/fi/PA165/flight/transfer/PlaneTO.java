@@ -93,18 +93,16 @@ public class PlaneTO {
     /**
      * Sets fuel present in a plane.
      * @param fuelLeft fuel amount present in the plane
-     * @throws Exception if fuelLeft is more than getTankCapacity().
      */
-    public void setFuelLeft(int fuelLeft) throws Exception {
+    public void setFuelLeft(int fuelLeft){
         this.fuelLeft = fuelLeft;
     }
 
     /**
      * Add fuel to plane's tank.
      * @param fuel fuel amount to tank to the plane
-     * @throws Exception if total fuel would be more than getTankCapacity().
      */
-    public void tankFuel(int fuel) throws Exception {
+    public void tankFuel(int fuel) {
         this.fuelLeft += fuel;
     }
 
