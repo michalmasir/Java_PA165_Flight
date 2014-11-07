@@ -47,4 +47,10 @@ public class PlaneDAOImpl implements PlaneDAO {
         em.persist(plane);
 
     }
+    
+    public Plane updatePlane(Plane plane){
+        
+        return em.merge(plane);
+        
+    }
 }

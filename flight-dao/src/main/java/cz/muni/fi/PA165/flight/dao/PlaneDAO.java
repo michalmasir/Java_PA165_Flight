@@ -41,4 +41,11 @@ public interface PlaneDAO {
      * @param plane Plane to save
      */
     public void addPlane(Plane plane);
+    
+    /**
+     * Updates a plane
+     * @param plane
+     * @return Plane
+     */
+    public Plane updatePlane(Plane plane);
 }
