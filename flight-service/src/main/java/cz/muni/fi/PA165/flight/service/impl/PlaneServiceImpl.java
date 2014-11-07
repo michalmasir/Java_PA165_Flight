@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.flight.dao.PlaneDAO;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
+import java.util.Date;
 import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,20 @@ public class PlaneServiceImpl implements PlaneService{
     public void addPlane(PlaneTO planeTO) {
         Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
         planeDAO.addPlane(plane);
+    }
+    
+    @Override
+    @Transactional
+    public void updatePlane(PlaneTO planeTO) {
+        Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
+        planeDAO.updatePlane(plane);
+    }
+    
+    @Override
+    @Transactional
+    public void revisionDone(PlaneTO planeTO, Date date) {
+        planeTO.setLastRevisionTime(date);
+        updatePlane(planeTO);
     }
 
 
