@@ -58,14 +58,14 @@
     <!-- end of Flight service -->
 
 
-    <!-- Flight Service-->
+    <!-- Plane Service-->
 
     <bean id="planeDao" class="cz.muni.fi.PA165.flight.dao.impl.PlaneDAOImpl">
     </bean>
 
     <bean id="planeService" class="cz.muni.fi.PA165.flight.service.impl.PlaneServiceImpl">
     </bean>
-    <!-- end of Flight service -->
+    <!-- end of Plane service -->
 
 
 </beans>
