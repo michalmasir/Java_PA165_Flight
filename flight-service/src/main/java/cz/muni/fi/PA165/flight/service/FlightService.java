@@ -29,5 +29,7 @@ public interface FlightService {
     public List<FlightTO> getFlightsByArrivalDate(Date from, Date to);
 
     public boolean assignStewardToFlight(FlightTO flightTO, StewardTO stewardTO);
+    
+    public void landingDone(FlightTO flightTO);
 
 }
