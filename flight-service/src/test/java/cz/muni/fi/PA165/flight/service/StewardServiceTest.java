@@ -5,7 +5,6 @@ import cz.muni.fi.PA165.flight.entity.Steward;
 import cz.muni.fi.PA165.flight.service.impl.StewardServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,6 +12,7 @@ import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -28,8 +28,6 @@ import static org.junit.Assert.assertEquals;
 
 @ContextConfiguration({"/application-context.xml",})
 @TransactionConfiguration(defaultRollback=false)
-
-
 public class StewardServiceTest extends AbstractTestNGSpringContextTests {
 
     @Spy
@@ -47,7 +45,8 @@ public class StewardServiceTest extends AbstractTestNGSpringContextTests {
     public StewardTO stewardTO1;
     public StewardTO stewardTO2;
 
-    @Before
+
+    @BeforeMethod
     public void setup() {
 
         stewardTO1 = new StewardTO();

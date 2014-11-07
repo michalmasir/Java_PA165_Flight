@@ -13,9 +13,9 @@ public interface AirportService {
     //add airport
     public void addAirpot(AirportTO airport);
     //remove airport
-    public void removeAirpot(AirportTO airport);
+    public void removeAirport(AirportTO airport);
     //update airport
-    public AirportTO updateAirpot(AirportTO airportTO);
+    public AirportTO updateAirport(AirportTO airportTO);
     //getAll airports
     public List<AirportTO> getAirportsList();
 

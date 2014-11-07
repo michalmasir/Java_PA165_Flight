@@ -5,7 +5,6 @@ import cz.muni.fi.PA165.flight.dao.FlightDAO;
 import cz.muni.fi.PA165.flight.entity.Airport;
 import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.service.impl.AirportServiceImpl;
-import cz.muni.fi.PA165.flight.service.impl.FlightServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import org.dozer.DozerBeanMapper;
@@ -14,14 +13,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(locations = {"classpath:/application-context.xml"})
 public class AirportServiceTest extends AbstractTestNGSpringContextTests {
@@ -33,8 +35,6 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     AirportDAO airportDAO;
 
-    @InjectMocks
-    FlightServiceImpl flightService;
     @InjectMocks
     AirportServiceImpl airportService;
 
@@ -136,21 +136,39 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testAddAirpot(){
+    public void testAddAirport(){
         airportService.addAirpot(airportTO1);
         verify(airportDAO).addAirport(airport1);
     }
 
     @Test
-    public void testRemoveAirpot(){
-
+    public void testRemoveAirport(){
+        airportService.removeAirport(airportTO1);
+        verify(airportDAO).deleteAirport(airport1);
     }
 
     @Test
     public void testUpdateAirport(){
-
+        when(airportDAO.updateAirport(airport1)).thenReturn(airport1);
+        airportService.updateAirport(airportTO1);
+        verify(airportDAO).updateAirport(airport1);
     }
 
     @Test
-    public void testGetAirportsList(){}
+    public void testGetAirportsList(){
+        List<Airport> airports = new ArrayList<>();
+        airports.add(airport1);
+        airports.add(airport2);
+        airports.add(airport3);
+
+        when(airportDAO.getAllAirports()).thenReturn(airports);
+
+        List<AirportTO> airportTOS = airportService.getAirportsList();
+        verify(airportDAO).getAllAirports();
+
+        assertEquals(airportTOS.get(0).getId(), airports.get(0).getId());
+        assertEquals(airportTOS.get(1).getId(), airports.get(1).getId());
+        assertEquals(airportTOS.get(2).getId(), airports.get(2).getId());
+        assertEquals(airportTOS.size(), airports.size());
+    }
 }
