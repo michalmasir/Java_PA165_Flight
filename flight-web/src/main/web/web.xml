@@ -1,0 +1,9 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <!-- Disables Servlet Container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
+    <welcome-file-list>
+        <welcome-file></welcome-file>
+    </welcome-file-list>
+    <!-- the rest is in cz.muni.fi.pa165.books.config.MyStartInitializer class -->
+</web-app>
