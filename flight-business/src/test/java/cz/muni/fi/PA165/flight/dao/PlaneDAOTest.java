@@ -1,13 +1,11 @@
 package cz.muni.fi.PA165.flight.dao;
 
-import cz.muni.fi.PA165.flight.dao.PlaneDAO;
 import cz.muni.fi.PA165.flight.dao.impl.PlaneDAOImpl;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;

@@ -11,10 +11,10 @@ import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Assert;
 import org.mockito.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * User: PC
@@ -149,7 +147,7 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(flightTOs.get(0).getId(), flights.get(0).getId());
         Assert.assertEquals(flightTOs.get(1).getId(), flights.get(1).getId());
-        assertEquals(flightTOs.size(), flights.size());
+        Assert.assertEquals(flightTOs.size(), flights.size());
     }
 
 
@@ -189,7 +187,7 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(flightTOs.get(0).getId(), flights.get(0).getId());
         Assert.assertEquals(flightTOs.get(1).getId(), flights.get(1).getId());
-        assertEquals(flightTOs.size(), flights.size());
+        Assert.assertEquals(flightTOs.size(), flights.size());
     }
 
     @Test
@@ -210,7 +208,7 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(flightTOs.get(0).getId(), flights.get(0).getId());
         Assert.assertEquals(flightTOs.get(1).getId(), flights.get(1).getId());
-        assertEquals(flightTOs.size(), flights.size());
+        Assert.assertEquals(flightTOs.size(), flights.size());
     }
 
 
@@ -219,7 +217,7 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
        Mockito.when(flightDAO.safeAddSteward(flight1, steward)).thenReturn(true);
        boolean result =  flightService.assignStewardToFlight(flightTO1, stewardTO);
        Mockito.verify(flightDAO).safeAddSteward(flight1, steward);
-       assertEquals(result, true);
+        Assert.assertEquals(result, true);
     }
 
     @Test

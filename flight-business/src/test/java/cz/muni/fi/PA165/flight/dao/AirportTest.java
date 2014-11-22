@@ -1,13 +1,11 @@
 package cz.muni.fi.PA165.flight.dao;
 
-import cz.muni.fi.PA165.flight.dao.AirportDAO;
 import cz.muni.fi.PA165.flight.dao.impl.AirportDAOImpl;
 import cz.muni.fi.PA165.flight.entity.Airport;
-import junit.framework.Assert;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;

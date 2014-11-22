@@ -8,11 +8,11 @@ import cz.muni.fi.PA165.flight.service.impl.AirportServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Assert;
 import org.mockito.*;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(locations = {"classpath:/application-context.xml"})
@@ -168,6 +167,6 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(airportTOS.get(0).getId(), airports.get(0).getId());
         Assert.assertEquals(airportTOS.get(1).getId(), airports.get(1).getId());
         Assert.assertEquals(airportTOS.get(2).getId(), airports.get(2).getId());
-        assertEquals(airportTOS.size(), airports.size());
+        Assert.assertEquals(airportTOS.size(), airports.size());
     }
 }

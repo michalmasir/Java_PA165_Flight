@@ -5,11 +5,11 @@ import cz.muni.fi.PA165.flight.entity.Steward;
 import cz.muni.fi.PA165.flight.service.impl.StewardServiceImpl;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
-import org.junit.Assert;
 import org.mockito.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by M on 7.11.2014.
@@ -89,7 +87,7 @@ public class StewardServiceTest extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(stewardTOList.get(0).getId(), stewardList.get(0).getId());
         Assert.assertEquals(stewardTOList.get(1).getId(), stewardList.get(1).getId());
-        assertEquals(stewardTOList.size(),stewardList.size());
+        Assert.assertEquals(stewardTOList.size(), stewardList.size());
 
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="1.0">
+
+	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
+        <class>cz.muni.fi.PA165.flight.entity.Airport</class>
+        <class>cz.muni.fi.PA165.flight.entity.Flight</class>
+        <class>cz.muni.fi.PA165.flight.entity.Plane</class>
+        <class>cz.muni.fi.PA165.flight.entity.Steward</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.format_sql" value="false" />
+        </properties>
+	</persistence-unit>
+</persistence>

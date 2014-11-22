@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.flight.dao;
 
-import cz.muni.fi.PA165.flight.dao.StewardDAO;
 import cz.muni.fi.PA165.flight.dao.impl.FlightDAOImpl;
 import cz.muni.fi.PA165.flight.dao.impl.PlaneDAOImpl;
 import cz.muni.fi.PA165.flight.dao.impl.StewardDAOImpl;
@@ -9,12 +8,9 @@ import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.entity.Steward;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
