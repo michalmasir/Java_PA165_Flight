@@ -9,6 +9,8 @@ import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -23,6 +25,7 @@ import java.util.logging.Logger;
  * Date: 5. 11. 2014
  * Time: 19:54
  */
+@Service
 public class FlightServiceImpl implements FlightService {
 
     @Inject

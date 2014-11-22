@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.flight.entity.Airport;
 import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by Misko on 6.11.2014.
  */
+@Service
 public class AirportServiceImpl implements AirportService{
 
     @Inject

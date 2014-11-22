@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.flight.entity.Steward;
 import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by M on 7.11.2014.
  */
+@Service
 public class StewardServiceImpl implements StewardService {
 
 
