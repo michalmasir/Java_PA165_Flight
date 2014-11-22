@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cz.muni.fi.PA165")
+@ComponentScan(basePackages = "cz.fi.muni.PA165")
 @ImportResource({"classpath:application-context.xml"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

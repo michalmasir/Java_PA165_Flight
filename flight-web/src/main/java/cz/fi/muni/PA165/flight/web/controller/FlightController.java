@@ -16,7 +16,7 @@ public class FlightController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
      public String list() {
-        return "list";
+        return "flight/list";
      }
 
 }
