@@ -1,4 +1,4 @@
-package cz.fi.muni.PA165.flight.web.config;
+package cz.muni.fi.PA165.flight.web.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cz.fi.muni.PA165")
+@ComponentScan(basePackages = "cz.muni.fi.PA165.flight")
 @ImportResource({"classpath:application-context.xml"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

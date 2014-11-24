@@ -1,4 +1,4 @@
-package cz.fi.muni.PA165.flight.web.validation;
+package cz.muni.fi.PA165.flight.web.validation;
 
 import cz.muni.fi.PA165.flight.entity.Flight;
 import org.springframework.validation.Errors;

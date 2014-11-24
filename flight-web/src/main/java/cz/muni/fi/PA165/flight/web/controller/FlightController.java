@@ -1,6 +1,9 @@
-package cz.fi.muni.PA165.flight.web.controller;
+package cz.muni.fi.PA165.flight.web.controller;
 
+import cz.muni.fi.PA165.flight.service.FlightService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/flight")
 public class FlightController {
 
+    @Autowired
+    private FlightService flightService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-     public String list() {
+     public String list(Model model) {
+        model.addAttribute("flights", flightService.getFlightsList());
         return "flight/list";
      }
 

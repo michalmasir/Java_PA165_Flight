@@ -1,4 +1,4 @@
-package cz.fi.muni.PA165.flight.web.config;
+package cz.muni.fi.PA165.flight.web.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
