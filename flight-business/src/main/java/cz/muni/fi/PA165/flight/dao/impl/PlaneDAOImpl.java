@@ -52,7 +52,6 @@ public class PlaneDAOImpl implements PlaneDAO {
             throw new DataIntegrityViolationException("Plane can not be null");
         }
         em.persist(plane);
-
     }
     
     public Plane updatePlane(Plane plane){

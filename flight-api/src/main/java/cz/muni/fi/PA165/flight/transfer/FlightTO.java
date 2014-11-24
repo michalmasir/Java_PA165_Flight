@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.flight.transfer;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,8 +21,10 @@ public class FlightTO {
 
     private PlaneTO plane;
 
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date departureTime;
 
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date arrivalTime;
 
     private Set<StewardTO> stewards = new HashSet<StewardTO>();

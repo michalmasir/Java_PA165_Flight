@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -44,6 +46,16 @@ public class PlaneServiceImpl implements PlaneService{
         planeTO.setLastRevisionTime(date);
         updatePlane(planeTO);
     }
+
+    @Override
+    @Transactional
+    public List<PlaneTO> planeList() {
+        List<PlaneTO> flightTOs = new ArrayList<>();
+
+        for(Plane flight : planeDAO.getAllPlanes()){
+            flightTOs.add(dozerBeanMapper.map(flight, PlaneTO.class));
+        }
+        return flightTOs;}
 
 
 }
