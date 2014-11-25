@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,7 +76,7 @@ public class FlightController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String process_form(@Valid @ModelAttribute FlightTO flight, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
-            for(ObjectError err:bindingResult.getAllErrors()){
+            for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);
             }
 
@@ -102,6 +101,7 @@ public class FlightController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
+        ensureDataInDb();
         model.addAttribute("flights", flightService.getFlightsList());
         return "flight/list";
     }
@@ -162,6 +162,20 @@ public class FlightController {
         stewardTO.setFirstName("john");
         stewardTO.setLastName("tetser");
         stewardService.addSteward(stewardTO);
+
+
+        FlightTO flight = new FlightTO();
+        flight.setPlane(planeService.getPlaneBtId(1));
+        flight.setFrom(airportService.getAirportById(1));
+        flight.setTo(airportService.getAirportById(2));
+        Calendar cld = Calendar.getInstance();
+        cld.set(2000, Calendar.AUGUST, 11);
+        flight.setDepartureTime(cld.getTime());
+
+        cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
+        flight.setArrivalTime(cld.getTime());
+        flightService.addFlight(flight);
+
     }
 }
 

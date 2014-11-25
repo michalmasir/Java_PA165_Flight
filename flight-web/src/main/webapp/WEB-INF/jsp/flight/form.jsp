@@ -28,13 +28,13 @@
                         </div>
 
                         <div class="form-group">
-                            <form:label path="departureTime"><fmt:message key="flight.departure_time"/></form:label>
+                            <form:label path="departureTime"><fmt:message key="flight.departure_date"/></form:label>
                             <form:input path="departureTime" cssClass="form-control"/>
                             <form:errors path="departureTime" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="from"><fmt:message key="flight.airport.to"/></form:label>
+                            <form:label path="from"><fmt:message key="flight.from_airport"/></form:label>
                             <form:select path="from" cssClass="form-control">
                                 <c:forEach items="${airports}" var="airport">
                                     <option value="${airport.id}" ${airport.id == flight.from.id ? 'selected="selected"' : ''}>${airport.name}</option>
@@ -45,13 +45,13 @@
                         </div>
 
                         <div class="form-group">
-                            <form:label path="arrivalTime"><fmt:message key="flight.arrival_time"/></form:label>
+                            <form:label path="arrivalTime"><fmt:message key="flight.arrival_date"/></form:label>
                             <form:input path="arrivalTime" cssClass="form-control"/>
                             <form:errors path="arrivalTime" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="to"><fmt:message key="flight.airport.to"/></form:label>
+                            <form:label path="to"><fmt:message key="flight.to_airport"/></form:label>
                             <form:select path="to" cssClass="form-control">
                                 <c:forEach items="${airports}" var="airport">
                                     <option value="${airport.id}" ${airport.id == flight.to.id ? 'selected="selected"' : ''}>${airport.name}</option>
@@ -70,7 +70,6 @@
                             </form:select>
                             <form:errors path="stewards" cssClass="error"/>
                         </div>
-
 
                         <input type="submit" value="<fmt:message key='generic.save'/>" class="btn btn-primary">
                     </fieldset>
