@@ -34,8 +34,7 @@ public class AirportServiceImpl implements AirportService{
     @Override
     @Transactional
     public void removeAirport(AirportTO airportTo) {
-        Airport airport = dozerBeanMapper.map(airportTo,Airport.class);
-        airportDao.deleteAirport(airport);
+        airportDao.deleteAirport(airportDao.getAirportById(airportTo.getId()));
     }
 
     @Override

@@ -20,4 +20,5 @@ public interface PlaneService {
 
     public PlaneTO getPlaneBtId(long id);
 
+    public void removePlane(PlaneTO planeTO);
 }

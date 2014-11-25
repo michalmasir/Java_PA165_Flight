@@ -64,4 +64,9 @@ public class PlaneServiceImpl implements PlaneService{
         return dozerBeanMapper.map(plane, PlaneTO.class);
     }
 
+    @Override
+    public void removePlane(PlaneTO planeTO) {
+        planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
+    }
+
 }
