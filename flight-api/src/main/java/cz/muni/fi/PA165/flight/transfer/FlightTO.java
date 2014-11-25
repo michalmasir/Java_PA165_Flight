@@ -82,7 +82,12 @@ public class FlightTO {
     }
 
     public void setStewards(Set<StewardTO> stewards) {
-        this.stewards = stewards;
+        if(stewards == null){
+            this.stewards = new HashSet<>();
+        }
+        else{
+            this.stewards = stewards;
+        }
     }
 
     @Override

@@ -20,7 +20,7 @@
             <c:forEach items="${flights}" var="flight">
                 <tr>
                     <td>${flight.id}</td>
-                    <td><c:out value="${flight.plane.name}"/></td>
+                    <td><c:out value="${flight.plane.manufacturer} - ${flight.plane.type}"/></td>
                 </tr>
             </c:forEach>
         </table>

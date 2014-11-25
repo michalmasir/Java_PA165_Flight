@@ -27,6 +27,7 @@ public class StewardServiceImpl implements StewardService {
 
 
     @Override
+    @Transactional
     public StewardTO getStewardById(long id) {
         Steward steward = stewardDAO.getStewardById(id);
         return dozerBeanMapper.map(steward,StewardTO.class);
@@ -49,6 +50,7 @@ public class StewardServiceImpl implements StewardService {
     }
 
     @Override
+    @Transactional
     public List<StewardTO> getAllStewards() {
         List<StewardTO> stewardTOList = new ArrayList<>();
 

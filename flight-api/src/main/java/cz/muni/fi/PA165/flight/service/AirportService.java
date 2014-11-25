@@ -17,4 +17,5 @@ public interface AirportService {
     //getAll airports
     public List<AirportTO> getAirportsList();
 
+    public AirportTO getAirportById(long id);
 }

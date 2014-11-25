@@ -57,5 +57,11 @@ public class PlaneServiceImpl implements PlaneService{
         }
         return flightTOs;}
 
+    @Override
+    @Transactional
+    public PlaneTO getPlaneBtId(long id) {
+        Plane plane = planeDAO.getPlaneById(id);
+        return dozerBeanMapper.map(plane, PlaneTO.class);
+    }
 
 }

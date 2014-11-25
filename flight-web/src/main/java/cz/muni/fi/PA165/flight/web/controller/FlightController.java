@@ -4,8 +4,10 @@ import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.service.FlightService;
 import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.service.StewardService;
+import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
+import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -65,6 +67,9 @@ public class FlightController {
         Calendar cld = Calendar.getInstance();
         cld.set(2000, Calendar.AUGUST, 11);
         flight.setDepartureTime(cld.getTime());
+
+        cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
+        flight.setArrivalTime(cld.getTime());
         //----END OF TESTING CODE----
         return form(model, flight);
     }
@@ -88,7 +93,7 @@ public class FlightController {
             flightService.updateFlight(flight);
             redirectAttributes.addFlashAttribute(
                     "message",
-                    messageSource.getMessage("flight.updated.flash", flightData(flight), locale)
+                    messageSource.getMessage("flight.update.flash", flightData(flight), locale)
             );
         }
         return "redirect:" + uriBuilder.path("/flight/list").build();
@@ -102,7 +107,7 @@ public class FlightController {
     }
 
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
         FlightTO flight = flightService.getFlightById(id);
         flightService.removeFlight(flight);
@@ -134,10 +139,29 @@ public class FlightController {
             return;
         }
         db_ready = true;
+
         PlaneTO planeTO = new PlaneTO();
         planeTO.setManufacturer("Boeing");
         planeTO.setType("747");
         planeService.addPlane(planeTO);
+
+        AirportTO airportTO = new AirportTO();
+        airportTO.setName("MR Stefanika");
+        airportTO.setCity("BA");
+        airportTO.setState("SK");
+        airportService.addAirport(airportTO);
+
+        AirportTO airportTO1 = new AirportTO();
+        airportTO1.setName("V Havla");
+        airportTO1.setCity("Prague");
+        airportTO1.setState("CR");
+
+        airportService.addAirport(airportTO1);
+
+        StewardTO stewardTO = new StewardTO();
+        stewardTO.setFirstName("john");
+        stewardTO.setLastName("tetser");
+        stewardService.addSteward(stewardTO);
     }
 }
 

@@ -1,11 +1,15 @@
 package cz.muni.fi.PA165.flight.web.config;
 
+import cz.muni.fi.PA165.flight.web.conversion.StringToAirportConverter;
+import cz.muni.fi.PA165.flight.web.conversion.StringToPlaneConverter;
+import cz.muni.fi.PA165.flight.web.conversion.StringToStewardConverter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -57,4 +61,29 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     }
 
 
+    @Bean
+    public StringToPlaneConverter getPlaneConverter()
+    {
+        return new StringToPlaneConverter();
+    }
+
+    @Bean
+    public StringToAirportConverter getAirportConverter()
+    {
+        return new StringToAirportConverter();
+    }
+
+
+    @Bean
+    public StringToStewardConverter getStringToStewardConverter(){
+        return new StringToStewardConverter();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry formatterRegistry)
+    {
+        formatterRegistry.addConverter(getPlaneConverter());
+        formatterRegistry.addConverter(getAirportConverter());
+        formatterRegistry.addConverter(getStringToStewardConverter());
+    }
 }

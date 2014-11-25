@@ -47,12 +47,20 @@ public class AirportServiceImpl implements AirportService{
     }
 
     @Override
+    @Transactional
     public List<AirportTO> getAirportsList() {
        List<AirportTO> airportTOs = new ArrayList<>();
         for(Airport airport: airportDao.getAllAirports()){
             airportTOs.add(dozerBeanMapper.map(airport, AirportTO.class));
         }
         return airportTOs;
+    }
+
+    @Override
+    @Transactional
+    public AirportTO getAirportById(long id) {
+        Airport airport = airportDao.getAirportById(id);
+        return dozerBeanMapper.map(airport, AirportTO.class);
     }
 
 

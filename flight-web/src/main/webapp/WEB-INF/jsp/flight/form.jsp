@@ -65,7 +65,7 @@
                             <form:label path="stewards"><fmt:message key="flight.stewards"/></form:label>
                             <form:select path="stewards" multiple="multiple" cssClass="form-control">
                                 <c:forEach items="${stewards}" var="steward">
-                                    <option value="${steward.id}">${steward.name}</option>
+                                    <option value="${steward.id}">${steward.firstName} ${steward.lastName}</option>
                                 </c:forEach>
                             </form:select>
                             <form:errors path="stewards" cssClass="error"/>

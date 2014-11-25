@@ -18,4 +18,6 @@ public interface PlaneService {
 
     public List<PlaneTO> planeList();
 
+    public PlaneTO getPlaneBtId(long id);
+
 }
