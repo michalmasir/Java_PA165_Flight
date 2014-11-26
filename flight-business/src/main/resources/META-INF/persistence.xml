@@ -3,7 +3,7 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 	version="1.0">
 
-	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="myUnit">
         <class>cz.muni.fi.PA165.flight.entity.Airport</class>
         <class>cz.muni.fi.PA165.flight.entity.Flight</class>
         <class>cz.muni.fi.PA165.flight.entity.Plane</class>
