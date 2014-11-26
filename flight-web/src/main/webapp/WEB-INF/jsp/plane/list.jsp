@@ -16,7 +16,7 @@
                 <th></th>
                 <th></th>
             </tr>
-            <c:forEach items="${planes}" var="flight">
+            <c:forEach items="${planes}" var="plane">
                 <tr>
                     <td>${plane.id}</td>
                     <td>${plane.type}</td>

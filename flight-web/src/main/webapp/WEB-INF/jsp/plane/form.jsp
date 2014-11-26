@@ -10,65 +10,70 @@
     <jsp:body>
         <div class="panel panel-default">
             <div class="panel-body">
-                <form:form method="post" action="${pageContext.request.contextPath}/flight/update"
-                           modelAttribute="flight">
+                <form:form method="post" action="${pageContext.request.contextPath}/plane/update"
+                           modelAttribute="plane">
                     <form:hidden path="id"/>
                     <fieldset>
                         <legend><fmt:message key="flight.update.title"/></legend>
 
                         <div class="form-group">
-                            <form:label path="plane"><fmt:message key="flight.plane"/></form:label>
-                            <form:select path="plane" cssClass="form-control">
-                                <c:forEach items="${planes}" var="plane">
-                                    <option value="${plane.id}" ${plane.id == flight.plane.id ? 'selected="selected"' : ''}>${plane.manufacturer}
-                                        - ${plane.type}</option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="plane" cssClass="error"/>
+                            <form:label path="id"><fmt:message key="plane.plane"/></form:label>
+                            <form:input path="id" cssClass="form-control"/>
+                            <form:errors path="id" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="departureTime"><fmt:message key="flight.departure_date"/></form:label>
-                            <form:input path="departureTime" cssClass="form-control"/>
-                            <form:errors path="departureTime" cssClass="error"/>
+                            <form:label path="manufacturer"><fmt:message key="plane.manufacturer"/></form:label>
+                            <form:input path="manufacturer" cssClass="form-control"/>
+                            <form:errors path="manufacturer" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="from"><fmt:message key="flight.from_airport"/></form:label>
-                            <form:select path="from" cssClass="form-control">
-                                <c:forEach items="${airports}" var="airport">
-                                    <option value="${airport.id}" ${airport.id == flight.from.id ? 'selected="selected"' : ''}>${airport.name}</option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="from" cssClass="error"/>
-
+                            <form:label path="type"><fmt:message key="plane.type"/></form:label>
+                            <form:input path="type" cssClass="form-control"/>
+                            <form:errors path="type" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="arrivalTime"><fmt:message key="flight.arrival_date"/></form:label>
-                            <form:input path="arrivalTime" cssClass="form-control"/>
-                            <form:errors path="arrivalTime" cssClass="error"/>
+                            <form:label path="passangerSeatsCount"><fmt:message key="plane.passangerSeatsCount"/></form:label>
+                            <form:input path="passangerSeatsCount" cssClass="form-control"/>
+                            <form:errors path="passangerSeatsCount" cssClass="error"/>
                         </div>
 
                         <div class="form-group">
-                            <form:label path="to"><fmt:message key="flight.to_airport"/></form:label>
-                            <form:select path="to" cssClass="form-control">
-                                <c:forEach items="${airports}" var="airport">
-                                    <option value="${airport.id}" ${airport.id == flight.to.id ? 'selected="selected"' : ''}>${airport.name}</option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="to" cssClass="error"/>
+                            <form:label path="staffSeatsCount"><fmt:message key="plane.staffSeatsCount"/></form:label>
+                            <form:input path="staffSeatsCount" cssClass="form-control"/>
+                            <form:errors path="staffSeatsCount" cssClass="error"/>
                         </div>
 
+                        <div class="form-group">
+                            <form:label path="tankCapacity"><fmt:message key="plane.tankCapacity"/></form:label>
+                            <form:input path="tankCapacity" cssClass="form-control"/>
+                            <form:errors path="tankCapacity" cssClass="error"/>
+                        </div>
 
                         <div class="form-group">
-                            <form:label path="stewards"><fmt:message key="flight.stewards"/></form:label>
-                            <form:select path="stewards" multiple="multiple" cssClass="form-control">
-                                <c:forEach items="${stewards}" var="steward">
-                                    <option value="${steward.id}">${steward.firstName} ${steward.lastName}</option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="stewards" cssClass="error"/>
+                            <form:label path="fuelLeft"><fmt:message key="plane.fuelLeft"/></form:label>
+                            <form:input path="fuelLeft" cssClass="form-control"/>
+                            <form:errors path="fuelLeft" cssClass="error"/>
+                        </div>
+
+                        <%--<div class="form-group">--%>
+                            <%--<form:label path="lastRevisionTime"><fmt:message key="plane.lastRevisionTime"/></form:label>--%>
+                            <%--<form:input path="lastRevisionTime" cssClass="form-control"/>--%>
+                            <%--<form:errors path="lastRevisionTime" cssClass="error"/>--%>
+                        <%--</div>--%>
+
+                        <div class="form-group">
+                            <form:label path="totalFlightTime"><fmt:message key="plane.totalFlightTime"/></form:label>
+                            <form:input path="totalFlightTime" cssClass="form-control"/>
+                            <form:errors path="totalFlightTime" cssClass="error"/>
+                        </div>
+
+                        <div class="form-group">
+                            <form:label path="totalFlightDistance"><fmt:message key="plane.totalFlightDistance"/></form:label>
+                            <form:input path="totalFlightDistance" cssClass="form-control"/>
+                            <form:errors path="totalFlightDistance" cssClass="error"/>
                         </div>
 
                         <input type="submit" value="<fmt:message key='generic.save'/>" class="btn btn-primary">

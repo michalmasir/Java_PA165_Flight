@@ -130,6 +130,18 @@ public class PlaneTO {
         this.totalFlightDistance += inc;
     }
 
+    public Date getLastRevisionTime() {
+        return lastRevisionTime;
+    }
+
+    public long getTotalFlightDistance() {
+        return totalFlightDistance;
+    }
+
+    public long getTotalFlightTime() {
+        return totalFlightTime;
+    }
+
     /**
      * Returns plane ID.
      * @return
