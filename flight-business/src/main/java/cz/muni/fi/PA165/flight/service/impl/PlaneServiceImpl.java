@@ -65,6 +65,7 @@ public class PlaneServiceImpl implements PlaneService{
     }
 
     @Override
+    @Transactional
     public void removePlane(PlaneTO planeTO) {
         planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
     }
