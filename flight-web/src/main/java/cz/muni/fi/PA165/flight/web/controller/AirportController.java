@@ -33,13 +33,6 @@ public class AirportController {
     @Autowired
     private MessageSource messageSource;
 
-    /*
-    @ModelAttribute("airports")
-    public List<AirportTO> allAirports() {
-        return airportService.getAirportsList();
-    }
-    */
-
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         //todo return null from dozer if not found
@@ -75,22 +68,13 @@ public class AirportController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(@ModelAttribute AirportTO airportTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
-        if (bindingResult.hasErrors()) {
-            for (ObjectError err : bindingResult.getAllErrors()) {
-                System.err.println(err);
-            }
-            //return previouse form
-            return "airport/form";
-        }
-        else {
-            airportService.addAirport(airportTO);
-            redirectAttributes.addFlashAttribute(
-                    "message",
-                    messageSource.getMessage("airport.add.flash", airportMessage(airportTO), locale)
-            );
-        }
-        return "redirect:" + uriBuilder.path("/airport/list").build();
+    public String create(Model model) {
+        AirportTO airportTO = new AirportTO();
+        airportTO.setCity("");
+        airportTO.setName("");
+        airportTO.setState("");
+        model.addAttribute("airport",airportTO);
+        return "airport/form";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

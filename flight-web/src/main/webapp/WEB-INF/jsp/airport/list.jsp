@@ -7,8 +7,11 @@
 <fmt:message var="title" key="airport.label.title"/>
 <my:layout>
     <jsp:body>
-        <h1><fmt:message key="airport.label.list"/></h1>
-        <table class="table table-striped">
+        <div class="page-header">
+            <h1><fmt:message key="airport.label.list"/></h1>
+        </div>
+        <table class="table table-striped data-table">
+            <thead>
             <tr>
                 <th><fmt:message key="airport.label.id"/></th>
                 <th><fmt:message key="airport.label.name"/></th>
@@ -17,6 +20,8 @@
                 <th></th>
                 <th></th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach items="${airports}" var="airport">
                 <tr>
                     <td>${airport.id}</td>
@@ -27,7 +32,9 @@
                     <td><a href="<s:url value='/airport/delete/${airport.id}'/>"><fmt:message key="generic.delete"/></a></td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
+        <a href="<s:url value='/airport/create/'/>" class="right btn btn-primary"><fmt:message key="generic.create"/></a>
     </jsp:body>
 </my:layout>
 
