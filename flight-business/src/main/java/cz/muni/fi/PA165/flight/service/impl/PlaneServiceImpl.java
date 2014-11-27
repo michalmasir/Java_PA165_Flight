@@ -18,7 +18,7 @@ import java.util.List;
  * @author Michal Galan
  */
 @Service
-public class PlaneServiceImpl implements PlaneService{
+public class PlaneServiceImpl implements PlaneService {
 
     @Inject
     private PlaneDAO planeDAO;
@@ -32,14 +32,14 @@ public class PlaneServiceImpl implements PlaneService{
         Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
         planeDAO.addPlane(plane);
     }
-    
+
     @Override
     @Transactional
     public void updatePlane(PlaneTO planeTO) {
         Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
         planeDAO.updatePlane(plane);
     }
-    
+
     @Override
     @Transactional
     public void revisionDone(PlaneTO planeTO, Date date) {
@@ -52,15 +52,19 @@ public class PlaneServiceImpl implements PlaneService{
     public List<PlaneTO> planeList() {
         List<PlaneTO> flightTOs = new ArrayList<>();
 
-        for(Plane flight : planeDAO.getAllPlanes()){
+        for (Plane flight : planeDAO.getAllPlanes()) {
             flightTOs.add(dozerBeanMapper.map(flight, PlaneTO.class));
         }
-        return flightTOs;}
+        return flightTOs;
+    }
 
     @Override
     @Transactional
     public PlaneTO getPlaneById(long id) {
         Plane plane = planeDAO.getPlaneById(id);
+        if (plane == null) {
+            return null;
+        }
         return dozerBeanMapper.map(plane, PlaneTO.class);
     }
 

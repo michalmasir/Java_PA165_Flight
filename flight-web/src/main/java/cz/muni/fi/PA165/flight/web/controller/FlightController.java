@@ -8,16 +8,15 @@ import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
+import cz.muni.fi.PA165.flight.web.validation.FlightValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -74,7 +73,8 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String process_form(@Valid @ModelAttribute FlightTO flight, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String process_form(@Valid @ModelAttribute("flight") FlightTO flight, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+
         if (bindingResult.hasErrors()) {
             for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);
@@ -132,6 +132,11 @@ public class FlightController {
         return new Object[]{flight.getId(), flight.getFrom().getName(), flight.getTo().getName(), flight.getPlane().getType()};
     }
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+       binder.addValidators(new FlightValidation());
+    }
+
     private static boolean db_ready = false;
 
     private void ensureDataInDb() {
@@ -174,6 +179,7 @@ public class FlightController {
 
         cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
         flight.setArrivalTime(cld.getTime());
+        flight.getStewards().add(stewardService.getStewardById(1));
         flightService.addFlight(flight);
 
     }

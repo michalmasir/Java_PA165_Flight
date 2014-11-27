@@ -77,15 +77,7 @@ public class AirportTO {
 
         AirportTO airportTO = (AirportTO) o;
 
-        if (id != airportTO.id) return false;
-        if (city != null ? !city.equals(airportTO.city) : airportTO.city != null) return false;
-        if (flightsFrom != null ? !flightsFrom.equals(airportTO.flightsFrom) : airportTO.flightsFrom != null)
-            return false;
-        if (flightsTo != null ? !flightsTo.equals(airportTO.flightsTo) : airportTO.flightsTo != null) return false;
-        if (name != null ? !name.equals(airportTO.name) : airportTO.name != null) return false;
-        if (state != null ? !state.equals(airportTO.state) : airportTO.state != null) return false;
-
-        return true;
+        return id == airportTO.id;
     }
 
     @Override

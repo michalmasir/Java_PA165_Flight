@@ -30,13 +30,16 @@ public class StewardServiceImpl implements StewardService {
     @Transactional
     public StewardTO getStewardById(long id) {
         Steward steward = stewardDAO.getStewardById(id);
-        return dozerBeanMapper.map(steward,StewardTO.class);
+        if (steward == null) {
+            return null;
+        }
+        return dozerBeanMapper.map(steward, StewardTO.class);
     }
 
     @Override
     @Transactional
     public void addSteward(StewardTO stewardTO) {
-        Steward steward = dozerBeanMapper.map(stewardTO,Steward.class);
+        Steward steward = dozerBeanMapper.map(stewardTO, Steward.class);
         stewardDAO.addSteward(steward);
 
     }
@@ -52,8 +55,8 @@ public class StewardServiceImpl implements StewardService {
     public List<StewardTO> getAllStewards() {
         List<StewardTO> stewardTOList = new ArrayList<>();
 
-        for(Steward steward : stewardDAO.getAllStewards()){
-            stewardTOList.add(dozerBeanMapper.map(steward,StewardTO.class));
+        for (Steward steward : stewardDAO.getAllStewards()) {
+            stewardTOList.add(dozerBeanMapper.map(steward, StewardTO.class));
         }
         return stewardTOList;
     }

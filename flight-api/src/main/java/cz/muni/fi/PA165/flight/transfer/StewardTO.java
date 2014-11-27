@@ -57,17 +57,17 @@ public class StewardTO {
 
         StewardTO steward = (StewardTO) o;
 
-        if (id != steward.id || id == 0) return false;
-        if (firstName != steward.firstName) return false;
-        if (lastName != steward.lastName) return false;
-        if (flights != null ? !flights.equals(steward.flights) : steward.flights != null) return false;
-
-
-        return true;
+        return !(id != steward.id || id == 0);
     }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+    public String toString(){
+        return getFirstName() + " " + getLastName();
+    }
 }
+
+
