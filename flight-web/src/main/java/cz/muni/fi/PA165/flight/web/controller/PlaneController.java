@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Locale;
 
@@ -61,7 +62,7 @@ public class PlaneController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String process_form(@ModelAttribute PlaneTO plane, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String process_form(@Valid @ModelAttribute("plane") PlaneTO plane, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
             for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);
