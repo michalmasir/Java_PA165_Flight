@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Misko on 6.11.2014.
  */
 @Service
-public class AirportServiceImpl implements AirportService{
+public class AirportServiceImpl implements AirportService {
 
     @Inject
     private AirportDAO airportDao;
@@ -27,7 +27,7 @@ public class AirportServiceImpl implements AirportService{
     @Override
     @Transactional
     public void addAirport(AirportTO airportTo) {
-        Airport airport = dozerBeanMapper.map(airportTo,Airport.class);
+        Airport airport = dozerBeanMapper.map(airportTo, Airport.class);
         airportDao.addAirport(airport);
     }
 
@@ -48,8 +48,8 @@ public class AirportServiceImpl implements AirportService{
     @Override
     @Transactional
     public List<AirportTO> getAirportsList() {
-       List<AirportTO> airportTOs = new ArrayList<>();
-        for(Airport airport: airportDao.getAllAirports()){
+        List<AirportTO> airportTOs = new ArrayList<>();
+        for (Airport airport : airportDao.getAllAirports()) {
             airportTOs.add(dozerBeanMapper.map(airport, AirportTO.class));
         }
         return airportTOs;
@@ -59,6 +59,9 @@ public class AirportServiceImpl implements AirportService{
     @Transactional
     public AirportTO getAirportById(long id) {
         Airport airport = airportDao.getAirportById(id);
+        if (airport == null) {
+            return null;
+        }
         return dozerBeanMapper.map(airport, AirportTO.class);
     }
 

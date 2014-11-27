@@ -25,7 +25,6 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="<c:url value='/flight/list'/>"><fmt:message key="flight.menu"/></a></li>
                     <li class=""><a href="<c:url value='/plane/list'/>"><fmt:message key="plane.menu"/></a></li>
-                    <li class=""><a href="<c:url value='/airport/list'/>"><fmt:message key="airport.menu"/></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

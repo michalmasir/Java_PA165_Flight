@@ -58,10 +58,10 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     private void validateTime(Flight flight) {
-        if(flight.getDepartureTime() == null){
+        if (flight.getDepartureTime() == null) {
             throw new DataIntegrityViolationException("Flight has null departure time!");
         }
-        if(flight.getArrivalTime() == null){
+        if (flight.getArrivalTime() == null) {
             throw new DataIntegrityViolationException("Flight has null arrival time!");
         }
 
@@ -111,25 +111,25 @@ public class FlightDAOImpl implements FlightDAO {
 
     @Override
     public List<Flight> getFlightsByDepartureDate(Date from, Date to) {
-        return  em.createQuery("SELECT f FROM Flight f WHERE departureTime >= :from AND departureTime <= :to", Flight.class)
-                .setParameter("from", from )
+        return em.createQuery("SELECT f FROM Flight f WHERE departureTime >= :from AND departureTime <= :to", Flight.class)
+                .setParameter("from", from)
                 .setParameter("to", to)
                 .getResultList();
     }
 
     @Override
     public List<Flight> getFlightsByArrivalDate(Date from, Date to) {
-        return  em.createQuery("SELECT f FROM Flight f WHERE arrivalTime >= :from AND arrivalTime <= :to", Flight.class)
-                .setParameter("from", from )
+        return em.createQuery("SELECT f FROM Flight f WHERE arrivalTime >= :from AND arrivalTime <= :to", Flight.class)
+                .setParameter("from", from)
                 .setParameter("to", to)
                 .getResultList();
     }
 
     public boolean flightsInterfere(Flight flight1, Flight flight2) {
-        if (flight2.getDepartureTime().compareTo(flight1.getDepartureTime()) <= 0 && flight2.getArrivalTime().compareTo(flight1.getDepartureTime()) <= 0) {
+        if (flight2.getDepartureTime().compareTo(flight1.getDepartureTime()) <= 0 && flight1.getDepartureTime().compareTo(flight2.getArrivalTime()) <= 0) {
             return true;
         }
-        if (flight1.getDepartureTime().compareTo(flight2.getDepartureTime()) <= 0 && flight1.getArrivalTime().compareTo(flight2.getDepartureTime()) <= 0) {
+        if (flight1.getDepartureTime().compareTo(flight2.getDepartureTime()) <= 0 && flight2.getDepartureTime().compareTo(flight2.getArrivalTime()) <= 0) {
             return true;
         }
         return false;

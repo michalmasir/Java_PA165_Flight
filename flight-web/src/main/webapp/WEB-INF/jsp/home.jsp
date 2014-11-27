@@ -4,5 +4,5 @@
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout>
-
+    <img src="${pageContext.request.contextPath}/static/images/google-flight-search.jpg" style="display: block; margin: 0 auto;"/>
 </t:layout>
