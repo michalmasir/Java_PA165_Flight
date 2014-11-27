@@ -39,6 +39,11 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="panel">
+        <cc:if test="${not empty message}">
+            <div class="message">
+                <p class="bg-info"><cc:out value="${message}"/></p>
+            </div>
+        </cc:if>
         <jsp:doBody/>
     </div>
 </div>

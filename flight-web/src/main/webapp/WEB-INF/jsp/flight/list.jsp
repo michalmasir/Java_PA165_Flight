@@ -27,13 +27,13 @@
             <tbody>
             <c:forEach items="${flights}" var="flight">
                 <tr>
-                    <td>${flight.id}</td>
-                    <td>${flight.from.name}</td>
-                    <td>${flight.departureTime}</td>
-                    <td>${flight.to.name}</td>
-                    <td>${flight.arrivalTime}</td>
-                    <td><c:out value="${flight.plane.manufacturer} - ${flight.plane.type}"/></td>
-                    <td>${flight.listStewards}</td>
+                    <td><c:out value="${flight.id}"/></td>
+                    <td><c:out value="${flight.from.name}"/></td>
+                    <td><c:out value="${flight.departureTime}"/></td>
+                    <td><c:out value="${flight.to.name}"/></td>
+                    <td><c:out value="${flight.arrivalTime}"/></td>
+                    <td><c:out value="${flight.plane.manufacturer}"/> - <c:out value="${flight.plane.type}"/></td>
+                    <td><c:out value="${flight.listStewards}"/></td>
                     <td><a href="<s:url value='/flight/update/${flight.id}'/>"><fmt:message key="generic.update"/></a></td>
                     <td><a href="<s:url value='/flight/delete/${flight.id}'/>"><fmt:message key="generic.delete"/></a></td>
                 </tr>
