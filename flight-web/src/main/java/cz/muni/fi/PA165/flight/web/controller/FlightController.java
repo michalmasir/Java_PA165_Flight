@@ -165,7 +165,7 @@ public class FlightController {
 
 
         FlightTO flight = new FlightTO();
-        flight.setPlane(planeService.getPlaneBtId(1));
+        flight.setPlane(planeService.getPlaneById(1));
         flight.setFrom(airportService.getAirportById(1));
         flight.setTo(airportService.getAirportById(2));
         Calendar cld = Calendar.getInstance();

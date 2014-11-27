@@ -1,13 +1,7 @@
 package cz.muni.fi.PA165.flight.web.controller;
 
-import cz.muni.fi.PA165.flight.service.AirportService;
-import cz.muni.fi.PA165.flight.service.FlightService;
 import cz.muni.fi.PA165.flight.service.PlaneService;
-import cz.muni.fi.PA165.flight.service.StewardService;
-import cz.muni.fi.PA165.flight.transfer.AirportTO;
-import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
-import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -21,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,7 +35,7 @@ public class PlaneController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         //todo return null from dozer if not found
-        PlaneTO plane = planeService.getPlaneBtId(id);
+        PlaneTO plane = planeService.getPlaneById(id);
         return form(model, plane);
     }
 
@@ -104,7 +96,7 @@ public class PlaneController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
-        PlaneTO plane = planeService.getPlaneBtId(id);
+        PlaneTO plane = planeService.getPlaneById(id);
         planeService.removePlane(plane);
         redirectAttributes.addFlashAttribute(
                 "message",

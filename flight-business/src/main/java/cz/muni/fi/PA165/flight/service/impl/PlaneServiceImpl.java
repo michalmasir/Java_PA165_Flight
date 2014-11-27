@@ -59,12 +59,13 @@ public class PlaneServiceImpl implements PlaneService{
 
     @Override
     @Transactional
-    public PlaneTO getPlaneBtId(long id) {
+    public PlaneTO getPlaneById(long id) {
         Plane plane = planeDAO.getPlaneById(id);
         return dozerBeanMapper.map(plane, PlaneTO.class);
     }
 
     @Override
+    @Transactional
     public void removePlane(PlaneTO planeTO) {
         planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
     }
