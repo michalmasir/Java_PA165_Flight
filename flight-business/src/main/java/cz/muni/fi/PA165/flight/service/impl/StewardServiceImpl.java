@@ -48,6 +48,15 @@ public class StewardServiceImpl implements StewardService {
     @Transactional
     public void deleteSteward(StewardTO stewardTO) {
         stewardDAO.deleteSteward(stewardDAO.getStewardById(stewardTO.getId()));
+
+    }
+
+    @Override
+    @Transactional
+    public void updateSteward(StewardTO stewardTO) {
+        Steward steward = dozerBeanMapper.map(stewardTO, Steward.class);
+        stewardDAO.updateSteward(steward);
+
     }
 
     @Override
