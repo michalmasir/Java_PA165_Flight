@@ -50,7 +50,7 @@ public class Plane {
         this.flights = flights;
     }
 
-    @OneToMany(mappedBy = "plane")
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.REMOVE)
     private Set<Flight> flights = new HashSet<>();
 
     /* METHODS */

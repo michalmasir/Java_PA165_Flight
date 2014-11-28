@@ -19,7 +19,11 @@ public class Steward {
 
     private String lastName;
 
-    @ManyToMany(mappedBy = "stewards")
+    @ManyToMany
+    @JoinTable(
+            name = "flight_stewards",
+            joinColumns = {@JoinColumn(name = "steward_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "flight_id", referencedColumnName = "id")})
     private Set<Flight> flights = new HashSet<Flight>();
 
     public void setFirstName(String first_name) {

@@ -36,13 +36,13 @@ public class Airport {
     /**
      * List of destination with arriving flights
      */
-    @OneToMany(mappedBy = "from")
+    @OneToMany(mappedBy = "from", cascade = CascadeType.REMOVE)
     private Set<Flight> flightsFrom = new HashSet<Flight>();
 
     /**
      * List of destination with departing flights
      */
-    @OneToMany(mappedBy = "to")
+    @OneToMany(mappedBy = "to", cascade = CascadeType.REMOVE)
     private Set<Flight> flightsTo = new HashSet<Flight>();
 
     /**
