@@ -6,7 +6,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:layout>
+
+<t:layout section="airports">
     <jsp:body>
         <div class="panel panel-default">
             <div class="panel-body">
