@@ -5,7 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <fmt:message var="title" key="airport.label.title"/>
-<my:layout>
+
+<my:layout section="airports">
     <jsp:body>
         <div class="page-header">
             <h1><fmt:message key="airport.label.list"/></h1>

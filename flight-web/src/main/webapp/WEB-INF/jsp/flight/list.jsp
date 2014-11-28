@@ -28,12 +28,12 @@
             <c:forEach items="${flights}" var="flight">
                 <tr>
                     <td>${flight.id}</td>
-                    <td>${flight.from.name}</td>
-                    <td>${flight.departureTime}</td>
-                    <td>${flight.to.name}</td>
-                    <td>${flight.arrivalTime}</td>
+                    <td><c:out value="${flight.from.name}"/></td>
+                    <td><fmt:formatDate value="${flight.departureTime}" pattern = "dd.MM.yyyy HH:mm" /></td>
+                    <td><c:out value="${flight.to.name}"/></td>
+                    <td><fmt:formatDate value="${flight.arrivalTime}" pattern = "dd.MM.yyyy HH:mm" /></td>
                     <td><c:out value="${flight.plane.manufacturer} - ${flight.plane.type}"/></td>
-                    <td>${flight.listStewards}</td>
+                    <td><c:out value="${flight.listStewards}"/></td>
                     <td><a href="<s:url value='/flight/update/${flight.id}'/>"><fmt:message key="generic.update"/></a></td>
                     <td><a href="<s:url value='/flight/delete/${flight.id}'/>"><fmt:message key="generic.delete"/></a></td>
                 </tr>

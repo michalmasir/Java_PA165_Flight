@@ -18,14 +18,16 @@
                 <th>id</th>
                 <th><fmt:message key="steward.firstName"/> </th>
                 <th><fmt:message key="steward.lastName"/> </th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${stewards}" var="steward">
                 <tr>
                     <td>${steward.id}</td>
-                    <td>${steward.firstName}</td>
-                    <td>${steward.lastName}</td>
+                    <td><c:out value="${steward.firstName}"/></td>
+                    <td><c:out value="${steward.lastName}"/></td>
                     <td><a href="<s:url value='/steward/update/${steward.id}'/>"><fmt:message key="generic.update"/></a></td>
                     <td><a href="<s:url value='/steward/delete/${steward.id}'/>"><fmt:message key="generic.delete"/></a></td>
                 </tr>

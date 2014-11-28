@@ -78,7 +78,6 @@ public class PlaneController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        ensureDataInDb();
         model.addAttribute("planes", planeService.planeList());
         return "plane/list";
     }
@@ -104,30 +103,6 @@ public class PlaneController {
 
     private static Object[] planeData(PlaneTO plane) {
         return new Object[]{plane.getId(), plane.getType(), plane.getManufacturer()};
-    }
-
-    private static boolean db_ready = false;
-
-    private void ensureDataInDb() {
-        if (db_ready) {
-            return;
-        }
-        db_ready = true;
-
-        PlaneTO planeTO = new PlaneTO();
-        planeTO.setManufacturer("Boeing");
-        planeTO.setType("747");
-        planeTO.increaseTotalFlightDistance(200);
-        planeTO.setPassangerSeatsCount(300);
-        planeTO.setStaffSeatsCount(8);
-        planeTO.setTankCapacity(10000);
-        planeTO.tankFuel(544);
-        planeTO.increaseTotalFlightTime(1244);
-        planeTO.increaseTotalFlightDistance(65998);
-        planeTO.setLastRevisionTime(new Date(5416));
-
-        planeService.addPlane(planeTO);
-
     }
 }
 
