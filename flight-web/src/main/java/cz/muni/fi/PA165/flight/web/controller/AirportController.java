@@ -4,23 +4,22 @@ import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import java.util.List;
 import java.util.Locale;
 
+import cz.muni.fi.PA165.flight.web.validation.AirportValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
 /**
- *
+ * Controller for airport entity
  * @author Michal Mašír
  */
 @Controller
@@ -42,7 +41,7 @@ public class AirportController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String process_form(@ModelAttribute AirportTO airportTO,BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String process_form(@Valid @ModelAttribute("airport") AirportTO airportTO,BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
             for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);
@@ -97,6 +96,11 @@ public class AirportController {
 
     private static Object[] airportMessage(AirportTO airportTO) {
         return new Object[]{airportTO.getId(), airportTO.getName(), airportTO.getCity(), airportTO.getState()};
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new AirportValidation());
     }
 
     private static boolean db_ready = false;
