@@ -18,12 +18,16 @@ public class PlaneValidation implements Validator {
     public void validate(Object target, Errors errors) {
         PlaneTO planeTO = (PlaneTO) target;
 
+        if (planeTO.getLastRevisionTime() == null){
+            errors.rejectValue("lastRevisionTime", "plane.lastRevisionTime.empty");
+        }
+
         if(planeTO.getManufacturer().isEmpty()) {
-            errors.rejectValue("manufacturer", "empty");
+            errors.rejectValue("manufacturer", "plane.manufacturer.empty");
         }
 
        if(planeTO.getType().isEmpty()) {
-            errors.rejectValue("name", "empty");
+            errors.rejectValue("type", "plane.lastRevisionTime.empty");
         }
     }
 }
