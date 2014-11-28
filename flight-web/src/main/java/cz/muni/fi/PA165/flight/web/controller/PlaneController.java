@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,26 +44,14 @@ public class PlaneController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         PlaneTO plane = new PlaneTO();
-
-        //----TESTING CODE-------
-        ensureDataInDb();
-        plane.setLastRevisionTime(new Date());
-        
-        plane.setManufacturer("Beoing");
-        plane.setType("737");
-        plane.setTankCapacity(100000);
-        plane.setPassangerSeatsCount(300);
-        plane.setStaffSeatsCount(8);
-        plane.setFuelLeft(1220);
-        plane.increaseTotalFlightTime(500);
-        plane.increaseTotalFlightDistance(1005);
-        plane.setLastRevisionTime(new Date(45897));
-        //----END OF TESTING CODE----
+        Calendar cal = Calendar.getInstance();
+        cal.set(2014,1,1);
+        plane.setLastRevisionTime(cal.getTime());
         return form(model, plane);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String process_form(@ModelAttribute PlaneTO plane, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String process_form(@Valid @ModelAttribute("plane") PlaneTO plane, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
             for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);

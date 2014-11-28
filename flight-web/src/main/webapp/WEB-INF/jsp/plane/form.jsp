@@ -59,11 +59,11 @@
                             <form:errors path="fuelLeft" cssClass="error"/>
                         </div>
 
-                        <%--<div class="form-group">--%>
-                            <%--<form:label path="lastRevisionTime"><fmt:message key="plane.lastRevisionTime"/></form:label>--%>
-                            <%--<form:input path="lastRevisionTime" cssClass="form-control"/>--%>
-                            <%--<form:errors path="lastRevisionTime" cssClass="error"/>--%>
-                        <%--</div>--%>
+                        <div class="form-group">
+                            <form:label path="lastRevisionTime"><fmt:message key="plane.lastRevisionTime"/></form:label>
+                            <form:input path="lastRevisionTime" cssClass="form-control"/>
+                            <form:errors path="lastRevisionTime" cssClass="error"/>
+                        </div>
 
                         <div class="form-group">
                             <form:label path="totalFlightTime"><fmt:message key="plane.totalFlightTime"/></form:label>
