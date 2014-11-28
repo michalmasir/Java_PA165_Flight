@@ -95,8 +95,8 @@ public class DataInitialisation implements InitializingBean {
         a1.setState("CZ");
 
         AirportTO a2 = new AirportTO();
-        a2.setCity("Banská Bystrica");
-        a2.setName("Sliač");
+        a2.setCity("Bansk\u00E1 Bystrica");
+        a2.setName("Slia\u010D");
         a2.setState("SK");
 
         AirportTO a3 = new AirportTO();

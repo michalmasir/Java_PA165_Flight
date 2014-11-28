@@ -23,8 +23,8 @@
             <c:forEach items="${planes}" var="plane">
                 <tr>
                     <td>${plane.id}</td>
-                    <td>${plane.type}</td>
-                    <td>${plane.manufacturer}</td>
+                    <td><c:out value="${plane.type}"/></td>
+                    <td><c:out value="${plane.manufacturer}"/></td>
                     <td><a href="<s:url value='/plane/update/${plane.id}'/>"><fmt:message key="generic.update"/></a>
                     </td>
                     <td><a href="<s:url value='/plane/delete/${plane.id}'/>"><fmt:message key="generic.delete"/></a>
