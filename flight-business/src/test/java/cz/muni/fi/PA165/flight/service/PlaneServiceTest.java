@@ -60,7 +60,9 @@ public class PlaneServiceTest {
     
     @Test
     public void testRevisionDone() {
-        planeService.revisionDone(planeTO1, new Date());
+        Date date = new Date();
+        planeService.revisionDone(planeTO1, date );
+        plane1.setLastRevisionTime(date);
         Mockito.verify(planeDAO).updatePlane(plane1);
     }
 }

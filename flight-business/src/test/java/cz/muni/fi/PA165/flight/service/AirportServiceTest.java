@@ -141,6 +141,7 @@ public class AirportServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testRemoveAirport(){
+        Mockito.when(airportDAO.getAirportById(airportTO1.getId())).thenReturn(airport1);
         airportService.removeAirport(airportTO1);
         Mockito.verify(airportDAO).deleteAirport(airport1);
     }

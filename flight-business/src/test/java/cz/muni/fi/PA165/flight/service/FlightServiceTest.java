@@ -222,6 +222,7 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFlightRemove(){
+        Mockito.when(flightDAO.getFlightById(flightTO1.getId())).thenReturn(flight1);
         flightService.removeFlight(flightTO1);
         Mockito.verify(flightDAO).deleteFlight(flight1);
     }

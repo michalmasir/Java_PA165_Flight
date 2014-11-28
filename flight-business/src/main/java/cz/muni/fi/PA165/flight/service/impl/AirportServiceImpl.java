@@ -34,7 +34,8 @@ public class AirportServiceImpl implements AirportService {
     @Override
     @Transactional
     public void removeAirport(AirportTO airportTo) {
-        airportDao.deleteAirport(airportDao.getAirportById(airportTo.getId()));
+        Airport airport = airportDao.getAirportById(airportTo.getId());
+        airportDao.deleteAirport(airport);
     }
 
     @Override

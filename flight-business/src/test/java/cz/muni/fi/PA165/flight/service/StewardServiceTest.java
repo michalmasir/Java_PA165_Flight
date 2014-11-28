@@ -69,6 +69,7 @@ public class StewardServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testDeleteSteward(){
+        Mockito.when(stewardDAO.getStewardById(stewardTO1.getId())).thenReturn(steward1);
         stewardService.deleteSteward(stewardTO1);
         Mockito.verify(stewardDAO).deleteSteward(steward1);
     }
