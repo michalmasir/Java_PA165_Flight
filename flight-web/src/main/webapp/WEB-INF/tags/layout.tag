@@ -35,6 +35,7 @@
                     <li class="<cc:if test="${section == 'flights'}">active</cc:if>"><a href="<c:url value='/flight/list'/>"><fmt:message key="flight.menu"/></a></li>
                     <li class="<cc:if test="${section =='planes'}">active</cc:if>"><a href="<c:url value='/plane/list'/>"><fmt:message key="plane.menu"/></a></li>
                     <li class="<cc:if test="${section =='airports'}">active</cc:if>"><a href="<c:url value='/airport/list'/>"><fmt:message key="airport.menu"/></a></li>
+                    <li class="<cc:if test="${section =='stewards'}">active</cc:if>"><a href="<c:url value='/steward/list'/>"><fmt:message key="steward.menu"/></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

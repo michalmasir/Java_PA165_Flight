@@ -50,6 +50,12 @@ public class StewardDAOImpl implements StewardDAO {
 
     }
 
+    @Override
+    public void updateSteward(Steward steward){
+
+        em.merge(steward);
+    }
+
 
 
 }

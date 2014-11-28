@@ -45,6 +45,14 @@ import java.util.List;
 
         public void addSteward(Steward steward);
 
+        /**
+         * Updates given Steward.
+         *
+         * @param steward Steward to be updated
+         */
+
+        public void updateSteward(Steward steward);
+
 
           }
 
