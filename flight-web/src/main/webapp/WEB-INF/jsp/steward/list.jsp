@@ -18,6 +18,8 @@
                 <th>id</th>
                 <th><fmt:message key="steward.firstName"/> </th>
                 <th><fmt:message key="steward.lastName"/> </th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>

@@ -44,11 +44,9 @@ public class PlaneController {
     public String create(Model model) {
         PlaneTO plane = new PlaneTO();
 
-        //----TESTING CODE-------
-        ensureDataInDb();
         plane.setLastRevisionTime(new Date());
-        
-        plane.setManufacturer("Beoing");
+
+        plane.setManufacturer("Boeing");
         plane.setType("737");
         plane.setTankCapacity(100000);
         plane.setPassangerSeatsCount(300);
@@ -57,7 +55,7 @@ public class PlaneController {
         plane.increaseTotalFlightTime(500);
         plane.increaseTotalFlightDistance(1005);
         plane.setLastRevisionTime(new Date(45897));
-        //----END OF TESTING CODE----
+
         return form(model, plane);
     }
 
@@ -89,7 +87,6 @@ public class PlaneController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        ensureDataInDb();
         model.addAttribute("planes", planeService.planeList());
         return "plane/list";
     }
@@ -115,30 +112,6 @@ public class PlaneController {
 
     private static Object[] planeData(PlaneTO plane) {
         return new Object[]{plane.getId(), plane.getType(), plane.getManufacturer()};
-    }
-
-    private static boolean db_ready = false;
-
-    private void ensureDataInDb() {
-        if (db_ready) {
-            return;
-        }
-        db_ready = true;
-
-        PlaneTO planeTO = new PlaneTO();
-        planeTO.setManufacturer("Boeing");
-        planeTO.setType("747");
-        planeTO.increaseTotalFlightDistance(200);
-        planeTO.setPassangerSeatsCount(300);
-        planeTO.setStaffSeatsCount(8);
-        planeTO.setTankCapacity(10000);
-        planeTO.tankFuel(544);
-        planeTO.increaseTotalFlightTime(1244);
-        planeTO.increaseTotalFlightDistance(65998);
-        planeTO.setLastRevisionTime(new Date(5416));
-
-        planeService.addPlane(planeTO);
-
     }
 }
 

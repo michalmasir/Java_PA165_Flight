@@ -60,15 +60,13 @@ public class FlightController {
     public String create(Model model) {
         FlightTO flight = new FlightTO();
 
-        //----TESTING CODE-------
-        ensureDataInDb();
+
         Calendar cld = Calendar.getInstance();
         cld.set(2000, Calendar.AUGUST, 11);
         flight.setDepartureTime(cld.getTime());
 
         cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
         flight.setArrivalTime(cld.getTime());
-        //----END OF TESTING CODE----
         return form(model, flight);
     }
 
@@ -101,7 +99,6 @@ public class FlightController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        ensureDataInDb();
         model.addAttribute("flights", flightService.getFlightsList());
         return "flight/list";
     }
@@ -137,51 +134,5 @@ public class FlightController {
        binder.addValidators(new FlightValidation());
     }
 
-    private static boolean db_ready = false;
-
-    private void ensureDataInDb() {
-        if (db_ready) {
-            return;
-        }
-        db_ready = true;
-
-        PlaneTO planeTO = new PlaneTO();
-        planeTO.setManufacturer("Boeing");
-        planeTO.setType("747");
-        planeService.addPlane(planeTO);
-
-        AirportTO airportTO = new AirportTO();
-        airportTO.setName("MR Stefanika");
-        airportTO.setCity("BA");
-        airportTO.setState("SK");
-        airportService.addAirport(airportTO);
-
-        AirportTO airportTO1 = new AirportTO();
-        airportTO1.setName("V Havla");
-        airportTO1.setCity("Prague");
-        airportTO1.setState("CR");
-
-        airportService.addAirport(airportTO1);
-
-        StewardTO stewardTO = new StewardTO();
-        stewardTO.setFirstName("john");
-        stewardTO.setLastName("tetser");
-        stewardService.addSteward(stewardTO);
-
-
-        FlightTO flight = new FlightTO();
-        flight.setPlane(planeService.getPlaneById(1));
-        flight.setFrom(airportService.getAirportById(1));
-        flight.setTo(airportService.getAirportById(2));
-        Calendar cld = Calendar.getInstance();
-        cld.set(2000, Calendar.AUGUST, 11);
-        flight.setDepartureTime(cld.getTime());
-
-        cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
-        flight.setArrivalTime(cld.getTime());
-        flight.getStewards().add(stewardService.getStewardById(1));
-        flightService.addFlight(flight);
-
-    }
 }
 

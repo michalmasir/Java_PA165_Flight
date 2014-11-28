@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.js" ></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.dataTables.min.js" ></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/main_${pageContext.response.locale}.js" ></script>
 </head>
 <body>
 
