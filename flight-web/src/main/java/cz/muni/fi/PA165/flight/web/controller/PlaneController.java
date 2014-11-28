@@ -2,16 +2,15 @@ package cz.muni.fi.PA165.flight.web.controller;
 
 import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
+import cz.muni.fi.PA165.flight.web.validation.PlaneValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,7 +35,6 @@ public class PlaneController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
-        //todo return null from dozer if not found
         PlaneTO plane = planeService.getPlaneById(id);
         return form(model, plane);
     }
@@ -45,7 +43,7 @@ public class PlaneController {
     public String create(Model model) {
         PlaneTO plane = new PlaneTO();
         Calendar cal = Calendar.getInstance();
-        cal.set(2014,1,1);
+        cal.set(2014, 1, 1);
         plane.setLastRevisionTime(cal.getTime());
         return form(model, plane);
     }
@@ -104,5 +102,12 @@ public class PlaneController {
     private static Object[] planeData(PlaneTO plane) {
         return new Object[]{plane.getId(), plane.getType(), plane.getManufacturer()};
     }
+
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+       binder.addValidators( new PlaneValidation());
+    }
+
 }
 

@@ -51,7 +51,6 @@ public class FlightController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
-        //todo return null from dozer if not found
         FlightTO flight = flightService.getFlightById(id);
         return form(model, flight);
     }
