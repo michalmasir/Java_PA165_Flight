@@ -105,7 +105,6 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <!-- war name-->
         <finalName>flight</finalName>
