@@ -17,4 +17,6 @@ public interface StewardService {
 
     public void addSteward(StewardTO stewardTO);
 
+    public void updateSteward(StewardTO stewardTO);
+
 }

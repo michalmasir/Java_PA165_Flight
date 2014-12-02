@@ -72,6 +72,9 @@ public class FlightServiceImpl implements FlightService {
     @Transactional
     public FlightTO getFlightById(long id) {
         Flight flight = flightDAO.getFlightById(id);
+        if(flight == null){
+            return null;
+        }
         return dozerBeanMapper.map(flight, FlightTO.class);
     }
 

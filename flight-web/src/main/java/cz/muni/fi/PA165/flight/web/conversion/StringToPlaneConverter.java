@@ -18,7 +18,7 @@ public class StringToPlaneConverter  implements Converter<String, PlaneTO> {
 
     public PlaneTO convert(String id) {
         try {
-            return planeService.getPlaneBtId(Long.parseLong(id));
+            return planeService.getPlaneById(Long.parseLong(id));
         } catch (NumberFormatException e) {
             return null;
         }

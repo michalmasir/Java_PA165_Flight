@@ -12,12 +12,17 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.Locale;
 
 /**
  * User: PC
@@ -52,6 +57,7 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("Texts");
+        messageSource.setFallbackToSystemLocale(true);
         return messageSource;
     }
 
@@ -78,6 +84,7 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     public StringToStewardConverter getStringToStewardConverter(){
         return new StringToStewardConverter();
     }
+
 
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry)

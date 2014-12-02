@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.transfer;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -97,17 +98,7 @@ public class FlightTO {
 
         FlightTO flightTO = (FlightTO) o;
 
-        if (id != flightTO.id) return false;
-        if (arrivalTime != null ? !arrivalTime.equals(flightTO.arrivalTime) : flightTO.arrivalTime != null)
-            return false;
-        if (departureTime != null ? !departureTime.equals(flightTO.departureTime) : flightTO.departureTime != null)
-            return false;
-        if (from != null ? !from.equals(flightTO.from) : flightTO.from != null) return false;
-        if (plane != null ? !plane.equals(flightTO.plane) : flightTO.plane != null) return false;
-        if (stewards != null ? !stewards.equals(flightTO.stewards) : flightTO.stewards != null) return false;
-        if (to != null ? !to.equals(flightTO.to) : flightTO.to != null) return false;
-
-        return true;
+        return id == flightTO.id;
     }
 
     @Override
@@ -115,4 +106,7 @@ public class FlightTO {
         return (int) (id ^ (id >>> 32));
     }
 
+    public String getListStewards(){
+        return StringUtils.collectionToCommaDelimitedString(getStewards());
+    }
 }

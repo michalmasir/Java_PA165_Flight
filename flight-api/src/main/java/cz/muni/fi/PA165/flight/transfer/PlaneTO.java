@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.flight.transfer;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -28,6 +30,7 @@ public class PlaneTO {
      */
     private int fuelLeft;
 
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date lastRevisionTime;
 
     private long totalFlightTime;
@@ -130,6 +133,18 @@ public class PlaneTO {
         this.totalFlightDistance += inc;
     }
 
+    public Date getLastRevisionTime() {
+        return lastRevisionTime;
+    }
+
+    public long getTotalFlightDistance() {
+        return totalFlightDistance;
+    }
+
+    public long getTotalFlightTime() {
+        return totalFlightTime;
+    }
+
     /**
      * Returns plane ID.
      * @return
@@ -193,20 +208,8 @@ public class PlaneTO {
 
         PlaneTO plane = (PlaneTO) o;
 
-        if (fuelLeft != plane.fuelLeft) return false;
-        if (id != plane.id) return false;
-        if (passangerSeatsCount != plane.passangerSeatsCount) return false;
-        if (staffSeatsCount != plane.staffSeatsCount) return false;
-        if (tankCapacity != plane.tankCapacity) return false;
-        if (totalFlightDistance != plane.totalFlightDistance) return false;
-        if (totalFlightTime != plane.totalFlightTime) return false;
-        if (flights != null ? !flights.equals(plane.flights) : plane.flights != null) return false;
-        if (lastRevisionTime != null ? !lastRevisionTime.equals(plane.lastRevisionTime) : plane.lastRevisionTime != null)
-            return false;
-        if (manufacturer != null ? !manufacturer.equals(plane.manufacturer) : plane.manufacturer != null) return false;
-        if (type != null ? !type.equals(plane.type) : plane.type != null) return false;
+        return id == plane.id;
 
-        return true;
     }
 
     @Override

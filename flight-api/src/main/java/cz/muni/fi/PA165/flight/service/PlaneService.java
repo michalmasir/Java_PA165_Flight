@@ -18,7 +18,7 @@ public interface PlaneService {
 
     public List<PlaneTO> planeList();
 
-    public PlaneTO getPlaneBtId(long id);
+    public PlaneTO getPlaneById(long id);
 
     public void removePlane(PlaneTO planeTO);
 }
