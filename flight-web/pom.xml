@@ -48,6 +48,12 @@
             <groupId>cz.muni.fi.PA165</groupId>
             <artifactId>flight-business</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derby</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- servlet, JSP, JSTL -->
