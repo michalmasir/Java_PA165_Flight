@@ -12,17 +12,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.Locale;
 
 /**
  * User: PC
@@ -68,29 +60,32 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
 
     @Bean
-    public StringToPlaneConverter getPlaneConverter()
-    {
+    public StringToPlaneConverter getPlaneConverter() {
         return new StringToPlaneConverter();
     }
 
     @Bean
-    public StringToAirportConverter getAirportConverter()
-    {
+    public StringToAirportConverter getAirportConverter() {
         return new StringToAirportConverter();
     }
 
 
     @Bean
-    public StringToStewardConverter getStringToStewardConverter(){
+    public StringToStewardConverter getStringToStewardConverter() {
         return new StringToStewardConverter();
     }
 
 
     @Override
-    public void addFormatters(FormatterRegistry formatterRegistry)
-    {
+    public void addFormatters(FormatterRegistry formatterRegistry) {
         formatterRegistry.addConverter(getPlaneConverter());
         formatterRegistry.addConverter(getAirportConverter());
         formatterRegistry.addConverter(getStringToStewardConverter());
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new SasAllowOriginInterceptor());
+    }
+
 }

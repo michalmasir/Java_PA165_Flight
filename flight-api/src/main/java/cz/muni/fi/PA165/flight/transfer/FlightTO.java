@@ -1,8 +1,5 @@
 package cz.muni.fi.PA165.flight.transfer;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.StringUtils;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +19,8 @@ public class FlightTO {
 
     private PlaneTO plane;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date departureTime;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date arrivalTime;
 
     private Set<StewardTO> stewards = new HashSet<StewardTO>();
@@ -107,6 +102,13 @@ public class FlightTO {
     }
 
     public String getListStewards(){
-        return StringUtils.collectionToCommaDelimitedString(getStewards());
+        StringBuilder sList = new StringBuilder();
+        for(StewardTO stewardTO : getStewards()){
+            if(sList.length() > 0){
+                sList.append(", ");
+            }
+            sList.append(stewardTO);
+        }
+        return sList.toString();
     }
 }

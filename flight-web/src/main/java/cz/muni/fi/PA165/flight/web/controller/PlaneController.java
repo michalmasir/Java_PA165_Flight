@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.web.validation.PlaneValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -107,6 +109,9 @@ public class PlaneController {
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
        binder.addValidators( new PlaneValidation());
+       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+       dateFormat.setLenient(false);
+       binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
 }

@@ -100,10 +100,6 @@ public class Plane {
      * @param fuelLeft fuel amount present in the plane
      */
     public void setFuelLeft(int fuelLeft) {
-        if (fuelLeft > getTankCapacity()){
-            // this is commented because of Dozer which calls setters in own order
-            //throw new IllegalArgumentException("Can not tank more than capacity");
-        }
         this.fuelLeft = fuelLeft;
     }
 
@@ -113,10 +109,6 @@ public class Plane {
      * @throws Exception if total fuel would be more than getTankCapacity().
      */
     public void tankFuel(int fuel){
-        if (fuelLeft+fuel > getTankCapacity()){
-            // this is commented because of Dozer which calls setters in own order
-            //throw new IllegalArgumentException("Total fuel can not be more than tank capacity");
-        }
         this.fuelLeft += fuel;
     }
 

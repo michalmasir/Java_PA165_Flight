@@ -34,7 +34,6 @@ public class AirportController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
-        //todo return null from dozer if not found
         AirportTO airportTO = airportService.getAirportById(id);
         model.addAttribute("airport", airportTO);
         return "airport/form";
@@ -46,7 +45,7 @@ public class AirportController {
             for (ObjectError err : bindingResult.getAllErrors()) {
                 System.err.println(err);
             }
-            //return previouse form
+            //return previous form
             return "airport/form";
         } else if (airportTO.getId() == 0) {
             airportService.addAirport(airportTO);

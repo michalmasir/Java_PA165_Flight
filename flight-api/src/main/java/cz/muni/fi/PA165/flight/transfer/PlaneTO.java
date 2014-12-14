@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.flight.transfer;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 import java.util.Set;
 
@@ -30,7 +28,6 @@ public class PlaneTO {
      */
     private int fuelLeft;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date lastRevisionTime;
 
     private long totalFlightTime;

@@ -100,16 +100,8 @@ public class Flight {
 
         Flight flight = (Flight) o;
 
-        if (id != flight.id) return false;
-        if (arrivalTime != null ? !arrivalTime.equals(flight.arrivalTime) : flight.arrivalTime != null) return false;
-        if (departureTime != null ? !departureTime.equals(flight.departureTime) : flight.departureTime != null)
-            return false;
-        if (from != null ? !from.equals(flight.from) : flight.from != null) return false;
-        if (plane != null ? !plane.equals(flight.plane) : flight.plane != null) return false;
-        if (stewards != null ? !stewards.equals(flight.stewards) : flight.stewards != null) return false;
-        if (to != null ? !to.equals(flight.to) : flight.to != null) return false;
+        return id == flight.id;
 
-        return true;
     }
 
     @Override

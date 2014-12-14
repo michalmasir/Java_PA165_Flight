@@ -39,10 +39,8 @@ public class PlaneServiceTest {
     @BeforeMethod
     public void setup() {
         planeTO1 = new PlaneTO();
-//        planeTO1.setId(1);
         plane1 = new Plane();
-//        plane1.setId(1);
-        
+
         MockitoAnnotations.initMocks(this);
     }
 
