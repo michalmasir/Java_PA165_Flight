@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="sk">
+<head lang="en">
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
@@ -38,62 +38,50 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="panel">
-        <div class="message" style="display: none;">
-            <p class="bg-info"></p>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="">
+                <input type="hidden" id="id"/>
+                <fieldset>
+                    <legend>
+                        Update airport
+                    </legend>
+
+                    <div class="form-group">
+                        <label for="name">
+                            Name
+                        </label>
+                        <input id="name" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">
+                            State
+                        </label>
+                        <input id="state" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">
+                            City
+                        </label>
+                        <input id="city" class="form-control"/>
+                    </div>
+
+                    <input type="submit" value="<fmt:message key='generic.save'/>" class="btn btn-primary">
+                </fieldset>
+            </form>
         </div>
-
-        <div class="page-header">
-            <h1>List of Airports</h1>
-        </div>
-        <div class="dataTables_filter" id="example_filter"><label>Search:<input aria-controls="example" placeholder="" class="" type="search"></label></div>
-        <table class="table table-striped data-table">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>Name</th>
-                <th>State</th>
-                <th>City</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-
-        <a href="airport_form.html" class="right btn btn-primary">Create new</a>
     </div>
+
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        loadEntities('airport', function (data) {
-            console.log(data);
-            renderData(data);
-            $('.data-table').DataTable({searching: false, lengthChange: false});
-        });
+
+
+    $(document).ready(function(){
+        //todo use ajax form submission
     });
-
-    function renderData(data) {
-        for (var index in data) {
-            //noinspection JSUnfilteredForInLoop
-            var airport = data[index];
-            var $row = $('<tr>').attr("data-id", airport.id)
-                    .cell(airport.id)
-                    .cell(airport.name)
-                    .cell(airport.state)
-                    .cell(airport.city)
-                    .cell($('<a>').attr('href', 'airport_form.html?id=' + airport.id).html('Update'))
-                    .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete')
-                            .click(function () {
-                                removeEntity('airport', airport.id);
-                            }));
-            $('.data-table').append($row);
-        }
-    }
-
 </script>
 
 </body>
