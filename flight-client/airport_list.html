@@ -46,8 +46,7 @@
         <div class="page-header">
             <h1>List of Airports</h1>
         </div>
-        <div class="dataTables_filter" id="example_filter"><label>Search:<input aria-controls="example" placeholder="" class="" type="search"></label></div>
-        <table class="table table-striped data-table">
+       <table class="table table-striped data-table">
             <thead>
             <tr>
                 <th>id</th>
@@ -90,7 +89,7 @@
                             .click(function () {
                                 removeEntity('airport', airport.id);
                             }));
-            $('.data-table').append($row);
+            $('.data-table').find('tbody').append($row);
         }
     }
 
