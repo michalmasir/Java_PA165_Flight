@@ -50,14 +50,13 @@ public class StewardRestController {
     public ResponseEntity<String> postJson(@RequestBody StewardTO stewardTO) {
         stewardService.addSteward(stewardTO);
         return new ResponseEntity<>(ServletUriComponentsBuilder.fromPath("/rest/steward" + stewardTO.getId()).build().toUriString(), null, HttpStatus.CREATED);
-
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = JSON_DATA_TYPE)
     public ResponseEntity<String> putJson(@PathVariable Integer id, @RequestBody StewardTO stewardTO){
         StewardTO testSteward = stewardService.getStewardById(id);
         if(testSteward != null){
-            stewardService.updateSteward(testSteward);
+            stewardService.updateSteward(stewardTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         throw new EntityNotFoundException(id);

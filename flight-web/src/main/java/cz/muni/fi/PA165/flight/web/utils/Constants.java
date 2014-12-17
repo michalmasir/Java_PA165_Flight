@@ -7,7 +7,7 @@ package cz.muni.fi.PA165.flight.web.utils;
  */
 public class Constants {
 
-    public static final String JSON_DATA_TYPE = "application/json";
+    public static final String JSON_DATA_TYPE = "application/json;charset=UTF-8";
 
     public static final String JSON_HEADER = "Accept=application/json";
 

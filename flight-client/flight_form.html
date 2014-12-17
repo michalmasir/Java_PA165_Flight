@@ -65,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="from">
-                            To
+                            From
                         </label>
                         <select id="from" class="form-control">
 
@@ -82,7 +82,7 @@
 
                     <div class="form-group">
                         <label for="to">
-                            From
+                            To
                         </label>
                         <select id="to" class="form-control">
 
@@ -99,7 +99,7 @@
                         </select>
                     </div>
 
-                    <input type="submit" value="<fmt:message key='generic.save'/>" class="btn btn-primary">
+                    <input type="submit" value="Save" class="btn btn-primary">
                 </fieldset>
             </form>
         </div>
@@ -116,15 +116,15 @@
             var $option = $('<option>');
 
             if(select_id == 'from' || select_id == 'to'){
-                $option.html(data.name);
+                $option.html(item.name);
             }
 
             if(select_id == 'plane'){
-                $option.html(data.manufacturer + ' ' + data.type);
+                $option.html(item.manufacturer + ' ' + item.type);
             }
 
             if(select_id == 'stewards'){
-                $option.html(data.firstName + ' ' + data.lastName);
+                $option.html(item.firstName + ' ' + item.lastName);
             }
 
             $select.append($option);
@@ -137,7 +137,7 @@
                 loadEntities('plane', function(data){ dataToOptions('plane', data); }),
                 loadEntities('steward', function(data){ dataToOptions('stewards', data);})
         ).done(function(){
-        //todo deck for id from get and fetch data
+        //todo check for id from get and fetch data
         });
 
         //todo use ajax form submission
