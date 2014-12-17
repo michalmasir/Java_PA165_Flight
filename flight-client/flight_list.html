@@ -71,36 +71,24 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        loadEntities('flight', function(data){
+        loadEntities('flight', function (data) {
             console.log(data);
             renderData(data);
             $('.data-table').DataTable({searching: false, lengthChange: false});
         });
     });
 
-    function implodeStewardNames(stewards){
+    function implodeStewardNames(stewards) {
         var str = '';
-        for(var index in stewards){
+        for (var index in stewards) {
             //noinspection JSUnfilteredForInLoop
             var steward = stewards[index];
-            if(str){
+            if (str) {
                 str += ", ";
             }
             str += steward.firstName + " " + steward.lastName;
         }
         return str;
-    }
-
-    function removeFlight(id){
-        $.ajax({
-            url: 'http://localhost:8080/rest/flight/' + id,
-            type: 'delete',
-            contentType: "application/json",
-            success: function () {
-                $('.data-table').find('tr[data-id="'+id+'"]').remove();
-            },
-            error: handleAjaxError
-        })
     }
 
     function renderData(data) {
@@ -113,8 +101,11 @@
                     .cell(flight.airportTo.name).cell(flight.arrivalTime)
                     .cell(flight.plane.manufacturer + " " + flight.plane.type)
                     .cell(implodeStewardNames(flight.stewards))
-                    .cell($('<a>').attr('href', 'flight_form.html?id='+flight.id).html('Update'))
-                    .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete').click(function(){removeFlight(flight.id);}));
+                    .cell($('<a>').attr('href', 'flight_form.html?id=' + flight.id).html('Update'))
+                    .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete')
+                            .click(function () {
+                                removeEntity('flight', flight.id);
+                            }));
             $('.data-table').append($row);
         }
     }
