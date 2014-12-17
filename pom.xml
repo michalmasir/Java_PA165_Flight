@@ -20,6 +20,7 @@
         <module>flight-api</module>
         <module>flight-business</module>
         <module>flight-web</module>
+        <module>flight-client</module>
     </modules>
 
     <build>
