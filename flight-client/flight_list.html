@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/main_en.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">PA165</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="flight_list.html">Flights</a></li>
+                    <li class=""><a href="plane_list.html">Planes</a></li>
+                    <li class=""><a href="airport_list.html">Airports</a></li>
+                    <li class=""><a href="steward_list.html">Stewards</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="panel">
+        <div class="message" style="display: none;">
+            <p class="bg-info"></p>
+        </div>
+
+        <div class="page-header">
+            <h1>List of Flights</h1>
+        </div>
+        <table class="table table-striped data-table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>From</th>
+                <th>Departure at</th>
+                <th>To</th>
+                <th>Arrival at</th>
+                <th>Plane</th>
+                <th>Stewards</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <a href="flight_form.html" class="right btn btn-primary">Create new</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadEntities('flight', function(data){
+            console.log(data);
+            renderData(data);
+            $('.data-table').DataTable({searching: false, lengthChange: false});
+        });
+    });
+
+    function implodeStewardNames(stewards){
+        var str = '';
+        for(var index in stewards){
+            //noinspection JSUnfilteredForInLoop
+            var steward = stewards[index];
+            if(str){
+                str += ", ";
+            }
+            str += steward.firstName + " " + steward.lastName;
+        }
+        return str;
+    }
+
+    function removeFlight(id){
+        $.ajax({
+            url: 'http://localhost:8080/rest/flight/' + id,
+            type: 'delete',
+            contentType: "application/json",
+            success: function () {
+                $('.data-table').find('tr[data-id="'+id+'"]').remove();
+            },
+            error: handleAjaxError
+        })
+    }
+
+    function renderData(data) {
+        for (var index in data) {
+            //noinspection JSUnfilteredForInLoop
+            var flight = data[index];
+            var $row = $('<tr>').attr("data-id", flight.id)
+                    .cell(flight.id)
+                    .cell(flight.airportFrom.name).cell(flight.departureTime)
+                    .cell(flight.airportTo.name).cell(flight.arrivalTime)
+                    .cell(flight.plane.manufacturer + " " + flight.plane.type)
+                    .cell(implodeStewardNames(flight.stewards))
+                    .cell($('<a>').attr('href', 'flight_form.html?id='+flight.id).html('Update'))
+                    .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete').click(function(){removeFlight(flight.id);}));
+            $('.data-table').append($row);
+        }
+    }
+
+</script>
+
+</body>
+</html>

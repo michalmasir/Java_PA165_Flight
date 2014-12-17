@@ -37,5 +37,9 @@ public class MyStartInitializer implements WebApplicationInitializer {
 
         //register bundle also for JSTL fmt: tags which are not behind DispatcherServlet
         servletContext.setInitParameter(Config.FMT_LOCALIZATION_CONTEXT,"Texts");
+
+        FilterRegistration.Dynamic corsFilter = servletContext.addFilter("corsFilter", CORSFilter.class);
+        corsFilter.addMappingForUrlPatterns(null, false, "/*");
+
     }
 }

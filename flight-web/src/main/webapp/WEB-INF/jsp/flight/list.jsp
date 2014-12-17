@@ -9,7 +9,6 @@
         <div class="page-header">
             <h1><fmt:message key="flight.list"/></h1>
         </div>
-        <table class="table table-striped">
         <table class="table table-striped data-table">
             <thead>
             <tr>
