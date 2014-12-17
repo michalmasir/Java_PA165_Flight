@@ -1,6 +1,9 @@
+var context_path = '/pa165';
+var server_url = 'http://localhost:8080' + context_path + '/rest/';
+
 function loadEntities(type, success_func) {
     return $.ajax({
-        url: 'http://localhost:8080/rest/' + type + '/',
+        url: server_url + type + '/',
         dataType: 'json',
         contentType: "application/json",
         success: success_func,
@@ -10,7 +13,7 @@ function loadEntities(type, success_func) {
 
 function removeEntity(type, id) {
     $.ajax({
-        url: 'http://localhost:8080/rest/' + type + '/' + id,
+        url: server_url + type + '/' + id,
         type: 'delete',
         contentType: "application/json",
         success: function () {
