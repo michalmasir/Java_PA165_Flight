@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.flight.web.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.muni.fi.PA165.flight.web.conversion.StringToAirportConverter;
 import cz.muni.fi.PA165.flight.web.conversion.StringToPlaneConverter;
 import cz.muni.fi.PA165.flight.web.conversion.StringToStewardConverter;
@@ -15,6 +16,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * User: PC
@@ -87,5 +91,4 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SasAllowOriginInterceptor());
     }
-
 }

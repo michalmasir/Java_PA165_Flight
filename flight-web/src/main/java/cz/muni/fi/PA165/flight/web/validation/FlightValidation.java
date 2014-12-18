@@ -36,6 +36,17 @@ public class FlightValidation implements Validator {
             errors.rejectValue("departureTime", "null");
         }
 
+        if (flight.getPlane() == null) {
+            errors.rejectValue("plane", "null");
+        }
+
+        if (flight.getFrom() == null) {
+            errors.rejectValue("from", "null");
+        }
+
+        if (flight.getTo() == null) {
+            errors.rejectValue("to", "null");
+        }
 
         if (flight.getArrivalTime() != null && flight.getDepartureTime() != null) {
 

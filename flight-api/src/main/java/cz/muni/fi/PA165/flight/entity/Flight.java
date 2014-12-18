@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,18 +17,23 @@ public class Flight {
     private long id;
 
     @ManyToOne
+    @NotNull
     private Airport from;
 
     @ManyToOne
+    @NotNull
     private Airport to;
 
     @ManyToOne
+    @NotNull
     private Plane plane;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date departureTime;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date arrivalTime;
 
     @ManyToMany

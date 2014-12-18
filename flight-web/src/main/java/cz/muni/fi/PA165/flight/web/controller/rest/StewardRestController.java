@@ -4,14 +4,17 @@ import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import cz.muni.fi.PA165.flight.web.exceptions.EntityNotFoundException;
 import cz.muni.fi.PA165.flight.web.json.JsonObjectBuilderHelper;
+import cz.muni.fi.PA165.flight.web.validation.StewardValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cz.muni.fi.PA165.flight.web.utils.Constants.JSON_DATA_TYPE;
@@ -47,13 +50,13 @@ public class StewardRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> postJson(@RequestBody StewardTO stewardTO) {
+    public ResponseEntity<String> postJson(@Valid @RequestBody StewardTO stewardTO) {
         stewardService.addSteward(stewardTO);
         return new ResponseEntity<>(ServletUriComponentsBuilder.fromPath("/rest/steward" + stewardTO.getId()).build().toUriString(), null, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> putJson(@PathVariable Integer id, @RequestBody StewardTO stewardTO){
+    public ResponseEntity<String> putJson(@PathVariable Integer id, @Valid @RequestBody StewardTO stewardTO){
         StewardTO testSteward = stewardService.getStewardById(id);
         if(testSteward != null){
             stewardService.updateSteward(stewardTO);
@@ -70,6 +73,11 @@ public class StewardRestController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         throw new EntityNotFoundException(id);
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+       binder.addValidators(new StewardValidation());
     }
 
 }

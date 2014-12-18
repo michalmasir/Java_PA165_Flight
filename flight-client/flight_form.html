@@ -47,6 +47,12 @@
                         Update flight
                     </legend>
 
+                    <div class="alert alert-danger validation_error" role="alert" style="display: none;">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                        Your input is invalid
+                    </div>
+
                     <div class="form-group">
                         <label for="plane">
                             Plane
@@ -60,7 +66,7 @@
                         <label for="departureTime">
                             Departure at
                         </label>
-                        <input id="departureTime" class="form-control"/>
+                        <input type="datetime" id="departureTime" class="form-control"/>
                     </div>
 
                     <div class="form-group">
@@ -77,7 +83,7 @@
                         <label for="arrivalTime">
                             Arrival at
                         </label>
-                        <input id="arrivalTime" class="form-control"/>
+                        <input type="datetime" id="arrivalTime" class="form-control"/>
                     </div>
 
                     <div class="form-group">
@@ -99,7 +105,7 @@
                         </select>
                     </div>
 
-                    <input type="submit" value="Save" class="btn btn-primary">
+                    <input type="submit" value="Save" class="btn btn-primary" id="save">
                 </fieldset>
             </form>
         </div>
@@ -108,22 +114,22 @@
 </div>
 
 <script type="text/javascript">
-    function dataToOptions(select_id, data){
+    function dataToOptions(select_id, data) {
         var $select = $('#' + select_id);
-        for(var index in data){
+        for (var index in data) {
             //noinspection JSUnfilteredForInLoop
             var item = data[index];
-            var $option = $('<option>');
+            var $option = $('<option>').attr('value', item.id);
 
-            if(select_id == 'from' || select_id == 'to'){
+            if (select_id == 'from' || select_id == 'to') {
                 $option.html(item.name);
             }
 
-            if(select_id == 'plane'){
+            if (select_id == 'plane') {
                 $option.html(item.manufacturer + ' ' + item.type);
             }
 
-            if(select_id == 'stewards'){
+            if (select_id == 'stewards') {
                 $option.html(item.firstName + ' ' + item.lastName);
             }
 
@@ -131,14 +137,53 @@
         }
     }
 
-    $(document).ready(function(){
-        $.when(
-                loadEntities('airport', function(data){ dataToOptions('from', data); dataToOptions('to', data); }),
-                loadEntities('plane', function(data){ dataToOptions('plane', data); }),
-                loadEntities('steward', function(data){ dataToOptions('stewards', data);})
-        ).done(function(){
-        //todo check for id from get and fetch data
+    $(document).ready(function () {
+        $('#save').click(function (e) {
+            submitForm('flight','flight_list.html');
+            e.preventDefault();
         });
+
+
+        $.when(
+                loadEntities('airport', function (data) {
+                    dataToOptions('from', data);
+                    dataToOptions('to', data);
+                }),
+                loadEntities('plane', function (data) {
+                    dataToOptions('plane', data);
+                }),
+                loadEntities('steward', function (data) {
+                    dataToOptions('stewards', data);
+                }),
+                loadEntities('plane', function (data) {
+                    dataToOptions('plane', data);
+                })
+        ).done(function () {
+                    var id = getParameterByName('id');
+                    if (id) {
+                        $.ajax({
+                            url: server_url + 'flight/' + id,
+                            dataType: 'json',
+                            contentType: "application/json",
+                            success: function (data, _, status_data) {
+                                if (status_data.status == 200) {
+                                    $('#id').val(data.id);
+                                    $('#plane').val(data.plane.id);
+                                    $('#from').val(data.airportFrom.id);
+                                    $('#departureTime').val(renderTimestamp(data.departureTime));
+                                    $('#to').val(data.airportTo.id);
+                                    $('#arrivalTime').val(renderTimestamp(data.arrivalTime));
+                                    var stewards = [];
+                                    $.each(data.stewards, function (index, steward) {
+                                        stewards.push(steward.id);
+                                    });
+                                    $('#stewards').val(stewards);
+                                }
+                            },
+                            error: handleAjaxError
+                        })
+                    }
+                });
 
         //todo use ajax form submission
     });

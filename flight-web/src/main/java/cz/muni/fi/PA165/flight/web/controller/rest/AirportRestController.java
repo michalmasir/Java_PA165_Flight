@@ -5,14 +5,17 @@ import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.web.exceptions.EntityNotFoundException;
 import cz.muni.fi.PA165.flight.web.json.JsonObjectBuilderHelper;
+import cz.muni.fi.PA165.flight.web.validation.AirportValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -48,13 +51,13 @@ public class AirportRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> postJson(@RequestBody AirportTO airportTO){
+    public ResponseEntity<String> postJson(@Valid @RequestBody AirportTO airportTO){
         airportService.addAirport(airportTO);
         return new ResponseEntity<>(ServletUriComponentsBuilder.fromPath("/rest/airport/" + airportTO.getId()).build().toUriString(), null, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> putJson(@PathVariable Integer id, @RequestBody AirportTO airportTO) {
+    public ResponseEntity<String> putJson(@PathVariable Integer id, @Valid @RequestBody AirportTO airportTO) {
         if(airportService.getAirportById(id)!=null){
             airportService.updateAirport(airportTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -70,5 +73,10 @@ public class AirportRestController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         throw new EntityNotFoundException(id);
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+       binder.addValidators(new AirportValidation());
     }
 }

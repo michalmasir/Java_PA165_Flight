@@ -91,11 +91,6 @@
         return str;
     }
 
-    function renderTimestamp(timestamp){
-        var date =  new Date(timestamp);
-        return date.getDate() + ". " + date.getMonth() + ". " + date.getFullYear() + " " + date.getHours() + ":" + ("0"+ date.getMinutes() ).slice(-2);
-    }
-
     function renderData(data) {
         for (var index in data) {
             //noinspection JSUnfilteredForInLoop
