@@ -42,8 +42,6 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
     @Mock
     PlaneDAO planeDAO;
 
-    @Mock
-    PlaneServiceImpl planeService;
 
     @InjectMocks
     FlightServiceImpl flightService;
@@ -227,10 +225,4 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
         Mockito.verify(flightDAO).deleteFlight(flight1);
     }
     
-    @Test
-    public void testLandingDone() {
-        flightService.landingDone(flightTO1);
-        Mockito.verify(planeService).updatePlane(flightTO1.getPlane());
-    }
-
 }
