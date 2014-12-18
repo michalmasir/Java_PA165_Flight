@@ -52,6 +52,9 @@ public class FlightController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private FlightValidation flightValidation;
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         FlightTO flight = flightService.getFlightById(id);
@@ -133,7 +136,7 @@ public class FlightController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-       binder.addValidators(new FlightValidation());
+        binder.addValidators(flightValidation);
        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
        dateFormat.setLenient(false);
        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));

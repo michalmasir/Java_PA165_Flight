@@ -59,10 +59,9 @@ function handleAjaxError(data) {
         $('.validation_error').show();
         return;
     }
-
-    //todo display user friendly warning that server is down
     console.log(data);
     console.log("ajax error");
+    window.location.href = "crash.html"
 }
 
 jQuery.fn.cell = function (data) {

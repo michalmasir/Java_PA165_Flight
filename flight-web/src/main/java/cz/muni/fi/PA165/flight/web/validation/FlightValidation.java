@@ -1,7 +1,12 @@
 package cz.muni.fi.PA165.flight.web.validation;
 
+import cz.muni.fi.PA165.flight.service.PlaneService;
+import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
+import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -10,7 +15,15 @@ import org.springframework.validation.Validator;
  * Date: 22. 11. 2014
  * Time: 18:45
  */
+@Component
 public class FlightValidation implements Validator {
+
+    @Autowired
+    private PlaneService planeService;
+
+    @Autowired
+    private StewardService stewardService;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return FlightTO.class.isAssignableFrom(clazz);
@@ -24,6 +37,19 @@ public class FlightValidation implements Validator {
             return true;
         }
         return false;
+    }
+
+    private void validatePlane(Errors errors, FlightTO flight){
+        PlaneTO plane = planeService.getPlaneById(flight.getPlane().getId());
+        for (FlightTO f : plane.getFlights()) {
+            if (f.equals(flight)) {
+                continue;
+            }
+            if (flightsInterfere(f, flight)) {
+                errors.rejectValue("plane", "conflict");
+            }
+
+        }
     }
 
     @Override
@@ -54,17 +80,10 @@ public class FlightValidation implements Validator {
                 errors.rejectValue("arrivalTime", "conflict");
             }
 
-            for (FlightTO f : flight.getPlane().getFlights()) {
-                if (f.equals(flight)) {
-                    continue;
-                }
-                if (flightsInterfere(f, flight)) {
-                    errors.rejectValue("plane", "conflict");
-                }
-
-            }
+            validatePlane(errors, flight);
 
             for (StewardTO steward : flight.getStewards()) {
+                steward = stewardService.getStewardById(steward.getId());
                 for (FlightTO f : steward.getFlights()) {
                     if (f.equals(flight)) {
                         continue;

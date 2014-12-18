@@ -38,6 +38,9 @@ public class FlightRestController {
     @Autowired
     private JsonObjectBuilderHelper jsonObjectBuilderHelper;
 
+    @Autowired
+    private FlightValidation flightValidation;
+
     @RequestMapping(value = "/", method = RequestMethod.GET, headers = JSON_HEADER, produces = JSON_DATA_TYPE)
     public String getFlights() {
         List<FlightTO> flightTOs = flightService.getFlightsList();
@@ -81,7 +84,7 @@ public class FlightRestController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-       binder.addValidators(new FlightValidation());
+       binder.addValidators(flightValidation);
        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
        dateFormat.setLenient(false);
        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
