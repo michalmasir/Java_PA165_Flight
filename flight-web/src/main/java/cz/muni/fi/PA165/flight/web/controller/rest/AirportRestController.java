@@ -70,7 +70,7 @@ public class AirportRestController {
        AirportTO airportTO = airportService.getAirportById(id);
         if(airportTO!=null){
             airportService.removeAirport(airportTO);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         throw new EntityNotFoundException(id);
     }

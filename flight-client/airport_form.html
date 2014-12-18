@@ -71,7 +71,7 @@
                         <label for="city">
                             City
                         </label>
-                        <input id="city" class="form-control"/>
+                        <input type="text" id="city" class="form-control"/>
                     </div>
 
                     <input type="submit" value="Save" class="btn btn-primary" id="save">
@@ -84,9 +84,30 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $('#save').click(function (e) {
+            var $form = $('form');
+            submitForm('airport','airport_list.html');
+            e.preventDefault();
+        });
 
-    $(document).ready(function(){
-        //todo use ajax form submission
+        var id = getParameterByName('id');
+        if (id) {
+            $.ajax({
+                url: server_url + 'airport/' + id,
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (data, _, status_data) {
+                    if (status_data.status == 200) {
+                        $('#id').val(data.id);
+                        $('#name').val(data.name);
+                        $('#state').val(data.state);
+                        $('#city').val(data.city);
+                    }
+                },
+                error: handleAjaxError
+            })
+        }
     });
 </script>
 
