@@ -22,11 +22,11 @@ public class PlaneValidation implements Validator {
             errors.rejectValue("lastRevisionTime", "plane.lastRevisionTime.empty");
         }
 
-        if(planeTO.getManufacturer().isEmpty()) {
+        if(planeTO.getManufacturer() == null || planeTO.getManufacturer().isEmpty()) {
             errors.rejectValue("manufacturer", "plane.manufacturer.empty");
         }
 
-       if(planeTO.getType().isEmpty()) {
+       if(planeTO.getType() == null || planeTO.getType().isEmpty()) {
             errors.rejectValue("type", "plane.lastRevisionTime.empty");
         }
     }
