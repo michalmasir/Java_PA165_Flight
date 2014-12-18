@@ -12,6 +12,7 @@ import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
 import org.mockito.*;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.verify;
  */
 
 @ContextConfiguration(locations = {"classpath:/application-context.xml"})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
     @Spy

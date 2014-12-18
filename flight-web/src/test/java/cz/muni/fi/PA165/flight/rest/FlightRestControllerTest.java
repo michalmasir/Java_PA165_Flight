@@ -24,21 +24,16 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 import java.util.Calendar;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {MySpringMvcConfig.class}, loader = AnnotationConfigWebContextLoader.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class FlightRestControllerTest {
 
     @Autowired
@@ -115,14 +110,14 @@ public class FlightRestControllerTest {
                 .andExpect(status().isOk());
     }
 
-     @Test
-     public void createFlight() throws Exception {
-         String flightJson = "{\"departureTime\":973721940000,\"arrivalTime\":976362300000,\"stewards\":[{\"id\":\"3\"}],\"plane\":{\"id\":\"2\"},\"from\":{\"id\":\"1\"},\"to\":{\"id\":\"2\"}}";
-         this.mockMvc.perform(post("/rest/flight/")
-                 .contentType(contentType)
-                 .content(flightJson))
-                 .andExpect(status().isCreated());
-     }
+    @Test
+    public void createFlight() throws Exception {
+        String flightJson = "{\"departureTime\":973721940000,\"arrivalTime\":976362300000,\"stewards\":[{\"id\":\"3\"}],\"plane\":{\"id\":\"2\"},\"from\":{\"id\":\"1\"},\"to\":{\"id\":\"2\"}}";
+        this.mockMvc.perform(post("/rest/flight/")
+                .contentType(contentType)
+                .content(flightJson))
+                .andExpect(status().isCreated());
+    }
 
     @Test
     public void updateFlight() throws Exception {
@@ -131,6 +126,13 @@ public class FlightRestControllerTest {
                 .contentType(contentType)
                 .content(flightJson))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void removeFlight() throws Exception {
+        this.mockMvc.perform(delete("/rest/flight/1")
+                .contentType(contentType))
+                .andExpect(status().isOk());
     }
 
 }

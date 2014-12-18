@@ -153,12 +153,14 @@
             <version>0.9.1</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.glassfish.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1</version>
-            <scope>test</scope>
+          <groupId>org.apache.openejb</groupId>
+          <artifactId>javaee-api</artifactId>
+          <version>6.0-6</version>
+          <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
