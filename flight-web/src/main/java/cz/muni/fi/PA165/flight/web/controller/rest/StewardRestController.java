@@ -34,10 +34,10 @@ public class StewardRestController {
     private JsonObjectBuilderHelper jsonObjectBuilderHelper;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, headers = JSON_HEADER, produces = JSON_DATA_TYPE)
-    public String getStewards(){
+    public String getStewards() {
         List<StewardTO> stewardTOList = stewardService.getAllStewards();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(StewardTO stewardTO: stewardTOList){
+        for (StewardTO stewardTO : stewardTOList) {
             arrayBuilder.add(jsonObjectBuilderHelper.stewardJsonObjectBuilder(stewardTO));
         }
         return arrayBuilder.build().toString();
@@ -45,8 +45,12 @@ public class StewardRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = JSON_HEADER, produces = JSON_DATA_TYPE)
-    public String getSteward(@PathVariable int id){
-        return jsonObjectBuilderHelper.stewardJsonObjectBuilder(stewardService.getStewardById(id)).build().toString();
+    public String getSteward(@PathVariable int id) {
+        StewardTO steward = stewardService.getStewardById(id);
+        if (steward != null) {
+            return jsonObjectBuilderHelper.stewardJsonObjectBuilder(steward).build().toString();
+        }
+        throw new EntityNotFoundException(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = JSON_DATA_TYPE)
@@ -56,9 +60,9 @@ public class StewardRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> putJson(@PathVariable Integer id, @Valid @RequestBody StewardTO stewardTO){
+    public ResponseEntity<String> putJson(@PathVariable Integer id, @Valid @RequestBody StewardTO stewardTO) {
         StewardTO testSteward = stewardService.getStewardById(id);
-        if(testSteward != null){
+        if (testSteward != null) {
             stewardService.updateSteward(stewardTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -66,9 +70,9 @@ public class StewardRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> delete(@PathVariable Integer id){
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
         StewardTO testSteward = stewardService.getStewardById(id);
-        if(testSteward != null){
+        if (testSteward != null) {
             stewardService.deleteSteward(testSteward);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -77,7 +81,7 @@ public class StewardRestController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-       binder.addValidators(new StewardValidation());
+        binder.addValidators(new StewardValidation());
     }
 
 }

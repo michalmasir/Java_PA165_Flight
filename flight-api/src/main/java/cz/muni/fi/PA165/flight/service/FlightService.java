@@ -29,6 +29,4 @@ public interface FlightService {
 
     public boolean assignStewardToFlight(FlightTO flightTO, StewardTO stewardTO);
     
-    public void landingDone(FlightTO flightTO);
-
 }

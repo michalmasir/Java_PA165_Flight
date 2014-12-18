@@ -238,18 +238,18 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
         john = stewardDAO.getStewardById(john.getId());
 
         Flight flight1 = dummyFlight();
+        planeDAO.addPlane(flight1.getPlane());
         flight1.getStewards().add(john);
+
+        flightDao.addFlight(flight1);
         john.getFlights().add(flight1);
 
         Flight flight2 = dummyFlight();
-        flight1.getStewards().add(john);
-        john.getFlights().add(flight2);
-
-        planeDAO.addPlane(flight1.getPlane());
         planeDAO.addPlane(flight2.getPlane());
+        flight2.getStewards().add(john);
 
-        flightDao.addFlight(flight1);
         flightDao.addFlight(flight2);
+        john.getFlights().add(flight2);
 
         em.getTransaction().commit();
         em.close();
@@ -274,12 +274,15 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
         john = stewardDAO.getStewardById(john.getId());
 
         Flight flight1 = dummyFlight();
+        flightDao.addFlight(flight1);
+
         Assert.assertTrue(flightDao.canAddSteward(flight1, john));
         flight1.getStewards().add(john);
         john.getFlights().add(flight1);
 
-        Flight flight2 = dummyFlight();
 
+        Flight flight2 = dummyFlight();
+        flightDao.addFlight(flight2);
         Assert.assertFalse(flightDao.canAddSteward(flight2, john));
 
 

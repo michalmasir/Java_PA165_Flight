@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.flight.service;
 
+import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 
 import java.util.Date;
@@ -21,4 +22,6 @@ public interface PlaneService {
     public PlaneTO getPlaneById(long id);
 
     public void removePlane(PlaneTO planeTO);
+
+    public void landingDone(FlightTO flightTO);
 }

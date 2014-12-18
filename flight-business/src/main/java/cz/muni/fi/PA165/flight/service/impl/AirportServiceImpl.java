@@ -5,9 +5,9 @@ import cz.muni.fi.PA165.flight.entity.Airport;
 import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.List;
 @Service
 public class AirportServiceImpl implements AirportService {
 
-    @Inject
+    @Autowired
     private AirportDAO airportDao;
 
-    @Inject
+    @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
     @Override

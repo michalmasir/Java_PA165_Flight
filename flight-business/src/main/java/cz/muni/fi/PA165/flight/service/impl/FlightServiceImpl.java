@@ -4,7 +4,7 @@ import cz.muni.fi.PA165.flight.dao.FlightDAO;
 import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Steward;
 import cz.muni.fi.PA165.flight.service.FlightService;
-import cz.muni.fi.PA165.flight.service.PlaneService;
+//import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
@@ -12,7 +12,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,13 +27,13 @@ import java.util.logging.Logger;
 @Service
 public class FlightServiceImpl implements FlightService {
 
-    @Inject
+    @Autowired
     private FlightDAO flightDAO;
     
-    @Inject
-    private PlaneService planeService;
+    //@Autowired
+    //private PlaneService planeService;
 
-    @Inject
+    @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
     @Override
@@ -108,29 +107,6 @@ public class FlightServiceImpl implements FlightService {
         return flightDAO.safeAddSteward(flight, steward);
     }
 
-    /**
-     * Updates the plane after landing
-     * @param flightTO
-     */
-    @Override
-    @Transactional
-    public void landingDone(FlightTO flightTO) {
-        PlaneTO planeTO = flightTO.getPlane();
-        
-        int fuel = (int)(Math.random()*1000); // value from other system
-        long distance = (long)(Math.random()*1000); // value from other system
-        long time = Math.abs(
-                flightTO.getDepartureTime().getTime() - flightTO.getArrivalTime().getTime()
-        );
-        planeTO.increaseTotalFlightDistance(distance);
-        planeTO.increaseTotalFlightTime(time);
-        try {
-            planeTO.setFuelLeft(fuel);
-        } catch (Exception ex) {
-            Logger.getLogger(FlightServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        planeService.updatePlane(planeTO);
-    }
 
 
 }

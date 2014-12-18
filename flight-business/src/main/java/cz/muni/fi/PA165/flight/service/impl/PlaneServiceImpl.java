@@ -3,15 +3,18 @@ package cz.muni.fi.PA165.flight.service.impl;
 import cz.muni.fi.PA165.flight.dao.PlaneDAO;
 import cz.muni.fi.PA165.flight.entity.Plane;
 import cz.muni.fi.PA165.flight.service.PlaneService;
+import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,10 +23,10 @@ import java.util.List;
 @Service
 public class PlaneServiceImpl implements PlaneService {
 
-    @Inject
+    @Autowired
     private PlaneDAO planeDAO;
 
-    @Inject
+    @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
     @Override
@@ -72,6 +75,31 @@ public class PlaneServiceImpl implements PlaneService {
     @Transactional
     public void removePlane(PlaneTO planeTO) {
         planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
+    }
+
+    /**
+     * Updates the plane after landing
+     *
+     * @param flightTO
+     */
+    @Override
+    @Transactional
+    public void landingDone(FlightTO flightTO) {
+        PlaneTO planeTO = flightTO.getPlane();
+
+        int fuel = (int) (Math.random() * 1000); // value from other system
+        long distance = (long) (Math.random() * 1000); // value from other system
+        long time = Math.abs(
+                flightTO.getDepartureTime().getTime() - flightTO.getArrivalTime().getTime()
+        );
+        planeTO.increaseTotalFlightDistance(distance);
+        planeTO.increaseTotalFlightTime(time);
+        try {
+            planeTO.setFuelLeft(fuel);
+        } catch (Exception ex) {
+            Logger.getLogger(FlightServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updatePlane(planeTO);
     }
 
 }

@@ -5,9 +5,9 @@ import cz.muni.fi.PA165.flight.entity.Steward;
 import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ import java.util.List;
 public class StewardServiceImpl implements StewardService {
 
 
-    @Inject
+    @Autowired
     private StewardDAO stewardDAO;
 
-    @Inject
+    @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
 

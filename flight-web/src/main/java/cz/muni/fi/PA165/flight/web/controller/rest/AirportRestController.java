@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.flight.web.controller.rest;
 
-import cz.muni.fi.PA165.flight.entity.Airport;
 import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.web.exceptions.EntityNotFoundException;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.validation.Valid;
-
 import java.util.List;
 
 import static cz.muni.fi.PA165.flight.web.utils.Constants.JSON_DATA_TYPE;
@@ -39,7 +37,7 @@ public class AirportRestController {
     public String getAirports() {
         List<AirportTO> airportTOList = airportService.getAirportsList();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(AirportTO a : airportTOList){
+        for (AirportTO a : airportTOList) {
             arrayBuilder.add(jsonObjectBuilderHelper.airportJsonObjectBuilder(a));
         }
         return arrayBuilder.build().toString();
@@ -47,18 +45,22 @@ public class AirportRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = JSON_HEADER, produces = JSON_DATA_TYPE)
     public String getAirport(@PathVariable int id) {
-       return jsonObjectBuilderHelper.airportJsonObjectBuilder(airportService.getAirportById(id)).build().toString();
+        AirportTO airportTO = airportService.getAirportById(id);
+        if (airportTO != null) {
+            return jsonObjectBuilderHelper.airportJsonObjectBuilder(airportTO).build().toString();
+        }
+        throw new EntityNotFoundException(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = JSON_DATA_TYPE)
-    public ResponseEntity<String> postJson(@Valid @RequestBody AirportTO airportTO){
+    public ResponseEntity<String> postJson(@Valid @RequestBody AirportTO airportTO) {
         airportService.addAirport(airportTO);
         return new ResponseEntity<>(ServletUriComponentsBuilder.fromPath("/rest/airport/" + airportTO.getId()).build().toUriString(), null, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = JSON_DATA_TYPE)
     public ResponseEntity<String> putJson(@PathVariable Integer id, @Valid @RequestBody AirportTO airportTO) {
-        if(airportService.getAirportById(id)!=null){
+        if (airportService.getAirportById(id) != null) {
             airportService.updateAirport(airportTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -66,9 +68,9 @@ public class AirportRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> delete(@PathVariable Integer id){
-       AirportTO airportTO = airportService.getAirportById(id);
-        if(airportTO!=null){
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+        AirportTO airportTO = airportService.getAirportById(id);
+        if (airportTO != null) {
             airportService.removeAirport(airportTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -77,6 +79,6 @@ public class AirportRestController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-       binder.addValidators(new AirportValidation());
+        binder.addValidators(new AirportValidation());
     }
 }

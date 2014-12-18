@@ -53,7 +53,11 @@ public class FlightRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = JSON_HEADER, produces = JSON_DATA_TYPE)
     public String getFlight(@PathVariable int id) {
-        return jsonObjectBuilderHelper.flightJsonObjectBuilder(flightService.getFlightById(id)).build().toString();
+        FlightTO flight = flightService.getFlightById(id);
+        if (flight != null) {
+            return jsonObjectBuilderHelper.flightJsonObjectBuilder(flight).build().toString();
+        }
+        throw new EntityNotFoundException(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = JSON_DATA_TYPE)
