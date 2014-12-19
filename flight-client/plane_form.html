@@ -82,7 +82,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for=".celllastRevisionTime)">
+                        <label for="lastRevisionTime">
                             Last revision time
                         </label>
                         <input type="datetime" id="lastRevisionTime" class="form-control"/>
@@ -125,29 +125,6 @@
 </div>
 
 <script type="text/javascript">
-    function dataToOptions(select_id, data) {
-        var $select = $('#' + select_id);
-        for (var index in data) {
-            //noinspection JSUnfilteredForInLoop
-            var item = data[index];
-            var $option = $('<option>').attr('value', item.id);
-
-            if (select_id == 'from' || select_id == 'to') {
-                $option.html(item.name);
-            }
-
-            if (select_id == 'plane') {
-                $option.html(item.manufacturer + ' ' + item.type);
-            }
-
-            if (select_id == 'stewards') {
-                $option.html(item.firstName + ' ' + item.lastName);
-            }
-
-            $select.append($option);
-        }
-    }
-
     $(document).ready(function () {
         $('#save').click(function (e) {
             submitForm('plane','plane_list.html');

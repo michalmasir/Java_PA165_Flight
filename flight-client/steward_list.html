@@ -3,8 +3,94 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/main_en.js"></script>
 </head>
 <body>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">PA165</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="flight_list.html">Flights</a></li>
+                    <li class=""><a href="plane_list.html">Planes</a></li>
+                    <li class=""><a href="airport_list.html">Airports</a></li>
+                    <li class="active"><a href="steward_list.html">Stewards</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="panel">
+        <div class="message" style="display: none;">
+            <p class="bg-info"></p>
+        </div>
+
+        <div class="page-header">
+            <h1>List of Stewards</h1>
+        </div>
+        <table class="table table-striped data-table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <a href="steward_form.html" class="right btn btn-primary">Create new</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadEntities('steward', function (data) {
+            console.log(data);
+            renderData(data);
+            $('.data-table').DataTable({searching: false, lengthChange: false});
+        });
+    });
+
+    function renderData(data) {
+        for (var index in data) {
+            var steward = data[index];
+            var $row = $('<tr>').attr("data-id", steward.id)
+                    .cell(steward.id)
+                    .cell(steward.firstName)
+                    .cell(steward.lastName)
+                    .cell($('<a>').attr('href', 'steward_form.html?id=' + steward.id).html('Update'))
+                    .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete')
+                            .click(function () {
+                                removeEntity('steward', $(this).parents('tr').attr('data-id'));
+                            }));
+            $('.data-table').find('tbody').append($row);
+        }
+    }
+
+</script>
 
 </body>
 </html>
