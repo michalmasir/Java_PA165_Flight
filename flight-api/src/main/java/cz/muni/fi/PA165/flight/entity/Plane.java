@@ -40,7 +40,27 @@ public class Plane {
 
     private long totalFlightTime;
 
+    public long getTotalFlightDistance() {
+        return totalFlightDistance;
+    }
+
+    public long getTotalFlightTime() {
+        return totalFlightTime;
+    }
+
+    public Date getLastRevisionTime() {
+        return lastRevisionTime;
+    }
+
     private long totalFlightDistance;
+
+    public void setTotalFlightTime(long totalFlightTime) {
+        this.totalFlightTime = totalFlightTime;
+    }
+
+    public void setTotalFlightDistance(long totalFlightDistance) {
+        this.totalFlightDistance = totalFlightDistance;
+    }
 
     public Set<Flight> getFlights() {
         return flights;

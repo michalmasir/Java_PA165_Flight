@@ -40,6 +40,8 @@ public class DataInitialisation implements InitializingBean {
         PlaneTO planeTO = new PlaneTO();
         planeTO.setManufacturer("Boeing");
         planeTO.setType("747");
+        planeTO.setTankCapacity(500000);
+        planeTO.setFuelLeft(3000);
         planeService.addPlane(planeTO);
 
         AirportTO airportTO = new AirportTO();

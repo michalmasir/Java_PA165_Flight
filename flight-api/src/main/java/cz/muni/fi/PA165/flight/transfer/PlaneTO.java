@@ -30,6 +30,14 @@ public class PlaneTO {
 
     private Date lastRevisionTime;
 
+    public void setTotalFlightTime(long totalFlightTime) {
+        this.totalFlightTime = totalFlightTime;
+    }
+
+    public void setTotalFlightDistance(long totalFlightDistance) {
+        this.totalFlightDistance = totalFlightDistance;
+    }
+
     private long totalFlightTime;
 
     private long totalFlightDistance;
