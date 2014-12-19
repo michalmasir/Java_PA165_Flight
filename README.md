@@ -1,6 +1,19 @@
 Java_PA165_Flight
 =================
 
+
+How to run web application
+-
+1. cd flight-web
+2. mvn tomcat7:run
+
+How to run REST client
+-
+* Open flight-client/index.html in your favourite browser
+
+
+Description
+-
 The goal is to create an information system managing flight records at an airport.
 The system should allow the users to enter records about stewards, airplanes and destinations. 
 It should also be possible to update and delete these records. 
