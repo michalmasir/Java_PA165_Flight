@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.flight.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,16 +22,19 @@ public class Airport {
      * Destination name
      */
     @Column
+    @NotNull
     private String name;
     /**
      * State, where the airport is located
      */
     @Column
+    @NotNull
     private String state;
     /**
      * City in a state where the airport is located
      */
     @Column
+    @NotNull
     private String city;
 
     /**

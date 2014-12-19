@@ -75,12 +75,12 @@ public class PlaneRestControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is((int) planeService.getPlaneById(1).getId())))
-                .andExpect(jsonPath("$.plane.id", is((int) planeService.getPlaneById(1).getId())));
+                .andExpect(jsonPath("$.type", is(planeService.getPlaneById(1).getType())));
     }
 
     @Test
     public void addPlane() throws Exception {
-        String planeJson = "{\"id\":1,\"fuelLeft\":3000,\"manufacturer\":\"Boeing\",\"type\":\"737\",\"passangerSeatsCount\":300,\"staffSeatsCount\":8,\"tankCapacity\":50000,\"lastRevisionTime\":1.1.2014 4:28,\"totalFlightTime\":6565,\"totalFlightDistance\":588}";
+        String planeJson = "{\"fuelLeft\":3000,\"manufacturer\":\"Boeing\",\"type\":\"737\",\"passangerSeatsCount\":300,\"staffSeatsCount\":8,\"tankCapacity\":50000,\"lastRevisionTime\":976362300000,\"totalFlightTime\":6565,\"totalFlightDistance\":588}";
         this.mockMvc.perform(post("/rest/plane/")
                 .contentType(contentType)
                 .content(planeJson))
@@ -89,7 +89,7 @@ public class PlaneRestControllerTest {
 
     @Test
     public void updatePlane() throws Exception {
-        String planeJson = "{\"id\":1,\"fuelLeft\":3000,\"manufacturer\":\"Boeing Updated\",\"type\":\"737\",\"passangerSeatsCount\":300,\"staffSeatsCount\":8,\"tankCapacity\":50000,\"lastRevisionTime\":1.1.2014 4:28,\"totalFlightTime\":6565,\"totalFlightDistance\":588}";
+        String planeJson = "{\"id\":1,\"fuelLeft\":3000,\"manufacturer\":\"Boeing Updated\",\"type\":\"737\",\"passangerSeatsCount\":300,\"staffSeatsCount\":8,\"tankCapacity\":50000,\"lastRevisionTime\":976362300000,\"totalFlightTime\":6565,\"totalFlightDistance\":588}";
         this.mockMvc.perform(put("/rest/plane/1")
                 .contentType(contentType)
                 .content(planeJson))

@@ -24,7 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 import java.util.Calendar;
 
-import static org.hamcrest.Matcher.hasSize;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -51,11 +51,6 @@ public class AirportRestControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
-            AirportTO airportTO = new AirportTO();
-            airportService.addAirport(airportTO);
-            airportTO = airportService.getAirportById(1);
-
     }
 
     @Test
@@ -85,7 +80,7 @@ public class AirportRestControllerTest {
 
     @Test
     public void createAirport() throws Exception {
-        String airportJson = "{\"id\":\"1\",\"name\":\"Letisko\",\"state\":\"SK\", \"city\":\"Banska Bystrica\"}";
+        String airportJson = "{\"name\":\"Letisko\",\"state\":\"SK\", \"city\":\"Banska Bystrica\"}";
         this.mockMvc.perform(post("/rest/airport/")
                 .contentType(contentType)
                 .content(airportJson))
@@ -94,11 +89,11 @@ public class AirportRestControllerTest {
 
     @Test
     public void updateAirport() throws Exception {
-        String airportJson = "{\"name\":\"Letisko\",\"state\":\"SK\", \"city\":\"Banska Bystrica\"}";
-        this.mockMvc.perform(put("/rest/flight/1")
+        String airportJson = "{\"id\":\"1\",\"name\":\"Letisko\",\"state\":\"SK\", \"city\":\"Banska Bystrica\"}";
+        this.mockMvc.perform(put("/rest/airport/1")
                 .contentType(contentType)
                 .content(airportJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
