@@ -98,7 +98,7 @@
                     .cell($('<a>').attr('href', 'plane_form.html?id=' + plane.id).html('Update'))
                     .cell($('<a>').attr('href', 'javascript:void(0);').html('Delete')
                             .click(function () {
-                                removeEntity('plane', plane.id);
+                                removeEntity('plane', $(this).parents('tr').attr('data-id'));
                             }));
             $('.data-table').find('tbody').append($row);
         }
