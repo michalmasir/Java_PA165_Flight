@@ -43,12 +43,6 @@ public class PlaneServiceImpl implements PlaneService {
         planeDAO.updatePlane(plane);
     }
 
-    @Override
-    @Transactional
-    public void revisionDone(PlaneTO planeTO, Date date) {
-        planeTO.setLastRevisionTime(date);
-        updatePlane(planeTO);
-    }
 
     @Override
     @Transactional
@@ -76,30 +70,4 @@ public class PlaneServiceImpl implements PlaneService {
     public void removePlane(PlaneTO planeTO) {
         planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
     }
-
-    /**
-     * Updates the plane after landing
-     *
-     * @param flightTO
-     */
-    @Override
-    @Transactional
-    public void landingDone(FlightTO flightTO) {
-        PlaneTO planeTO = flightTO.getPlane();
-
-        int fuel = (int) (Math.random() * 1000); // value from other system
-        long distance = (long) (Math.random() * 1000); // value from other system
-        long time = Math.abs(
-                flightTO.getDepartureTime().getTime() - flightTO.getArrivalTime().getTime()
-        );
-        planeTO.increaseTotalFlightDistance(distance);
-        planeTO.increaseTotalFlightTime(time);
-        try {
-            planeTO.setFuelLeft(fuel);
-        } catch (Exception ex) {
-            Logger.getLogger(FlightServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        updatePlane(planeTO);
-    }
-
 }

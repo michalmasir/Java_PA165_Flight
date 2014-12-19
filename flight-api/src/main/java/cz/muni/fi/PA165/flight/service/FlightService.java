@@ -23,10 +23,4 @@ public interface FlightService {
 
     public FlightTO getFlightById(long id);
 
-    public List<FlightTO> getFlightsByDepartureDate(Date from, Date to);
-
-    public List<FlightTO> getFlightsByArrivalDate(Date from, Date to);
-
-    public boolean assignStewardToFlight(FlightTO flightTO, StewardTO stewardTO);
-    
 }

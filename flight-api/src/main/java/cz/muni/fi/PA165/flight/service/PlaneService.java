@@ -14,14 +14,10 @@ public interface PlaneService {
     public void addPlane(PlaneTO planeTO);
     
     public void updatePlane(PlaneTO planeTO);
-    
-    public void revisionDone(PlaneTO planeTO, Date date);
 
     public List<PlaneTO> planeList();
 
     public PlaneTO getPlaneById(long id);
 
     public void removePlane(PlaneTO planeTO);
-
-    public void landingDone(FlightTO flightTO);
 }

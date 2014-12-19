@@ -57,29 +57,4 @@ public class PlaneServiceTest {
         planeService.updatePlane(planeTO1);
         Mockito.verify(planeDAO).updatePlane(plane1);
     }
-    
-    @Test
-    public void testRevisionDone() {
-        Date date = new Date();
-        planeService.revisionDone(planeTO1, date );
-        plane1.setLastRevisionTime(date);
-        Mockito.verify(planeDAO).updatePlane(plane1);
-    }
-
-    @Test
-    public void testLandingDone() {
-        PlaneTO planeTO = new PlaneTO();
-        Calendar from = Calendar.getInstance();
-        from.set(1999, Calendar.JANUARY, 1);
-        Calendar to = Calendar.getInstance();
-        to.set(2003, Calendar.FEBRUARY, 1);
-
-        FlightTO flightTO = new FlightTO();
-        flightTO.setPlane(planeTO);
-        flightTO.setDepartureTime(from.getTime());
-        flightTO.setArrivalTime(to.getTime());
-
-        planeService.landingDone(flightTO);
-        Mockito.verify(planeService).updatePlane(flightTO.getPlane());
-    }
 }

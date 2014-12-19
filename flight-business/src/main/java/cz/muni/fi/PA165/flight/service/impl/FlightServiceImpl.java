@@ -76,37 +76,5 @@ public class FlightServiceImpl implements FlightService {
         }
         return dozerBeanMapper.map(flight, FlightTO.class);
     }
-
-    @Override
-    @Transactional
-    public List<FlightTO> getFlightsByDepartureDate(Date from, Date to) {
-        List<FlightTO> flightTOs = new ArrayList<>();
-
-        for(Flight flight : flightDAO.getFlightsByDepartureDate(from, to)){
-            flightTOs.add(dozerBeanMapper.map(flight, FlightTO.class));
-        }
-        return flightTOs;
-    }
-
-    @Override
-    @Transactional
-    public List<FlightTO> getFlightsByArrivalDate(Date from, Date to) {
-        List<FlightTO> flightTOs = new ArrayList<>();
-
-        for(Flight flight : flightDAO.getFlightsByArrivalDate(from, to)){
-            flightTOs.add(dozerBeanMapper.map(flight, FlightTO.class));
-        }
-        return flightTOs;
-    }
-
-    @Override
-    @Transactional
-    public boolean assignStewardToFlight(FlightTO flightTO, StewardTO stewardTO) {
-        Flight flight = dozerBeanMapper.map(flightTO, Flight.class);
-        Steward steward = dozerBeanMapper.map(stewardTO, Steward.class);
-        return flightDAO.safeAddSteward(flight, steward);
-    }
-
-
-
 }
+

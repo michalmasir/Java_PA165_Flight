@@ -170,57 +170,6 @@ public class FlightServiceTest  extends AbstractTestNGSpringContextTests {
 
 
     @Test
-    public void testFlightGetDepartureByDate() {
-        List<Flight> flights = new ArrayList<>();
-        flights.add(flight1);
-        flights.add(flight2);
-
-        Calendar from = Calendar.getInstance();
-        from.set(1999, Calendar.JANUARY, 1);
-        Calendar to = Calendar.getInstance();
-        to.set(2003, Calendar.FEBRUARY, 1);
-
-        Mockito.when(flightDAO.getFlightsByDepartureDate(from.getTime(), to.getTime())).thenReturn(flights);
-
-        List<FlightTO> flightTOs = flightService.getFlightsByDepartureDate(from.getTime(), to.getTime());
-        Mockito.verify(flightDAO).getFlightsByDepartureDate(from.getTime(), to.getTime());
-
-        Assert.assertEquals(flightTOs.get(0).getId(), flights.get(0).getId());
-        Assert.assertEquals(flightTOs.get(1).getId(), flights.get(1).getId());
-        Assert.assertEquals(flightTOs.size(), flights.size());
-    }
-
-    @Test
-    public void testFlightGetArrivalByDate() {
-        List<Flight> flights = new ArrayList<>();
-        flights.add(flight1);
-        flights.add(flight2);
-
-        Calendar from = Calendar.getInstance();
-        from.set(1999, Calendar.JANUARY, 1);
-        Calendar to = Calendar.getInstance();
-        to.set(2003, Calendar.FEBRUARY, 1);
-
-        Mockito.when(flightDAO.getFlightsByArrivalDate(from.getTime(), to.getTime())).thenReturn(flights);
-
-        List<FlightTO> flightTOs = flightService.getFlightsByArrivalDate(from.getTime(), to.getTime());
-        Mockito.verify(flightDAO).getFlightsByArrivalDate(from.getTime(), to.getTime());
-
-        Assert.assertEquals(flightTOs.get(0).getId(), flights.get(0).getId());
-        Assert.assertEquals(flightTOs.get(1).getId(), flights.get(1).getId());
-        Assert.assertEquals(flightTOs.size(), flights.size());
-    }
-
-
-    @Test
-    public void testAssignSteward(){
-       Mockito.when(flightDAO.safeAddSteward(flight1, steward)).thenReturn(true);
-       boolean result =  flightService.assignStewardToFlight(flightTO1, stewardTO);
-       Mockito.verify(flightDAO).safeAddSteward(flight1, steward);
-        Assert.assertEquals(result, true);
-    }
-
-    @Test
     public void testFlightRemove(){
         Mockito.when(flightDAO.getFlightById(flightTO1.getId())).thenReturn(flight1);
         flightService.removeFlight(flightTO1);
