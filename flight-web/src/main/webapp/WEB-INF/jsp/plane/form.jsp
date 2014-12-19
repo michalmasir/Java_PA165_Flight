@@ -15,11 +15,11 @@
                            modelAttribute="plane">
                     <form:hidden path="id"/>
                     <fieldset>
-                        <legend><fmt:message key="flight.update.title"/></legend>
+                        <legend><fmt:message key="plane.update.title"/></legend>
 
                         <div class="form-group">
-                            <form:label path="id"><fmt:message key="plane.plane"/></form:label>
-                            <form:input path="id" cssClass="form-control"/>
+                            <form:label path="id"><fmt:message key="plane.id"/></form:label>
+                            <form:input readonly="true" path="id" cssClass="form-control"/>
                             <form:errors path="id" cssClass="error"/>
                         </div>
 
