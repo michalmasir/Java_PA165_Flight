@@ -63,10 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.antMatchers("/**").permitAll()
                 .antMatchers("/static/**").permitAll()
+                .antMatchers("/rest/**").permitAll()
                 .and()
-                .formLogin()
+                .formLogin().loginPage("/loginPage").permitAll().loginProcessingUrl("/j_spring_security_check").permitAll()
         .and().authorizeRequests().anyRequest().authenticated();
     }
 }

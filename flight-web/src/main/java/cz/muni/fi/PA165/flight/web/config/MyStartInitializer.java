@@ -21,20 +21,6 @@ public class MyStartInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-       /* beforeSpringSecurityFilterChain(servletContext);
-        if(configurationClasses != null) {
-            AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
-            rootAppContext.register(configurationClasses);
-            servletContext.addListener(new ContextLoaderListener(rootAppContext));
-        }
-        if(enableHttpSessionEventPublisher()) {
-            servletContext.addListener("org.springframework.security.web.session.HttpSessionEventPublisher");
-        }
-        servletContext.setSessionTrackingModes(getSessionTrackingModes());
-        insertSpringSecurityFilterChain(servletContext);
-        afterSpringSecurityFilterChain(servletContext);
-                                        */
-        //create Spring beans context configured in MySpringMvcConfig.class
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(MySpringMvcConfig.class);
 

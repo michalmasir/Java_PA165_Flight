@@ -17,7 +17,6 @@ public class SasAllowOriginInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods",
                 "GET, POST, PUT, DELETE, OPTIONS");
-        //header('Access-Control-Allow-Headers: X-Requested-With');
         return true;
     }
 }

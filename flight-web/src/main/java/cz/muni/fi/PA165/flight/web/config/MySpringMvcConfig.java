@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.web.conversion.StringToStewardConverter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.Ordered;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -20,9 +21,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cz.muni.fi.PA165.flight")
+@ComponentScan(basePackages = {"cz.muni.fi.PA165.flight", "org.springframework.security.samples.mvc"})
 @ImportResource({"classpath:application-context.xml"})
-@Import({ SecurityConfig.class })
+@Import({SecurityConfig.class})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
