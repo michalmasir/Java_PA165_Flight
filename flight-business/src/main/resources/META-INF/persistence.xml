@@ -8,6 +8,8 @@
         <class>cz.muni.fi.PA165.flight.entity.Flight</class>
         <class>cz.muni.fi.PA165.flight.entity.Plane</class>
         <class>cz.muni.fi.PA165.flight.entity.Steward</class>
+        <class>cz.muni.fi.PA165.flight.entity.User</class>
+        <class>cz.muni.fi.PA165.flight.entity.UserRole</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
             <property name="hibernate.hbm2ddl.auto" value="create" />

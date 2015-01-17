@@ -1,59 +1,59 @@
 package cz.muni.fi.PA165.flight.dao;
 
-import cz.muni.fi.PA165.flight.entity.Flight;
 import cz.muni.fi.PA165.flight.entity.Steward;
+
 import java.util.List;
 
+/**
+ * This interfaces specifies the methods that a {@link cz.muni.fi.PA165.flight.entity.Steward} data access object
+ * must implement.
+ *
+ * @author Michal Hruby
+ */
+
+public interface StewardDAO {
+
     /**
-     * This interfaces specifies the methods that a {@link cz.muni.fi.PA165.flight.entity.Steward} data access object
-     * must implement.
+     * Returns list of all stewards.
      *
-     * @author  Michal Hruby
+     * @return list of all stewards
+     */
+    public List<Steward> getAllStewards();
+
+    /**
+     * Gets Steward with given id.
+     *
+     * @param id id of wanted Steward
+     * @return wanted Steward or null if the Steward does not exist
      */
 
-    public interface StewardDAO {
+    public Steward getStewardById(long id);
 
-        /**
-         * Returns list of all stewards.
-         *
-         * @return list of all stewards
-         */
-        public List<Steward> getAllStewards();
+    /**
+     * Deletes given Steward.
+     *
+     * @param steward Steward to be deleted
+     */
 
-        /**
-         * Gets Steward with given id.
-         *
-         * @param id id of wanted Steward
-         * @return wanted Steward or null if the Steward does not exist
-         */
+    public void deleteSteward(Steward steward);
 
-        public Steward getStewardById(long id );
+    /**
+     * Saves given Steward.
+     *
+     * @param steward Steward to be saved
+     */
 
-        /**
-         * Deletes given Steward.
-         *
-         * @param steward Steward to be deleted
-         */
+    public void addSteward(Steward steward);
 
-        public void deleteSteward(Steward steward);
+    /**
+     * Updates given Steward.
+     *
+     * @param steward Steward to be updated
+     */
 
-        /**
-         * Saves given Steward.
-         *
-         * @param steward Steward to be saved
-         */
-
-        public void addSteward(Steward steward);
-
-        /**
-         * Updates given Steward.
-         *
-         * @param steward Steward to be updated
-         */
-
-        public void updateSteward(Steward steward);
+    public void updateSteward(Steward steward);
 
 
-          }
+}
 
 

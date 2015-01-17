@@ -10,6 +10,8 @@ import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -45,6 +47,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     @Transactional
+    //@Secured("ROLE_ADMIN")
     public List<FlightTO> getFlightsList() {
         List<FlightTO> flightTOs = new ArrayList<>();
 

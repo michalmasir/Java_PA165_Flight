@@ -21,6 +21,19 @@ public class MyStartInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+       /* beforeSpringSecurityFilterChain(servletContext);
+        if(configurationClasses != null) {
+            AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
+            rootAppContext.register(configurationClasses);
+            servletContext.addListener(new ContextLoaderListener(rootAppContext));
+        }
+        if(enableHttpSessionEventPublisher()) {
+            servletContext.addListener("org.springframework.security.web.session.HttpSessionEventPublisher");
+        }
+        servletContext.setSessionTrackingModes(getSessionTrackingModes());
+        insertSpringSecurityFilterChain(servletContext);
+        afterSpringSecurityFilterChain(servletContext);
+                                        */
         //create Spring beans context configured in MySpringMvcConfig.class
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(MySpringMvcConfig.class);
@@ -36,10 +49,12 @@ public class MyStartInitializer implements WebApplicationInitializer {
         encoding.addMappingForUrlPatterns(null, false, "/*");
 
         //register bundle also for JSTL fmt: tags which are not behind DispatcherServlet
-        servletContext.setInitParameter(Config.FMT_LOCALIZATION_CONTEXT,"Texts");
+        servletContext.setInitParameter(Config.FMT_LOCALIZATION_CONTEXT, "Texts");
 
         FilterRegistration.Dynamic corsFilter = servletContext.addFilter("corsFilter", CORSFilter.class);
         corsFilter.addMappingForUrlPatterns(null, false, "/*");
 
     }
+
 }
+

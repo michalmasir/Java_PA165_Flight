@@ -1,15 +1,10 @@
 package cz.muni.fi.PA165.flight.web.init;
 
-import cz.muni.fi.PA165.flight.service.AirportService;
-import cz.muni.fi.PA165.flight.service.FlightService;
-import cz.muni.fi.PA165.flight.service.PlaneService;
-import cz.muni.fi.PA165.flight.service.StewardService;
-import cz.muni.fi.PA165.flight.transfer.AirportTO;
-import cz.muni.fi.PA165.flight.transfer.FlightTO;
-import cz.muni.fi.PA165.flight.transfer.PlaneTO;
-import cz.muni.fi.PA165.flight.transfer.StewardTO;
+import cz.muni.fi.PA165.flight.service.*;
+import cz.muni.fi.PA165.flight.transfer.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
@@ -34,6 +29,10 @@ public class DataInitialisation implements InitializingBean {
 
     @Autowired
     private StewardService stewardService;
+
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -131,5 +130,10 @@ public class DataInitialisation implements InitializingBean {
         stewardService.addSteward(steward1);
         stewardService.addSteward(steward2);
         stewardService.addSteward(steward3);
+
+        UserTO userTO = new UserTO();
+        userTO.setUsername("test");
+        userTO.setPassword(new BCryptPasswordEncoder().encode("test"));
+        userService.addUser(userTO);
     }
 }
