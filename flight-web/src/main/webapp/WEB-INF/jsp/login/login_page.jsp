@@ -12,33 +12,34 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <h3>PA165 Login</h3>
+                <h3><fmt:message key="login"/></h3>
 
-                <c:if test="${param.error}">
-                    <div style="color:red">
-                        Invalid credentials
+                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                    <div class="alert alert-danger validation_error" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only"> <fmt:message key="generic.error"/>:</span>
+                        <fmt:message key="login.error"/>
                     </div>
                 </c:if>
+
                 <form name='loginForm' action="<c:url value='j_spring_security_check' />"
                       method='POST'>
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <table>
-                        <tr>
-                            <td>User:</td>
-                            <td><input type='text' name='username' value=''>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Password:</td>
-                            <td><input type='password' name='password'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input name="submit" type="submit" value="submit"/>
-                            </td>
-                        </tr>
-                    </table>
+
+                    <div class="form-group">
+                        <label for="username"><fmt:message key="login.username"/></label>
+                        <input type="text" class="form-control" id="username" name='username'
+                               placeholder="<fmt:message key="login.username.placeholder"/>">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><fmt:message key="login.password"/></label>
+                        <input type="password" class="form-control" id="password" name='password'
+                               placeholder="<fmt:message key="login.password.placeholder"/>">
+                    </div>
+
+                    <button name="submit" type="submit" value="submit" class="btn btn-default"><fmt:message
+                            key="login.submit"/></button>
                 </form>
             </div>
         </div>

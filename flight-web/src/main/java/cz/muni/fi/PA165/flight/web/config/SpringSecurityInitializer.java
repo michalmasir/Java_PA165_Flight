@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.flight.web.config;
 
+
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 /**
@@ -13,3 +14,5 @@ public class SpringSecurityInitializer extends AbstractSecurityWebApplicationIni
     }
 
 }
+
+
