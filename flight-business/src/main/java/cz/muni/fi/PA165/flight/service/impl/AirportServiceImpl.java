@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,6 +27,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void addAirport(AirportTO airportTo) {
         Airport airport = dozerBeanMapper.map(airportTo, Airport.class);
         airportDao.addAirport(airport);
@@ -33,6 +35,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void removeAirport(AirportTO airportTo) {
         Airport airport = airportDao.getAirportById(airportTo.getId());
         airportDao.deleteAirport(airport);
@@ -40,6 +43,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public AirportTO updateAirport(AirportTO airportTO) {
         Airport targetAirport = dozerBeanMapper.map(airportTO, Airport.class);
         targetAirport = airportDao.updateAirport(targetAirport);
@@ -48,6 +52,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public List<AirportTO> getAirportsList() {
         List<AirportTO> airportTOs = new ArrayList<>();
         for (Airport airport : airportDao.getAllAirports()) {
@@ -58,6 +63,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public AirportTO getAirportById(long id) {
         Airport airport = airportDao.getAirportById(id);
         if (airport == null) {

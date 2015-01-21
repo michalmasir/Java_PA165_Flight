@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.web.validation.AirportValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,7 @@ public class AirportController {
     @Autowired
     private MessageSource messageSource;
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         AirportTO airportTO = airportService.getAirportById(id);
@@ -39,12 +41,11 @@ public class AirportController {
         return "airport/form";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String process_form(@ModelAttribute("airport") @Valid AirportTO airportTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
-            for (ObjectError err : bindingResult.getAllErrors()) {
-                System.err.println(err);
-            }
+
             //return previous form
             return "airport/form";
         } else if (airportTO.getId() == 0) {
@@ -63,6 +64,7 @@ public class AirportController {
         return "redirect:" + uriBuilder.path("/airport/list").build();
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         AirportTO airportTO = new AirportTO();
@@ -73,6 +75,7 @@ public class AirportController {
         return "airport/form";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
         AirportTO airportTO = airportService.getAirportById(id);
@@ -84,6 +87,7 @@ public class AirportController {
         return "redirect:" + uriBuilder.path("/airport/list").build();
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("airports", airportService.getAirportsList());

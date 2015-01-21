@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.web.validation.PlaneValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,28 +36,26 @@ public class PlaneController {
     @Autowired
     private MessageSource messageSource;
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         PlaneTO plane = planeService.getPlaneById(id);
         return form(model, plane);
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         PlaneTO plane = new PlaneTO();
         Calendar cal = Calendar.getInstance();
-        cal.set(2014, 1, 1);
         plane.setLastRevisionTime(cal.getTime());
         return form(model, plane);
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String process_form(@Valid @ModelAttribute("plane") PlaneTO plane, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         if (bindingResult.hasErrors()) {
-            for (ObjectError err : bindingResult.getAllErrors()) {
-                System.err.println(err);
-            }
-
             return form(model, plane);
         }
         if (plane.getId() == 0) {
@@ -76,13 +75,14 @@ public class PlaneController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("planes", planeService.planeList());
         return "plane/list";
     }
 
-
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
         PlaneTO plane = planeService.getPlaneById(id);

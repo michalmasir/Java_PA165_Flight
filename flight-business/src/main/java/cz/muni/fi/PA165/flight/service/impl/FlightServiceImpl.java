@@ -32,14 +32,12 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private FlightDAO flightDAO;
     
-    //@Autowired
-    //private PlaneService planeService;
-
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void addFlight(FlightTO flightTO) {
         Flight flight = dozerBeanMapper.map(flightTO, Flight.class);
         flightDAO.addFlight(flight);
@@ -47,7 +45,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     @Transactional
-    //@Secured("ROLE_ADMIN")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public List<FlightTO> getFlightsList() {
         List<FlightTO> flightTOs = new ArrayList<>();
 
@@ -59,12 +57,14 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void removeFlight(FlightTO flightTO) {
         flightDAO.deleteFlight(flightDAO.getFlightById(flightTO.getId()));
     }
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void updateFlight(FlightTO flightTO) {
         Flight flight = dozerBeanMapper.map(flightTO, Flight.class);
         flightDAO.updateFlight(flight);
@@ -72,6 +72,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public FlightTO getFlightById(long id) {
         Flight flight = flightDAO.getFlightById(id);
         if(flight == null){

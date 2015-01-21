@@ -1,12 +1,9 @@
 package cz.muni.fi.PA165.flight.web.config;
 
-import cz.muni.fi.PA165.flight.web.conversion.StringToAirportConverter;
-import cz.muni.fi.PA165.flight.web.conversion.StringToPlaneConverter;
-import cz.muni.fi.PA165.flight.web.conversion.StringToStewardConverter;
+import cz.muni.fi.PA165.flight.web.conversion.*;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.Ordered;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -75,17 +72,28 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
         return new StringToStewardConverter();
     }
 
+    @Bean
+    public StringToUserConverter getStringToUserConverter() {
+        return new StringToUserConverter();
+    }
+
+    @Bean
+    public StringToUserRoleConverter getStringToUserRoleConverter() {
+        return new StringToUserRoleConverter();
+    }
 
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry) {
         formatterRegistry.addConverter(getPlaneConverter());
         formatterRegistry.addConverter(getAirportConverter());
         formatterRegistry.addConverter(getStringToStewardConverter());
+        formatterRegistry.addConverter(getStringToUserConverter());
+        formatterRegistry.addConverter(getStringToUserRoleConverter());
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SasAllowOriginInterceptor());
+        registry.addInterceptor(new RequestInterceptor());
     }
 
 

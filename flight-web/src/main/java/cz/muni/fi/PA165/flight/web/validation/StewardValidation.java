@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.web.validation;
 
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

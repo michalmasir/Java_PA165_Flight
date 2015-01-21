@@ -1,9 +1,9 @@
 package cz.muni.fi.PA165.flight.entity;
 
+import cz.muni.fi.PA165.flight.enums.UserRole;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * User: PC
@@ -22,9 +22,10 @@ public class User {
     @NotNull
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Set<UserRole> userRoles = new HashSet<>();
-
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
+    private UserRole userRole;
 
     public String getUsername() {
         return this.username;
@@ -42,12 +43,12 @@ public class User {
         this.password = password;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package cz.muni.fi.PA165.flight.web.config;
 
+import cz.muni.fi.PA165.flight.enums.UserRole;
 import cz.muni.fi.PA165.flight.service.UserService;
-import cz.muni.fi.PA165.flight.transfer.UserRoleTO;
 import cz.muni.fi.PA165.flight.transfer.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: PC
@@ -33,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userDetailsService;
+
 
     @Autowired
     /**
@@ -49,11 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     throw new UsernameNotFoundException("Username not found");
                 }
 
-                Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-                for (UserRoleTO userRole : user.getUserRoles()) {
-                    grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
-                }
-                List<GrantedAuthority> authorities = new ArrayList<>(grantedAuthorities);
+                List<GrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority(user.getUserRole().getRoleString()));
                 return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
             }
         }).passwordEncoder(new BCryptPasswordEncoder());
@@ -67,6 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/**").permitAll()
                 .and()
                 .formLogin().loginPage("/loginPage").permitAll().loginProcessingUrl("/j_spring_security_check").permitAll()
-        .and().authorizeRequests().anyRequest().authenticated();
+                .and().authorizeRequests().anyRequest().authenticated();
     }
 }

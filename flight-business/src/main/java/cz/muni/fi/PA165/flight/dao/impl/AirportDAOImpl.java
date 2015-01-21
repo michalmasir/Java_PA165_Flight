@@ -45,25 +45,14 @@ public class AirportDAOImpl implements AirportDAO{
 
     @Override
     public void addAirport(Airport airport) {
-        //validateAirport(airport);
-       // em.persist(airport);
-
         em.persist(airport);
     }
 
     @Override
     public Airport updateAirport(Airport airport) {
-       //validateAirport(airport);
        return em.merge(airport);
     }
 
-    public boolean validateAirport(Airport airport){
-       if(airport==null)
-           throw new DataIntegrityViolationException("You can not add a null as airport !");
-       if(!validateFlights(airport))
-           throw new DataIntegrityViolationException("You can not add a null as Flight!");
-       return true;
-    }
 
     public boolean validateFlights(Airport airport){
         for(Flight flight: airport.getFlightsFrom()){

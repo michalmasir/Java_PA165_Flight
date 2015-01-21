@@ -1,14 +1,23 @@
 package cz.muni.fi.PA165.flight.web.init;
 
+import cz.muni.fi.PA165.flight.enums.UserRole;
 import cz.muni.fi.PA165.flight.service.*;
 import cz.muni.fi.PA165.flight.transfer.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: PC
@@ -36,6 +45,12 @@ public class DataInitialisation implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getRoleString()));
+        org.springframework.security.core.userdetails.User auth_user = new org.springframework.security.core.userdetails.User("rest", "rest", true, true, true, true, authorities);
+        Authentication authentication =  new UsernamePasswordAuthenticationToken(auth_user.getUsername(), auth_user.getPassword(), auth_user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         PlaneTO planeTO = new PlaneTO();
         planeTO.setManufacturer("Boeing");
         planeTO.setType("747");
@@ -132,8 +147,16 @@ public class DataInitialisation implements InitializingBean {
         stewardService.addSteward(steward3);
 
         UserTO userTO = new UserTO();
-        userTO.setUsername("test");
-        userTO.setPassword(new BCryptPasswordEncoder().encode("test"));
+        userTO.setUsername("admin");
+        userTO.setPassword("admin");
+        userTO.setUserRole(UserRole.ADMIN);
         userService.addUser(userTO);
+
+        UserTO userTO2 = new UserTO();
+        userTO2.setUsername("user");
+        userTO2.setPassword("user");
+        userTO2.setUserRole(UserRole.USER);
+        userService.addUser(userTO2);
+
     }
 }

@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.flight.transfer.FlightTO;
 import cz.muni.fi.PA165.flight.transfer.PlaneTO;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void addPlane(PlaneTO planeTO) {
         Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
         planeDAO.addPlane(plane);
@@ -38,6 +40,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void updatePlane(PlaneTO planeTO) {
         Plane plane = dozerBeanMapper.map(planeTO, Plane.class);
         planeDAO.updatePlane(plane);
@@ -46,6 +49,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public List<PlaneTO> planeList() {
         List<PlaneTO> flightTOs = new ArrayList<>();
 
@@ -57,6 +61,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public PlaneTO getPlaneById(long id) {
         Plane plane = planeDAO.getPlaneById(id);
         if (plane == null) {
@@ -67,6 +72,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void removePlane(PlaneTO planeTO) {
         planeDAO.deletePlane(planeDAO.getPlaneById(planeTO.getId()));
     }

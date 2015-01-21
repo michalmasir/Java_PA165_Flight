@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.flight.transfer;
 
+import cz.muni.fi.PA165.flight.enums.UserRole;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,12 +11,12 @@ import java.util.Set;
  * Time: 21:25
  */
 public class UserTO {
+
     private String username;
 
     private String password;
 
-    private Set<UserRoleTO> userRoles = new HashSet<>();
-
+    private UserRole userRole;
 
     public String getUsername() {
         return this.username;
@@ -32,12 +34,12 @@ public class UserTO {
         this.password = password;
     }
 
-    public Set<UserRoleTO> getUserRoles() {
-        return userRoles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoles(Set<UserRoleTO> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

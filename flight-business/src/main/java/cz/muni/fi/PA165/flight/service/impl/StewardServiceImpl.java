@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public StewardTO getStewardById(long id) {
         Steward steward = stewardDAO.getStewardById(id);
         if (steward == null) {
@@ -38,6 +40,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void addSteward(StewardTO stewardTO) {
         Steward steward = dozerBeanMapper.map(stewardTO, Steward.class);
         stewardDAO.addSteward(steward);
@@ -46,6 +49,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void deleteSteward(StewardTO stewardTO) {
         stewardDAO.deleteSteward(stewardDAO.getStewardById(stewardTO.getId()));
 
@@ -53,6 +57,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public void updateSteward(StewardTO stewardTO) {
         Steward steward = dozerBeanMapper.map(stewardTO, Steward.class);
         stewardDAO.updateSteward(steward);
@@ -61,6 +66,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     @Transactional
+    @Secured("ROLE_ADMIN")
     public List<StewardTO> getAllStewards() {
         List<StewardTO> stewardTOList = new ArrayList<>();
 

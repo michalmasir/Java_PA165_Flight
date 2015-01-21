@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.flight.service.StewardService;
 import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,7 @@ public class StewardController {
     @Autowired
     private MessageSource messageSource;
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
 
@@ -41,14 +43,11 @@ public class StewardController {
         return "steward/form";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String process_form(@ModelAttribute("steward") @Valid StewardTO steward, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
 
         if (bindingResult.hasErrors()) {
-            for (ObjectError err : bindingResult.getAllErrors()) {
-                System.err.println(err);
-            }
-
             return "steward/form";
         }
 
@@ -63,6 +62,7 @@ public class StewardController {
         return "redirect:" + uriBuilder.path("/steward/list").build();
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
 
@@ -74,6 +74,7 @@ public class StewardController {
         return "steward/form";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
 
@@ -84,6 +85,7 @@ public class StewardController {
         return "redirect:" + uriBuilder.path("/steward/list").build();
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("stewards", stewardService.getAllStewards());

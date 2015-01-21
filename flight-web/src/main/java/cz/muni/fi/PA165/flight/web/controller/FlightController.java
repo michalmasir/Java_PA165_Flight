@@ -1,21 +1,24 @@
 package cz.muni.fi.PA165.flight.web.controller;
 
+import cz.muni.fi.PA165.flight.enums.UserRole;
 import cz.muni.fi.PA165.flight.service.AirportService;
 import cz.muni.fi.PA165.flight.service.FlightService;
 import cz.muni.fi.PA165.flight.service.PlaneService;
 import cz.muni.fi.PA165.flight.service.StewardService;
-import cz.muni.fi.PA165.flight.transfer.AirportTO;
 import cz.muni.fi.PA165.flight.transfer.FlightTO;
-import cz.muni.fi.PA165.flight.transfer.PlaneTO;
-import cz.muni.fi.PA165.flight.transfer.StewardTO;
 import cz.muni.fi.PA165.flight.web.validation.FlightValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,9 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * User: PC
@@ -55,34 +56,32 @@ public class FlightController {
     @Autowired
     private FlightValidation flightValidation;
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         FlightTO flight = flightService.getFlightById(id);
         return form(model, flight);
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         FlightTO flight = new FlightTO();
 
 
         Calendar cld = Calendar.getInstance();
-        cld.set(2000, Calendar.AUGUST, 11);
         flight.setDepartureTime(cld.getTime());
 
-        cld.set(2000, Calendar.SEPTEMBER, 12, 12, 45);
+        cld.add(Calendar.HOUR, 1);
         flight.setArrivalTime(cld.getTime());
         return form(model, flight);
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String process_form(@Valid @ModelAttribute("flight") FlightTO flight, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
 
         if (bindingResult.hasErrors()) {
-            for (ObjectError err : bindingResult.getAllErrors()) {
-                System.err.println(err);
-            }
-
             return form(model, flight);
         }
         if (flight.getId() == 0) {
@@ -109,6 +108,7 @@ public class FlightController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
         FlightTO flight = flightService.getFlightById(id);
@@ -137,9 +137,9 @@ public class FlightController {
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(flightValidation);
-       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-       dateFormat.setLenient(false);
-       binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
 }
