@@ -219,20 +219,7 @@ public class Plane {
 
         Plane plane = (Plane) o;
 
-        if (fuelLeft != plane.fuelLeft) return false;
-        if (id != plane.id) return false;
-        if (passangerSeatsCount != plane.passangerSeatsCount) return false;
-        if (staffSeatsCount != plane.staffSeatsCount) return false;
-        if (tankCapacity != plane.tankCapacity) return false;
-        if (totalFlightDistance != plane.totalFlightDistance) return false;
-        if (totalFlightTime != plane.totalFlightTime) return false;
-        if (flights != null ? !flights.equals(plane.flights) : plane.flights != null) return false;
-        if (lastRevisionTime != null ? !lastRevisionTime.equals(plane.lastRevisionTime) : plane.lastRevisionTime != null)
-            return false;
-        if (manufacturer != null ? !manufacturer.equals(plane.manufacturer) : plane.manufacturer != null) return false;
-        if (type != null ? !type.equals(plane.type) : plane.type != null) return false;
-
-        return true;
+        return id == plane.id;
     }
 
     @Override

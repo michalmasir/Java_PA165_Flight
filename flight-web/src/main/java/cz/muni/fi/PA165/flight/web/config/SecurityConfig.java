@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/rest/**").permitAll()
                 .and()
-                .formLogin().loginPage("/loginPage").permitAll().loginProcessingUrl("/j_spring_security_check").permitAll()
+                .formLogin().loginPage("/loginPage").permitAll().loginProcessingUrl("/j_spring_security_check").permitAll().
+                and().logout().logoutSuccessUrl("/loginPage")
                 .and().authorizeRequests().anyRequest().authenticated();
     }
 }

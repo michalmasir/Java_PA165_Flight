@@ -152,14 +152,8 @@ public class Airport {
 
         Airport airport = (Airport) o;
 
-        if (id != airport.id) return false;
-        if (city != null ? !city.equals(airport.city) : airport.city != null) return false;
-        if (flightsFrom != null ? !flightsFrom.equals(airport.flightsFrom) : airport.flightsFrom != null) return false;
-        if (flightsTo != null ? !flightsTo.equals(airport.flightsTo) : airport.flightsTo != null) return false;
-        if (name != null ? !name.equals(airport.name) : airport.name != null) return false;
-        if (state != null ? !state.equals(airport.state) : airport.state != null) return false;
+        return id == airport.id;
 
-        return true;
     }
 
     @Override

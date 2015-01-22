@@ -69,12 +69,8 @@ public class Steward {
 
         Steward steward = (Steward) o;
 
-        if (id != steward.id) return false;
-        if (firstName != null ? !firstName.equals(steward.firstName) : steward.firstName != null) return false;
-        if (flights != null ? !flights.equals(steward.flights) : steward.flights != null) return false;
-        if (lastName != null ? !lastName.equals(steward.lastName) : steward.lastName != null) return false;
+        return id == steward.id;
 
-        return true;
     }
 
     @Override
