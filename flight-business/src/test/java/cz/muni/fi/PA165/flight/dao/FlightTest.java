@@ -32,12 +32,12 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
     private Flight dummyFlight() {
         Flight flight = new Flight();
         Calendar departure = Calendar.getInstance();
-        departure.set(2000, 1, 1);
+        departure.set(2000, 1, 1, 0, 0, 0);
 
         flight.setDepartureTime(departure.getTime());
 
         Calendar arrival = Calendar.getInstance();
-        arrival.set(2000, 1, 1);
+        arrival.set(2000, 1, 1 ,1, 0,0);
 
         flight.setArrivalTime(arrival.getTime());
 
@@ -242,14 +242,18 @@ public class FlightTest extends AbstractTestNGSpringContextTests {
         flight1.getStewards().add(john);
 
         flightDao.addFlight(flight1);
+        em.getTransaction().commit();
         john.getFlights().add(flight1);
+
+
+        em.getTransaction().begin();
 
         Flight flight2 = dummyFlight();
         planeDAO.addPlane(flight2.getPlane());
         flight2.getStewards().add(john);
 
-        flightDao.addFlight(flight2);
         john.getFlights().add(flight2);
+        flightDao.addFlight(flight2);
 
         em.getTransaction().commit();
         em.close();

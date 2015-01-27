@@ -129,7 +129,7 @@ public class FlightDAOImpl implements FlightDAO {
         if (flight2.getDepartureTime().compareTo(flight1.getDepartureTime()) <= 0 && flight1.getDepartureTime().compareTo(flight2.getArrivalTime()) <= 0) {
             return true;
         }
-        if (flight1.getDepartureTime().compareTo(flight2.getDepartureTime()) <= 0 && flight2.getDepartureTime().compareTo(flight2.getArrivalTime()) <= 0) {
+        if (flight1.getDepartureTime().compareTo(flight2.getDepartureTime()) <= 0 && flight2.getDepartureTime().compareTo(flight1.getArrivalTime()) <= 0) {
             return true;
         }
         return false;

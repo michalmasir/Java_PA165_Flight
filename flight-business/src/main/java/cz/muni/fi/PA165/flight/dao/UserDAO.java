@@ -5,9 +5,10 @@ import cz.muni.fi.PA165.flight.entity.User;
 import java.util.List;
 
 /**
- * User: PC
- * Date: 17. 1. 2015
- * Time: 21:41
+ * This interfaces specifies the methods that a {@link cz.muni.fi.PA165.flight.entity.User} data access object
+ * must implement.
+ *
+ * @author Vladimir Jurenka
  */
 public interface UserDAO {
 

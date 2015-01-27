@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.flight.service.impl;
 
 import cz.muni.fi.PA165.flight.dao.UserDAO;
+import cz.muni.fi.PA165.flight.entity.User;
 import cz.muni.fi.PA165.flight.service.UserService;
 import cz.muni.fi.PA165.flight.transfer.UserTO;
 import org.dozer.DozerBeanMapper;
@@ -34,7 +35,12 @@ public class UserServiceImpl implements UserService {
     /* No @Secured here or we can't login :)
      */
     public UserTO getUserByUsername(String username) {
-        return dozerBeanMapper.map(userDAO.getUserByUsername(username), UserTO.class);
+        User user = userDAO.getUserByUsername(username);
+        if(user == null){
+            return null;
+        }
+
+        return dozerBeanMapper.map(user, UserTO.class);
     }
 
     @Override
